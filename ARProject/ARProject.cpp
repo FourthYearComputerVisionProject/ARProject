@@ -14,7 +14,11 @@ int main()
 
 	//setup the video capture method using the left and right webcams
 	VideoCapture left;
-	left.open(0);
+	left.open(0);	
+	left.set(CV_CAP_PROP_FPS, 30);
+	left.set(CV_CAP_PROP_CONVERT_RGB , false);	
+	left.set(CV_CAP_PROP_FRAME_WIDTH , 640);
+	left.set(CV_CAP_PROP_FRAME_HEIGHT , 360);
 
 	VideoCapture right;
 	right.open(1);
