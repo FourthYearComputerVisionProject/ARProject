@@ -17,7 +17,11 @@ int main()
 	left.open(0);
 
 	VideoCapture right;
-	right.open(0);
+	right.open(1);
+	right.set(CV_CAP_PROP_FPS, 30);
+	right.set(CV_CAP_PROP_CONVERT_RGB , false);	
+	right.set(CV_CAP_PROP_FRAME_WIDTH , 640);
+	right.set(CV_CAP_PROP_FRAME_HEIGHT , 360);
 
 	//create the window that will show the video feed
 	namedWindow("left eye", 1);
