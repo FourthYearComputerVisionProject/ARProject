@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.20617.1 PREVIEW
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARProject", "ARProject\ARProject.vcxproj", "{C6FA4544-C867-420D-B7EA-6DE8FB11CC91}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenCVwithOpenGL", "OpenCVwithOpenGL\OpenCVwithOpenGL.vcxproj", "{AA8FC37C-45E0-4591-8625-F2BC36747EE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{C6FA4544-C867-420D-B7EA-6DE8FB11CC91}.Debug|Win32.Build.0 = Debug|Win32
 		{C6FA4544-C867-420D-B7EA-6DE8FB11CC91}.Release|Win32.ActiveCfg = Release|Win32
 		{C6FA4544-C867-420D-B7EA-6DE8FB11CC91}.Release|Win32.Build.0 = Release|Win32
+		{AA8FC37C-45E0-4591-8625-F2BC36747EE2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AA8FC37C-45E0-4591-8625-F2BC36747EE2}.Debug|Win32.Build.0 = Debug|Win32
+		{AA8FC37C-45E0-4591-8625-F2BC36747EE2}.Release|Win32.ActiveCfg = Release|Win32
+		{AA8FC37C-45E0-4591-8625-F2BC36747EE2}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
