@@ -27,38 +27,23 @@
     <ClInclude Include="textfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderableVideoCapture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StereoViewer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGLShaderTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="textfile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableVideoCapture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StereoViewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="through.vert">
+    <None Include="toonf2.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="oculusDistort.frag">
+    <None Include="toonf2.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
