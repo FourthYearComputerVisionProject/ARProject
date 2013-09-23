@@ -18,12 +18,16 @@ void reshapeCallback(int w, int h) {
 
 int main(int argc, char **argv) {
 
-	viewer = new StereoViewer(0, 0);
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(640, 400);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("Capture Window");
+
+
+	viewer = new StereoViewer(0, 0);
+
 	glutDisplayFunc(displayCallback);
 	glutIdleFunc(idleCallback);
 	glutReshapeFunc(reshapeCallback);

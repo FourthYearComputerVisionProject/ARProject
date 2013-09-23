@@ -17,7 +17,6 @@ private:
 	GLdouble xOffset;
 	GLdouble yOffset;
 	GLdouble zOffset;
-	//RenderableVideoCapture();
 
 public:
 	void updateTexture(void);

@@ -31,7 +31,7 @@ RenderableVideoCapture::RenderableVideoCapture(int captureDevice, GLdouble xOffs
 	capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
 
 	glGenTextures(1, &texture); // Create The Texture
-
+	
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

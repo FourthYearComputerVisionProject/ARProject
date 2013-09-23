@@ -9,11 +9,10 @@ using namespace cv;
 
 void StereoViewer::display(void) {
 
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(0.0, 0.0, 0.0, 1.0);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	//gluLookAt(0.0, 0.0, 20.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	glEnable(GL_TEXTURE_2D); //enable 2D texturing
 	
 	glEnable(GL_DEPTH_TEST);
