@@ -19,20 +19,26 @@ void StereoViewer::display(void) {
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LEQUAL);
 	glDepthRange(0.0f, 1.0f);
+	if(mode == 0)
+	{
+		StereoViewer::rightCapture->updateTexture();
+		StereoViewer::leftCapture->updateTexture();
 
-	StereoViewer::rightCapture->updateTexture();
-	StereoViewer::leftCapture->updateTexture();
+		StereoViewer::rightCapture->drawCapture();
+		StereoViewer::leftCapture->drawCapture();
 
-	StereoViewer::rightCapture->drawCapture();
-	StereoViewer::leftCapture->drawCapture();
+		//glTranslated(0.5, 0.5, 0.0);
 
-	//glTranslated(0.5, 0.5, 0.0);
+		//glutSolidTeapot(0.25);
 
-	//glutSolidTeapot(0.25);
-
-	//const GLint lensCenter = glGetUniformLocation(program, "lensCenter");
-	//glUniform2fv(lensCenter, 1, {2.0,1.0});
-
+		//const GLint lensCenter = glGetUniformLocation(program, "lensCenter");
+		//glUniform2fv(lensCenter, 1, {2.0,1.0});
+	}
+	else if(mode == 1)
+	{
+		StereoViewer::rightImage->drawImage();
+		StereoViewer::leftImage->drawImage();
+	}
 	glutSwapBuffers();
 }
 
@@ -65,11 +71,26 @@ void StereoViewer::setShaders() {
 }
 
 StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
+	StereoViewer::mode = 0;
 	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 0);
 	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 0);
 }
 
+StereoViewer::StereoViewer(const std::string filename) {
+	StereoViewer::mode = 1;
+	StereoViewer::rightImage = new RenderableImage(filename, 0.5, 0, 0);
+	StereoViewer::leftImage = new RenderableImage(filename, 0, 0, 0);
+}
+
 StereoViewer::~StereoViewer() {
-	delete(rightCapture);
-	delete(leftCapture);
+	if(mode == 0)
+	{
+		delete(rightCapture);
+		delete(leftCapture);
+	}
+	else if(mode == 1)
+	{
+		delete(rightImage);
+		delete(leftImage);
+	}
 }

@@ -9,10 +9,11 @@
 #include <GL/glut.h>
 
 #include <ctype.h>
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 #include "textfile.h"
 #include "RenderableVideoCapture.h"
+#include "RenderableImage.h"
 
 class StereoViewer{
 private:
@@ -21,12 +22,18 @@ private:
 
 	RenderableVideoCapture *rightCapture;
 	RenderableVideoCapture *leftCapture;
+
+	RenderableImage *rightImage;
+	RenderableImage *leftImage;
+
+	int mode;
 public:
 	void setShaders(void);
 	void reshape(int w, int h);
 	void display(void);
 	
 	StereoViewer(int leftDevice, int rightDevice);
+	StereoViewer::StereoViewer(const std::string filename);
 	~StereoViewer();
 };
 
