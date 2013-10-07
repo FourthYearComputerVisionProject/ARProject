@@ -65,11 +65,13 @@ void processNormalKeys(unsigned char key, int x, int y) {
 
 void setShaders() {
 
-	char *vs = NULL, *fs = NULL, *fs2 = NULL;
+	char *vs = NULL;
+	char *fs = NULL;
+	//char *fs2 = NULL;
 
 	vertShader = glCreateShader(GL_VERTEX_SHADER);
 	fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-	fragShader2 = glCreateShader(GL_FRAGMENT_SHADER);
+	//fragShader2 = glCreateShader(GL_FRAGMENT_SHADER);
 
 	vs = textFileRead("toonf2.vert");
 	fs = textFileRead("toonf2.frag");
@@ -80,7 +82,8 @@ void setShaders() {
 	glShaderSource(vertShader, 1, &vv, NULL);
 	glShaderSource(fragShader, 1, &ff, NULL);
 
-	free(vs); free(fs);
+	free(vs); 
+	free(fs);
 
 	glCompileShader(vertShader);
 	glCompileShader(fragShader);

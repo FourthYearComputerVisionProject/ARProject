@@ -16,11 +16,26 @@
 
 class StereoViewer{
 private:
-	GLuint oculusShader;
+	GLuint oculusVertShader;
+	GLuint oculusFragShader;
+	//GLuint oculusRightGeomShader;
+	//GLuint oculusLeftGeomShader;
 	GLuint program;
+	//GLuint leftShaderProgram;
+	//GLuint rightShaderProgram;
+	//GLuint frameBuffer;
+	//GLuint frameBuffer_texture;
+	//GLuint depthBuffer;
+
+	int width;
+	int height;
 
 	RenderableVideoCapture *rightCapture;
 	RenderableVideoCapture *leftCapture;
+
+	void printShaderLog(int shader, char* shaderName);
+	void stereoWarp(GLuint outFBO);
+
 public:
 	void setShaders(void);
 	void reshape(int w, int h);

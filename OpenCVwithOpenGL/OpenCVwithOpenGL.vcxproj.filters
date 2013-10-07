@@ -55,10 +55,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="through.vert">
+    <None Include="Shaders\barrel_right.geom">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="oculusDistort.frag">
+    <None Include="Shaders\empty.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\monochrome.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\monochrome.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\barrel.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Shaders\barrel_left.geom">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
