@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
+    <ClInclude Include="RenderableImage.h" />
     <ClInclude Include="StereoViewer.h" />
     <ClInclude Include="RenderableVideoCapture.h" />
     <ClInclude Include="textfile.h" />
@@ -92,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RenderableImage.cpp" />
     <ClCompile Include="StereoViewer.cpp" />
     <ClCompile Include="RenderableVideoCapture.cpp" />
     <ClCompile Include="textfile.cpp" />

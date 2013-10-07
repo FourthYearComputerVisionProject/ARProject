@@ -16,6 +16,11 @@ void reshapeCallback(int w, int h) {
 	viewer->reshape(w, h);
 }
 
+void closeCallback(){
+	glutLeaveMainLoop();
+	
+}
+
 int main(int argc, char **argv) {
 	int screenWidth = 1366;
 	int screenHeight = 768;
@@ -32,9 +37,12 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(windowPosX, windowPosY);
 	glutCreateWindow("Capture Window");
 
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+
 	glutDisplayFunc(displayCallback);
 	glutIdleFunc(idleCallback);
 	glutReshapeFunc(reshapeCallback);
+	glutCloseFunc(closeCallback);
 
 	GLenum err = glewInit();
 

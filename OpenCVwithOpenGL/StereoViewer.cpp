@@ -9,7 +9,7 @@ using namespace cv;
 
 void StereoViewer::display(void) {
 
-	glClearColor(0.0, 0.0, 0.0, 1.0);
+	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -29,6 +29,25 @@ void StereoViewer::display(void) {
 	StereoViewer::rightCapture->drawCapture();
 	StereoViewer::leftCapture->drawCapture();
 
+	glPushMatrix();
+
+	glTranslated(0.25, 0.25, 0);
+
+
+	glScaled(0.4, 0.4, 1);
+	StereoViewer::leftImage->drawImage();
+
+	glPopMatrix();
+	glPushMatrix();
+
+	glTranslated(0.75, 0.25, 0);
+
+	glScaled(0.4, 0.4, 1);
+
+	StereoViewer::leftImage->drawImage();
+
+	glPopMatrix();
+	
 	/*
 	//glBindVertexArray();
 	int tLoc = 0;
@@ -62,7 +81,7 @@ void StereoViewer::reshape(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, 1, 0, 1, -1, 1);
+	glOrtho(0, 1, 0, 1, -5, 5);
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -191,13 +210,18 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	*/
+
+	StereoViewer::rightImage = new RenderableImage("Images/reddit.png", 0.5, 0, 2);
+	StereoViewer::leftImage = new RenderableImage("Images/reddit.png", 0, 0, 2);
 	
-	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 0);
-	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 0);
+	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 1);
+	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 1);
 	setShaders();
 }
 
 StereoViewer::~StereoViewer() {
 	delete(rightCapture);
 	delete(leftCapture);
+	delete(rightImage);
+	delete(leftImage);
 }

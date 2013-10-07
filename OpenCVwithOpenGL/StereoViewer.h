@@ -13,6 +13,7 @@
 #include "highgui.h"
 #include "textfile.h"
 #include "RenderableVideoCapture.h"
+#include "RenderableImage.h"
 
 class StereoViewer{
 private:
@@ -33,9 +34,12 @@ private:
 	RenderableVideoCapture *rightCapture;
 	RenderableVideoCapture *leftCapture;
 
+	RenderableImage *rightImage;
+	RenderableImage *leftImage;
+
 	void printShaderLog(int shader, char* shaderName);
 	void stereoWarp(GLuint outFBO);
-
+	
 public:
 	void setShaders(void);
 	void reshape(int w, int h);
