@@ -20,8 +20,8 @@ void StereoViewer::display(void) {
 	glDepthFunc(GL_LEQUAL);
 	glDepthRange(0.0f, 1.0f);
 
-	glUseProgram(program);
-
+	//glUseProgram(program);
+	glUseProgram(0); //set no shader
 	
 	StereoViewer::rightCapture->updateTexture(program);
 	StereoViewer::leftCapture->updateTexture(program);
