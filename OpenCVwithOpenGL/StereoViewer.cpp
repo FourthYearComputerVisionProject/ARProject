@@ -14,7 +14,7 @@ void StereoViewer::display(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	glEnable(GL_TEXTURE_2D); //enable 2D texturing
-	
+
 	glEnable(GL_DEPTH_TEST);
 	glDepthMask(GL_TRUE);
 	glDepthFunc(GL_LEQUAL);
@@ -22,31 +22,48 @@ void StereoViewer::display(void) {
 
 	//glUseProgram(program);
 	glUseProgram(0); //set no shader
-	
+
 	StereoViewer::rightCapture->updateTexture(program);
 	StereoViewer::leftCapture->updateTexture(program);
 
 	StereoViewer::rightCapture->drawCapture();
 	StereoViewer::leftCapture->drawCapture();
 
-	glPushMatrix();
+	if (mode == 0) {		
+		glPushMatrix();
+		glTranslated(0.125, 0.25, 0);
+		glScaled(0.5, 0.28, 1);
+		StereoViewer::image->drawImage();
+		glPopMatrix();
 
-	glTranslated(0.25, 0.25, 0);
+		glPushMatrix();
+		glTranslated(0.625, 0.25, 0);
+		glScaled(0.5, 0.28, 1);
+		StereoViewer::image->drawImage();
+		glPopMatrix();
+	}
+	else {
+		StereoViewer::video->updateTexture(program);
+
+		glPushMatrix();
+
+		glTranslated(0.25, 0.25, 0);
 
 
-	glScaled(0.4, 0.4, 1);
-	StereoViewer::leftImage->drawImage();
+		glScaled(0.4, 0.3, 1);
+		StereoViewer::video->drawCapture();
 
-	glPopMatrix();
-	glPushMatrix();
+		glPopMatrix();
+		glPushMatrix();
 
-	glTranslated(0.75, 0.25, 0);
+		glTranslated(0.75, 0.25, 0);
 
-	glScaled(0.4, 0.4, 1);
+		glScaled(0.4, 0.3, 1);
 
-	StereoViewer::leftImage->drawImage();
+		StereoViewer::video->drawCapture();
 
-	glPopMatrix();
+		glPopMatrix();
+	}
 	
 	/*
 	//glBindVertexArray();
@@ -210,9 +227,13 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	*/
-
-	StereoViewer::rightImage = new RenderableImage("Images/reddit.png", 0.5, 0, 2);
-	StereoViewer::leftImage = new RenderableImage("Images/reddit.png", 0, 0, 2);
+	StereoViewer::mode = 1;
+	if (StereoViewer::mode == 0){
+		StereoViewer::image = new RenderableImage("Images/n4g.png", 0, 0, 2);
+	}
+	else {
+		StereoViewer::video = new RenderableVideoCapture("Images/gits.avi", 0, 0, 2);
+	}
 	
 	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 1);
 	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 1);
@@ -222,6 +243,5 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 StereoViewer::~StereoViewer() {
 	delete(rightCapture);
 	delete(leftCapture);
-	delete(rightImage);
-	delete(leftImage);
+	delete(image);
 }

@@ -1,7 +1,7 @@
 #ifndef RENDERABLEVIDEOCAPTURE_H
 #define RENDERABLEVIDEOCAPTURE_H
 
-#define DEFAULT_FRAMERATE 30
+#define DEFAULT_FRAMERATE 60
 
 #include "cv.h"
 #include "highgui.h"
@@ -23,6 +23,7 @@ public:
 	void drawCapture(void);
 
 	RenderableVideoCapture(int captureDevice, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset);
+	RenderableVideoCapture(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset);
 	~RenderableVideoCapture(void);
 };
 

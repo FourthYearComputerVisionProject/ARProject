@@ -10,7 +10,7 @@ void RenderableVideoCapture::updateTexture(GLuint program) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glUniform1i(program, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.cols, image.rows, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, image.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.cols, image.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, image.data);
 }
 	
 void RenderableVideoCapture::drawCapture() {
@@ -41,6 +41,23 @@ RenderableVideoCapture::RenderableVideoCapture(int captureDevice, GLdouble xOffs
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
+
+RenderableVideoCapture::RenderableVideoCapture(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset)
+	: xOffset(xOffset), yOffset(yOffset), zOffset(zOffset)
+{
+	capture.open(filename);
+	//capture.set(CV_CAP_PROP_EXPOSURE, 0);
+	capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
+
+	glGenTextures(1, &texture); // Create The Texture
+
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+}
+
 
 RenderableVideoCapture::~RenderableVideoCapture() {
 	glDeleteTextures(1, &texture);

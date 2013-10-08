@@ -31,11 +31,14 @@ private:
 	int width;
 	int height;
 
+	int mode;
+
 	RenderableVideoCapture *rightCapture;
 	RenderableVideoCapture *leftCapture;
 
-	RenderableImage *rightImage;
-	RenderableImage *leftImage;
+	RenderableVideoCapture *video;
+	
+	RenderableImage *image;
 
 	void printShaderLog(int shader, char* shaderName);
 	void stereoWarp(GLuint outFBO);

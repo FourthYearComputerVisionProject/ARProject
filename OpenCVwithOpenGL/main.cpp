@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
 	int screenWidth = 1366;
 	int screenHeight = 768;
 
-	int windowWidth = screenWidth; //* 7 / 8;
-	int windowHeight = screenHeight * 2 / 3;
+	int windowWidth = 1024; //* 7 / 8;
+	int windowHeight = 576;
 
 	int windowPosX = (screenWidth / 2) - (windowWidth / 2);
 	int windowPosY = (screenHeight / 2) - (windowHeight / 2);

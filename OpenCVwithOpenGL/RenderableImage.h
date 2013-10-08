@@ -19,7 +19,6 @@ private:
 
 public:
 	void drawImage(void);
-
 	RenderableImage(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset);
 	~RenderableImage(void);
 };
