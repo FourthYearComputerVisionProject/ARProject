@@ -8,7 +8,7 @@ void RenderableVideoCapture::updateTexture(GLuint program) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture); //bind the texture
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glUniform1i(program, 0);
+	//glUniform1i(program, 0);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.cols, image.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, image.data);
 }

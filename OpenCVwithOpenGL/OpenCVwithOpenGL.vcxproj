@@ -103,6 +103,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\alphablend.frag" />
     <None Include="Shaders\barrel.frag" />
     <None Include="Shaders\barrel_left.geom" />
     <None Include="Shaders\barrel_right.geom" />
