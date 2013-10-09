@@ -28,7 +28,6 @@ void StereoViewer::display(void) {
 	StereoViewer::rightCapture->drawCapture();
 	StereoViewer::leftCapture->drawCapture();
 
-	glUseProgram(alphaProgram);
 	if (mode == 0) {		
 
 		glPushMatrix();
@@ -45,6 +44,7 @@ void StereoViewer::display(void) {
 
 	}
 	else {
+		glUseProgram(alphaProgram);
 		StereoViewer::video->updateTexture();
 		glPushMatrix();
 			glTranslated(0.25, 0.25, 0);
