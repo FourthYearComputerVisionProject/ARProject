@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "RenderableVideoCapture.h"
 
-void RenderableVideoCapture::updateTexture(GLuint program) {
+void RenderableVideoCapture::updateTexture() {
 	cv::Mat image;
 	capture >> image;
 	glActiveTexture(GL_TEXTURE0);

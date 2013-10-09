@@ -22,8 +22,8 @@ void StereoViewer::display(void) {
 
 	glUseProgram(0); //set no shader
 
-	StereoViewer::rightCapture->updateTexture(monochromeProgram);
-	StereoViewer::leftCapture->updateTexture(monochromeProgram);
+	StereoViewer::rightCapture->updateTexture();
+	StereoViewer::leftCapture->updateTexture();
 
 	StereoViewer::rightCapture->drawCapture();
 	StereoViewer::leftCapture->drawCapture();
@@ -45,7 +45,7 @@ void StereoViewer::display(void) {
 
 	}
 	else {
-		StereoViewer::video->updateTexture(monochromeProgram);
+		StereoViewer::video->updateTexture();
 		glPushMatrix();
 			glTranslated(0.25, 0.25, 0);
 			glScaled(0.4, 0.3, 1);
