@@ -30,6 +30,8 @@ void StereoViewer::display(void) {
 	StereoViewer::leftCapture->drawCapture();
 
 	if (mode == 0) {		
+		glUseProgram(program);
+
 		glPushMatrix();
 		glTranslated(0.125, 0.25, 0);
 		glScaled(0.5, 0.28, 1);
@@ -41,6 +43,8 @@ void StereoViewer::display(void) {
 		glScaled(0.5, 0.28, 1);
 		StereoViewer::image->drawImage();
 		glPopMatrix();
+
+		glUseProgram(0);
 	}
 	else {
 		StereoViewer::video->updateTexture(program);
@@ -227,11 +231,12 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	*/
-	StereoViewer::mode = 1;
+	StereoViewer::mode = 0;
 	if (StereoViewer::mode == 0){
 		StereoViewer::image = new RenderableImage("Images/n4g.png", 0, 0, 2);
 	}
 	else {
+		//StereoViewer::video = new RenderableVideoCapture("http://dl.dropboxusercontent.com/u/31680566/Episode.flv", 0, 0, 2);
 		StereoViewer::video = new RenderableVideoCapture("Images/gits.avi", 0, 0, 2);
 	}
 	

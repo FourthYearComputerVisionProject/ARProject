@@ -25,9 +25,10 @@ int main(int argc, char **argv) {
 	int screenWidth = 1366;
 	int screenHeight = 768;
 
-	int windowWidth = 1024; //* 7 / 8;
+	int windowWidth = 1024; 
 	int windowHeight = 576;
 
+	// Center the window on the screen
 	int windowPosX = (screenWidth / 2) - (windowWidth / 2);
 	int windowPosY = (screenHeight / 2) - (windowHeight / 2);
 
@@ -36,6 +37,9 @@ int main(int argc, char **argv) {
 	glutInitWindowSize(windowWidth, windowHeight);
 	glutInitWindowPosition(windowPosX, windowPosY);
 	glutCreateWindow("Capture Window");
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
 
@@ -48,7 +52,7 @@ int main(int argc, char **argv) {
 
 	//glewInit();
 
-	viewer = new StereoViewer(0, 2);
+	viewer = new StereoViewer(0, 0);
 
 #ifdef _DEBUG
 	std::cout << "GLSL version: "<< glGetString(GL_SHADING_LANGUAGE_VERSION);

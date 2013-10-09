@@ -9,8 +9,8 @@
 #include <GL/glut.h>
 
 #include <ctype.h>
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 #include "textfile.h"
 #include "RenderableVideoCapture.h"
 #include "RenderableImage.h"
