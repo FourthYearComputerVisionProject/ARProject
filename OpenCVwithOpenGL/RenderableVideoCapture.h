@@ -3,8 +3,8 @@
 
 #define DEFAULT_FRAMERATE 60
 
-#include "cv.h"
-#include "highgui.h"
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
 
 #include <GL/glew.h>
 #include <GL/glut.h>

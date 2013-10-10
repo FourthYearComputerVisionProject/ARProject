@@ -37,6 +37,11 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(windowPosX, windowPosY);
 	glutCreateWindow("Capture Window");
 
+	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glAlphaFunc(GL_GREATER,0);
+	glEnable(GL_ALPHA_TEST);
+
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
 
 	glutDisplayFunc(displayCallback);
@@ -48,7 +53,7 @@ int main(int argc, char **argv) {
 
 	//glewInit();
 
-	viewer = new StereoViewer(0, 2);
+	viewer = new StereoViewer(0, 0);//0,0 for one cam//0,2 for rift
 
 #ifdef _DEBUG
 	std::cout << "GLSL version: "<< glGetString(GL_SHADING_LANGUAGE_VERSION);

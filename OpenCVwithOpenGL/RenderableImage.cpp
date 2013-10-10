@@ -16,7 +16,7 @@ void RenderableImage::drawImage() {
 RenderableImage::RenderableImage(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset)
 	: xOffset(xOffset), yOffset(yOffset), zOffset(zOffset)
 {
-	cv::Mat material = cv::imread(filename);
+	cv::Mat material = cv::imread(filename,-1);
 
 	glGenTextures(1, &texture); // Create The Texture
 
@@ -27,7 +27,7 @@ RenderableImage::RenderableImage(const std::string filename, GLdouble xOffset, G
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, material.cols, material.rows, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, material.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, material.cols, material.rows, 0, GL_BGRA, GL_UNSIGNED_BYTE, material.data);
 }
 
 RenderableImage::~RenderableImage() {

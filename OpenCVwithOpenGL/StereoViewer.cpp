@@ -32,13 +32,13 @@ void StereoViewer::display(void) {
 	if (mode == 0) {		
 		glPushMatrix();
 		glTranslated(0.125, 0.25, 0);
-		glScaled(0.5, 0.28, 1);
+		glScaled(1.0, 0.1, 1);//0.5,2.8,1
 		StereoViewer::image->drawImage();
 		glPopMatrix();
 
 		glPushMatrix();
 		glTranslated(0.625, 0.25, 0);
-		glScaled(0.5, 0.28, 1);
+		glScaled(1.0, 0.1, 1);
 		StereoViewer::image->drawImage();
 		glPopMatrix();
 	}
@@ -227,9 +227,10 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 	glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	*/
-	StereoViewer::mode = 1;
+	StereoViewer::mode = 0;
 	if (StereoViewer::mode == 0){
 		StereoViewer::image = new RenderableImage("Images/n4g.png", 0, 0, 2);
+		StereoViewer::image = new RenderableImage("Images/menumock.png", -0.125, -2.5, 2);
 	}
 	else {
 		StereoViewer::video = new RenderableVideoCapture("Images/gits.avi", 0, 0, 2);

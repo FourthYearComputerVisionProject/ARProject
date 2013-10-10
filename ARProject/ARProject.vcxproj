@@ -53,13 +53,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(OPENCV_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OPENCV_DIR)\include;$(OPENGL_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_DIR)\x86\vc10\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core246d.lib;opencv_imgproc246d.lib;opencv_highgui246d.lib;opencv_ml246d.lib;opencv_video246d.lib;opencv_features2d246d.lib;opencv_calib3d246d.lib;opencv_core246.lib;opencv_imgproc246.lib;opencv_highgui246.lib;opencv_ml246.lib;opencv_video246.lib;opencv_features2d246.lib;opencv_calib3d246.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OPENCV_DIR)\x86\vc10\lib;$(OPENGL_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core246d.lib;opencv_imgproc246d.lib;opencv_highgui246d.lib;opencv_ml246d.lib;opencv_video246d.lib;opencv_features2d246d.lib;opencv_calib3d246d.lib;opencv_core246.lib;opencv_imgproc246.lib;opencv_highgui246.lib;opencv_ml246.lib;opencv_video246.lib;opencv_features2d246.lib;opencv_calib3d246.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
