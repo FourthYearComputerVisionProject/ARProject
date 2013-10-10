@@ -19,7 +19,7 @@ private:
 	GLdouble zOffset;
 
 public:
-	void updateTexture(GLuint program);
+	void updateTexture();
 	void drawCapture(void);
 
 	RenderableVideoCapture(int captureDevice, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset);

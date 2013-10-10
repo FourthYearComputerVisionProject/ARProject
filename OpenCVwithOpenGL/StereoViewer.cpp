@@ -20,50 +20,44 @@ void StereoViewer::display(void) {
 	glDepthFunc(GL_LEQUAL);
 	glDepthRange(0.0f, 1.0f);
 
-	//glUseProgram(program);
 	glUseProgram(0); //set no shader
 
-	StereoViewer::rightCapture->updateTexture(program);
-	StereoViewer::leftCapture->updateTexture(program);
+	StereoViewer::rightCapture->updateTexture();
+	StereoViewer::leftCapture->updateTexture();
 
 	StereoViewer::rightCapture->drawCapture();
 	StereoViewer::leftCapture->drawCapture();
 
 	if (mode == 0) {		
+
 		glPushMatrix();
-		glTranslated(0.125, 0.25, 0);
-		glScaled(1.0, 0.1, 1);//0.5,2.8,1
-		StereoViewer::image->drawImage();
+			glTranslated(0.125, 0.25, 0);
+			glScaled(0.5, 0.28, 1);
+			StereoViewer::image->drawImage();
 		glPopMatrix();
 
 		glPushMatrix();
-		glTranslated(0.625, 0.25, 0);
-		glScaled(1.0, 0.1, 1);
-		StereoViewer::image->drawImage();
+			glTranslated(0.625, 0.25, 0);
+			glScaled(0.5, 0.28, 1);
+			StereoViewer::image->drawImage();
 		glPopMatrix();
+
 	}
 	else {
-		StereoViewer::video->updateTexture(program);
-
+		glUseProgram(alphaProgram);
+		StereoViewer::video->updateTexture();
 		glPushMatrix();
-
-		glTranslated(0.25, 0.25, 0);
-
-
-		glScaled(0.4, 0.3, 1);
-		StereoViewer::video->drawCapture();
-
+			glTranslated(0.25, 0.25, 0);
+			glScaled(0.4, 0.3, 1);
+			StereoViewer::video->drawCapture();
 		glPopMatrix();
 		glPushMatrix();
-
-		glTranslated(0.75, 0.25, 0);
-
-		glScaled(0.4, 0.3, 1);
-
-		StereoViewer::video->drawCapture();
-
+			glTranslated(0.75, 0.25, 0);
+			glScaled(0.4, 0.3, 1);
+			StereoViewer::video->drawCapture();
 		glPopMatrix();
 	}
+	glUseProgram(0);
 	
 	/*
 	//glBindVertexArray();
@@ -103,8 +97,7 @@ void StereoViewer::reshape(int w, int h) {
 }
 
 
-void StereoViewer::printShaderLog(int shader, char* shaderName)
-{
+void StereoViewer::printShaderLog(int shader, char* shaderName) {
 	int len = 0;
 	glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
 	if (len > 1)
@@ -123,68 +116,27 @@ void StereoViewer::printShaderLog(int shader, char* shaderName)
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &len);
 }
 
-void StereoViewer::setShaders() {
-	
-	char* vs = NULL;
-	char* fs = NULL;
-	//char* lgs = NULL;
-	//char* rgs = NULL;
 
-	oculusVertShader = glCreateShader(GL_VERTEX_SHADER);
-	oculusFragShader = glCreateShader(GL_FRAGMENT_SHADER);
-	//oculusRightGeomShader = glCreateShader(GL_GEOMETRY_SHADER);
-	//oculusLeftGeomShader = glCreateShader(GL_GEOMETRY_SHADER);
+void StereoViewer::setShader(char* filename, GLuint shader, GLenum type, GLuint program) {
+	shader = glCreateShader(type);
 
-	vs = textFileRead("Shaders\\monochrome.vert");
-	fs = textFileRead("Shaders\\monochrome.frag");
-	//lgs = textFileRead("Shaders\\barrel_left.geom");
-	//rgs = textFileRead("Shaders\\barrel_right.geom");
+	char* file = textFileRead(filename);
+	const char* constFile = file;
 
-	const char * constvs = vs;
-	const char * constfs = fs;
-	//const char * constlgs = lgs;
-	//const char * constrgs = rgs;
-
-	glShaderSource(oculusVertShader, 1, &constvs, NULL);
-	glShaderSource(oculusFragShader, 1, &constfs, NULL);
-	//glShaderSource(oculusLeftGeomShader, 1, &constlgs, NULL);
-	//glShaderSource(oculusRightGeomShader, 1, &constrgs, NULL);
-
-	free(vs); 
-	free(fs);
-	//free(lgs);
-	//free(rgs);
-
-	glCompileShader(oculusVertShader);
-	glCompileShader(oculusFragShader);
-	//glCompileShader(oculusLeftGeomShader);
-	//glCompileShader(oculusRightGeomShader);
+	glShaderSource(shader, 1, &constFile, NULL);
+	free(file);
+	glCompileShader(shader);
 
 #ifdef _DEBUG
-	//  Check for errors
-	printShaderLog(oculusVertShader, "oculusVert");
-	printShaderLog(oculusFragShader, "oculusFrag");
-	//printShaderLog(oculusLeftGeomShader, "oculusLeftGeom");
-	//printShaderLog(oculusRightGeomShader, "oculusRightGeom");
+	printShaderLog(shader, filename); //check for errors
 #endif
 
-	program = glCreateProgram();
-	glAttachShader(program, oculusVertShader);
-	glAttachShader(program, oculusFragShader);
-	//glAttachShader(program, oculusLeftGeomShader);
-	//glAttachShader(program, oculusRightGeomShader);
+	glAttachShader(program, shader);
 
-	//glAttachShader(leftShaderProgram, oculusLeftGeomShader);
-	//glAttachShader(rightShaderProgram, oculusRightGeomShader);
+	//glLinkProgram(program);
 
-	glLinkProgram(program);
-	//glLinkProgram(leftShaderProgram);
-	//glLinkProgram(rightShaderProgram);
-
-	glUseProgram(program);
-
+	//glDeleteShader(shader); //flag shader for deletion once it is detached from the program
 }
-
 StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 
 	// Create back-buffer, used for post-processing //
@@ -233,16 +185,34 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 		StereoViewer::image = new RenderableImage("Images/menumock.png", -0.125, -2.5, 2);
 	}
 	else {
+		//StereoViewer::video = new RenderableVideoCapture("http://dl.dropboxusercontent.com/u/31680566/Episode.flv", 0, 0, 2);
 		StereoViewer::video = new RenderableVideoCapture("Images/gits.avi", 0, 0, 2);
 	}
 	
 	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 1);
 	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 1);
-	setShaders();
+	
+	monochromeProgram = glCreateProgram();
+	setShader("Shaders\\monochrome.vert", monochromeVertShader, GL_VERTEX_SHADER, monochromeProgram);
+	setShader("Shaders\\monochrome.frag", monochromeFragShader, GL_FRAGMENT_SHADER, monochromeProgram);
+	glLinkProgram(monochromeProgram);
+
+	alphaProgram = glCreateProgram();
+	setShader("Shaders\\empty.vert", alphaVertShader, GL_VERTEX_SHADER, alphaProgram);
+	setShader("Shaders\\alphablend.frag", alphaFragShader, GL_FRAGMENT_SHADER, alphaProgram);
+	glLinkProgram(alphaProgram);
 }
 
 StereoViewer::~StereoViewer() {
 	delete(rightCapture);
 	delete(leftCapture);
 	delete(image);
+
+	glDeleteProgram(monochromeProgram);
+	glDeleteShader(monochromeVertShader);
+	glDeleteShader(monochromeFragShader);
+
+	glDeleteProgram(alphaProgram);
+	glDeleteShader(alphaFragShader);
+	glDeleteShader(alphaVertShader);
 }

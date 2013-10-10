@@ -16,7 +16,7 @@ void RenderableImage::drawImage() {
 RenderableImage::RenderableImage(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset)
 	: xOffset(xOffset), yOffset(yOffset), zOffset(zOffset)
 {
-	cv::Mat material = cv::imread(filename,-1);
+	cv::Mat material = cv::imread(filename, -1);
 
 	glGenTextures(1, &texture); // Create The Texture
 
