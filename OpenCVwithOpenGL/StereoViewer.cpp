@@ -182,7 +182,7 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	StereoViewer::mode = 0;
 	if (StereoViewer::mode == 0){
 		StereoViewer::image = new RenderableImage("Images/n4g.png", 0, 0, 2);
-		StereoViewer::image = new RenderableImage("Images/menumock.png", -0.125, -2.5, 2);
+		//StereoViewer::image = new RenderableImage("Images/menumock.png", -0.125, -2.5, 2);
 	}
 	else {
 		//StereoViewer::video = new RenderableVideoCapture("http://dl.dropboxusercontent.com/u/31680566/Episode.flv", 0, 0, 2);
