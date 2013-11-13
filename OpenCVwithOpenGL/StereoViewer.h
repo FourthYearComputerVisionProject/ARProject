@@ -12,8 +12,8 @@
 #include "opencv/cv.h"
 #include "opencv/highgui.h"
 #include "textfile.h"
-#include "RenderableVideoCapture.h"
-#include "RenderableImage.h"
+#include "Renderable.h"
+#include "RenderableCapture.h"
 
 class StereoViewer{
 private:
@@ -34,12 +34,8 @@ private:
 
 	int mode;
 
-	RenderableVideoCapture *rightCapture;
-	RenderableVideoCapture *leftCapture;
-
-	RenderableVideoCapture *video;
-	
-	RenderableImage *image;
+	Renderable *rightImg;
+	Renderable *leftImg;
 
 	void printShaderLog(int shader, char* shaderName);
 	void stereoWarp(GLuint outFBO);

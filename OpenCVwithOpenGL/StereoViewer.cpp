@@ -3,12 +3,14 @@
 
 #include "stdafx.h"
 #include "StereoViewer.h"
+#include "BoxManip.h"
 
 using namespace cv;
 
 
 void StereoViewer::display(void) {
 
+	//TODO Do update on captures
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClearDepth(1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -22,69 +24,14 @@ void StereoViewer::display(void) {
 
 	glUseProgram(0); //set no shader
 
-	StereoViewer::rightCapture->updateTexture();
-	StereoViewer::leftCapture->updateTexture();
+	StereoViewer::rightImg->update();
+	StereoViewer::leftImg->update();
 
-	StereoViewer::rightCapture->drawCapture();
-	StereoViewer::leftCapture->drawCapture();
+	StereoViewer::rightImg->draw();
+	StereoViewer::leftImg->draw();
 
-	if (mode == 0) {		
-
-		glPushMatrix();
-			glTranslated(0.125, 0.25, 0);
-			glScaled(0.5, 0.28, 1);
-			StereoViewer::image->drawImage();
-		glPopMatrix();
-
-		glPushMatrix();
-			glTranslated(0.625, 0.25, 0);
-			glScaled(0.5, 0.28, 1);
-			StereoViewer::image->drawImage();
-		glPopMatrix();
-
-	}
-	else {
-		glUseProgram(alphaProgram);
-		StereoViewer::video->updateTexture();
-		glPushMatrix();
-			glTranslated(0.25, 0.25, 0);
-			glScaled(0.4, 0.3, 1);
-			StereoViewer::video->drawCapture();
-		glPopMatrix();
-		glPushMatrix();
-			glTranslated(0.75, 0.25, 0);
-			glScaled(0.4, 0.3, 1);
-			StereoViewer::video->drawCapture();
-		glPopMatrix();
-	}
 	glUseProgram(0);
-	
-	/*
-	//glBindVertexArray();
-	int tLoc = 0;
-	glViewport(0, 0, width, height);
 
-	
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, frameBuffer_texture);
-
-	// bind the shader for the right eye //
-	glUseProgram(rightShaderProgram);
-	tLoc = glGetUniformLocation(oculusRightGeomShader, "Texture");
-	glUniform1i(tLoc, 0);
-	glDrawArrays(GL_POINTS, 0, 1);
-
-	// bind the shader for the left eye //
-	glUseProgram(leftShaderProgram);
-	tLoc = glGetUniformLocation(oculusLeftGeomShader, "Texture");
-	glUniform1i(tLoc, 0);
-	glDrawArrays(GL_POINTS, 0, 1);
-	
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glBindVertexArray(0);
-	*/
 	glutSwapBuffers();
 }
 
@@ -139,58 +86,15 @@ void StereoViewer::setShader(char* filename, GLuint shader, GLenum type, GLuint 
 }
 StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 
-	// Create back-buffer, used for post-processing //
-	/*
-	// Texture //
-	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, &frameBuffer_texture);
-	glBindTexture(GL_TEXTURE_2D, frameBuffer_texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	StereoViewer::rightImg = new RenderableCapture(rightDevice, 0.5, 0, 1);
+	StereoViewer::leftImg = new RenderableCapture(leftDevice, 0, 0, 1);
 
-	// Depth Buffer //
-	glGenRenderbuffers(1, &depthBuffer);
-	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
+	BoxManip *manip = new BoxManip();
 
-	// Framebuffer to link everything together //
-	glGenFramebuffers(1, &frameBuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, frameBuffer_texture, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
-	GLenum status;
-	if ((status = glCheckFramebufferStatus(GL_FRAMEBUFFER)) != GL_FRAMEBUFFER_COMPLETE) {
-		fprintf(stderr, "glCheckFramebufferStatus: error %p", status);
-		return;
-	}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	// onReshape //
-	// Rescale FBO and RBO as well
-	glBindTexture(GL_TEXTURE_2D, frameBuffer_texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	printf("%d", manip->getMode());
 
-	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
-	glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	*/
-	StereoViewer::mode = 0;
-	if (StereoViewer::mode == 0){
-		StereoViewer::image = new RenderableImage("Images/n4g.png", 0, 0, 2);
-		//StereoViewer::image = new RenderableImage("Images/menumock.png", -0.125, -2.5, 2);
-	}
-	else {
-		//StereoViewer::video = new RenderableVideoCapture("http://dl.dropboxusercontent.com/u/31680566/Episode.flv", 0, 0, 2);
-		StereoViewer::video = new RenderableVideoCapture("Images/gits.avi", 0, 0, 2);
-	}
-	
-	StereoViewer::rightCapture = new RenderableVideoCapture(rightDevice, 0.5, 0, 1);
-	StereoViewer::leftCapture = new RenderableVideoCapture(leftDevice, 0, 0, 1);
+	StereoViewer::rightImg -> addManipulator(manip);
+	StereoViewer::leftImg -> addManipulator(manip);
 	
 	monochromeProgram = glCreateProgram();
 	setShader("Shaders\\monochrome.vert", monochromeVertShader, GL_VERTEX_SHADER, monochromeProgram);
@@ -204,9 +108,8 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 }
 
 StereoViewer::~StereoViewer() {
-	delete(rightCapture);
-	delete(leftCapture);
-	delete(image);
+	delete(rightImg);
+	delete(leftImg);
 
 	glDeleteProgram(monochromeProgram);
 	glDeleteShader(monochromeVertShader);

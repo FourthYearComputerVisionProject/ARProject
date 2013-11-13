@@ -6,8 +6,6 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-
-#include "RenderableVideoCapture.h"
 #include "StereoViewer.h"
 
 void displayCallback();
