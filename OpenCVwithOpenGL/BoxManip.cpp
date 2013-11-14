@@ -1,16 +1,12 @@
 #include "stdafx.h"
 #include "BoxManip.h"
 
-BoxManip::BoxManip(void){
-	
+BoxManip::BoxManip(Renderable *myParent){
+	parent = myParent;
 }
 
-int BoxManip::getMode(void){
-	return 0x0100;
-}
+BoxManip::~BoxManip(void){
 
-long BoxManip::getUID(void){
-	return 1;
 }
 
 void BoxManip::update(cv::Mat image){

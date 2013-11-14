@@ -89,12 +89,11 @@ StereoViewer::StereoViewer(int leftDevice, int rightDevice) {
 	StereoViewer::rightImg = new RenderableCapture(rightDevice, 0.5, 0, 1);
 	StereoViewer::leftImg = new RenderableCapture(leftDevice, 0, 0, 1);
 
-	BoxManip *manip = new BoxManip();
+	BoxManip *manipLeft = new BoxManip(StereoViewer::leftImg);
+	BoxManip *manipRight = new BoxManip(StereoViewer::rightImg);
 
-	printf("%d", manip->getMode());
-
-	StereoViewer::rightImg -> addManipulator(manip);
-	StereoViewer::leftImg -> addManipulator(manip);
+	StereoViewer::rightImg -> addManipulator(manipRight);
+	StereoViewer::leftImg -> addManipulator(manipLeft);
 	
 	monochromeProgram = glCreateProgram();
 	setShader("Shaders\\monochrome.vert", monochromeVertShader, GL_VERTEX_SHADER, monochromeProgram);

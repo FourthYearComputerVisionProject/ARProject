@@ -7,17 +7,19 @@
 #include "opencv\highgui.h"
 
 #include "Manipulator.h"
+#include "Renderable.h"
 
 class BoxManip : public Manipulator {
 private:
+	Renderable *parent;
 public:
-	int getMode(void);
-	void update(cv::Mat image);
-	void draw(cv::Mat image);
-	long getUID(void);
+	unsigned char getMode(void) {return 0x10;}
+	virtual void update(cv::Mat image);
+	virtual void draw(cv::Mat image);
+	long getUID(void) {return 1;}
 
-	BoxManip(void);
-	~BoxManip(void) {}
+	BoxManip(Renderable *myParent);
+	virtual ~BoxManip(void);
 };
 
 #endif

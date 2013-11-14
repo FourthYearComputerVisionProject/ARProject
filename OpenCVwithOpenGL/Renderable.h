@@ -14,6 +14,15 @@ protected:
 	std::list<Manipulator*> manips;
 	cv::Mat capture;
 public:
+	Manipulator* getManipulator(long uid){
+		for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
+			if((*it)->getUID() == uid){
+				return (*it);
+			}
+		}
+		return NULL;
+	}
+
 	//Fetch a new capture and update the manips
 	virtual void update(void) = 0;
 

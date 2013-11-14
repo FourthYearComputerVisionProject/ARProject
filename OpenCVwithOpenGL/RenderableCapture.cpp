@@ -38,7 +38,7 @@ void RenderableCapture::addManipulator(Manipulator *manip){
 void RenderableCapture::update(void){
 	videoCapture >> capture;
 	for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
-		if(((*it) -> getMode() & 0x1000) != 0){
+		if(((*it) -> getMode() & (char)0x01) != 0){
 			(*it) -> update(capture);
 		}
 	}
@@ -46,7 +46,7 @@ void RenderableCapture::update(void){
 
 void RenderableCapture::draw(void){
 	for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
-		if(((*it) -> getMode() & 0x0100) != 0){
+		if(((*it) -> getMode() & (char)0x10) != 0){
 			(*it) -> draw(capture);
 		}
 	}
