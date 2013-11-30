@@ -7,13 +7,42 @@
 #define _DEBUG
 #define _CRT_SECURE_NO_WARNINGS
 
+//Exclude rarely used stuff from Windows headers
+//#define WIN32_LEAN_AND_MEAN
+
+#include <crtdbg.h>
+
 #include "targetver.h"
 
 #include <stdio.h>
-#include <tchar.h>
 #include <stdlib.h>
-#include <string.h>
+#include <malloc.h>
+#include <memory>
+#include <tchar.h>
 
+#include <mmsystem.h>
 
+#include <string>
+#include <list>
+#include <vector>
+#include <queue>
+#include <map>
 
-// TODO: reference additional headers your program requires here
+//Define using shared_ptr
+
+using std::tr1::shared_ptr;
+using std::tr1::weak_ptr;
+
+class GCC_noncopyable
+{
+private:  
+      GCC_noncopyable(const GCC_noncopyable& x);  
+      GCC_noncopyable& operator=(const GCC_noncopyable& x);  
+public:  
+      GCC_noncopyable() {}; // Default constructor  
+};
+
+//Fast delegate for the event manager
+
+#include "3rdParty/FastDelegate/FastDelegate.h"
+using fastdelegate::MakeDelegate;
