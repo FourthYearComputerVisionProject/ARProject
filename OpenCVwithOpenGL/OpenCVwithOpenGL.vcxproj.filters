@@ -106,5 +106,6 @@
     <None Include="Shaders\alphablend.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
