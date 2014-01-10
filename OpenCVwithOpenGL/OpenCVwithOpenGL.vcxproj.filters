@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\event">
+      <UniqueIdentifier>{88c4cece-360b-4aee-bfb4-d20aca0f7042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\event">
+      <UniqueIdentifier>{9e9821fc-4acf-4b70-ba5e-fdedc40de669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -51,6 +57,21 @@
     <ClInclude Include="BoxManip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\event</Filter>
+    </ClInclude>
+    <ClInclude Include="templates.h">
+      <Filter>Header Files\event</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
+      <Filter>Header Files\event</Filter>
+    </ClInclude>
+    <ClInclude Include="CriticalSection.h">
+      <Filter>Header Files\event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManagerImpl.h">
+      <Filter>Header Files\event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +97,12 @@
     </ClCompile>
     <ClCompile Include="BoxManip.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Header Files\event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManagerImpl.cpp">
+      <Filter>Header Files\event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
