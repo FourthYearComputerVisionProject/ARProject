@@ -2,6 +2,7 @@
 #include "RenderableImage.h"
 
 void RenderableImage::drawImage() {
+	//MOVED TO RenderableAbst//
 	glBindTexture(GL_TEXTURE_2D, texture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -11,6 +12,7 @@ void RenderableImage::drawImage() {
 	glTexCoord2d(0.0, 0.0); glVertex3d(0.0 + xOffset, 1.0 + yOffset, 0.0 + zOffset);
 	glTexCoord2d(1.0, 0.0); glVertex3d(0.5 + xOffset, 1.0 + yOffset, 0.0 + zOffset);
 	glEnd();
+	//END MOVED//
 }
 
 RenderableImage::RenderableImage(const std::string filename, GLdouble xOffset, GLdouble yOffset, GLdouble zOffset)
