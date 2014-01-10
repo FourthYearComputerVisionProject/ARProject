@@ -26,7 +26,7 @@ RenderableCapture::~RenderableCapture(void){
 	videoCapture.release();
 }
 
-void RenderableCapture::addManipulator(Manipulator *manip){
+void RenderableCapture::addManipulator(Manipulator *manip) {
 	for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
 		if(manip -> getUID() == (*it) -> getUID()){
 			return;
@@ -35,7 +35,7 @@ void RenderableCapture::addManipulator(Manipulator *manip){
 	manips.push_back(manip);
 }
 
-void RenderableCapture::update(void){
+void RenderableCapture::update(void) {
 	videoCapture >> capture;
 	for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
 		if(((*it) -> getMode() & (char)0x01) != 0){
@@ -44,7 +44,7 @@ void RenderableCapture::update(void){
 	}
 }
 
-void RenderableCapture::draw(void){
+void RenderableCapture::draw(void) {
 	for(std::list<Manipulator*>::iterator it = manips.begin(); it != manips.end(); it++){
 		if(((*it) -> getMode() & (char)0x10) != 0){
 			(*it) -> draw(capture);
