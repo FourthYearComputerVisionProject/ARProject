@@ -28,7 +28,7 @@ public:
 
 	//Do we need these?
 
-	virtual bool VQueueEvent(const IEventDataPtr& pEvent) const;
+	virtual bool VQueueEvent(const IEventDataPtr& pEvent);
 	virtual bool VThreadSafeQueueEvent(const IEventDataPtr& pEvent);
 	virtual bool VAbortEvent(const EventType& type, bool allOf = false);
 

@@ -2,7 +2,8 @@
 #define CRITICAL_SECTION_H
 
 #include "stdafx.h"
-#include <windows.h>
+#include <Windows.h>
+#include <mmsystem.h>
  
 class CriticalSection : public GCC_noncopyable
 {
@@ -24,7 +25,7 @@ public:
 
 	void Unlock()
     { 
-		LeaveCriticalSection( &m_cs ); 
+		LeaveCriticalSection( &m_cs );
 	}
 protected:
     mutable CRITICAL_SECTION m_cs;
