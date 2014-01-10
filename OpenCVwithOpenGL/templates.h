@@ -36,7 +36,7 @@ public:
 		auto findIt = m_creationFunctions.find(id);
 		if(findIt == m_creationFunctions.end())
 		{
-			m_creationFunctions[id] = & GenericObjectCreationFunction<BaseClass, SubClass>;
+			m_creationFunctions[id] = &GenericObjectCreationFunction<BaseClass, SubClass>;
 			return true;
 		}
 		return false;

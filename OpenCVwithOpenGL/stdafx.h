@@ -20,8 +20,6 @@
 #include <memory>
 #include <tchar.h>
 
-#include <mmsystem.h>
-
 #include <string>
 #include <list>
 #include <vector>
