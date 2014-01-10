@@ -111,6 +111,16 @@ void HandDetection::makeContours()
 	}
 }
 
+/*=============== HandDetection:: calibrateSkinToneRangeToDetect() ===============
+  When the program launches, this will be used to find the range of skin tones to detect
+  and therefore customize it for the current ARUser under the specific lighting conditions
+*/
+void HandDetection::calibrateSkinToneRangeToDetect()
+{
+	
+	
+}
+
 /*=============== HandDetection:: lookForHands() ===============
   Look through contours and see if it matches the size of our hands
 */
@@ -172,11 +182,19 @@ void HandDetection::cleanUpContours(int index)
 
 }
 
-/*=============== HandDetection:: drawClickIcon(int x, int y, Mat &drawTo) ===============
+/*=============== HandDetection:: findOutlier(Mat image) ===============
+  Find the outliers in the image.  Used to find the fingertip.
+*/
+
+Point findOutlier(Mat contour)
+{
+	
+}
+/*=============== HandDetection:: drawClickIcon(int x, int y, Mat drawTo) ===============
   draws the icon at the x,y coordinates to indicate a click at that location
 */
 
-void drawClickIcon(int x, int y, Mat &drawTo)
+void drawClickIcon(int x, int y, Mat drawTo)
 {
 	circle(drawTo,Point(x,y),3,Scalar(255,0,0),2);
     

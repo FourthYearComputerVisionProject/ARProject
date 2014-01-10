@@ -56,8 +56,10 @@ class HandDetection
 		void cleanUpContours(int index);
 		void lookForHands(int index);
 		void HandDetection::displayWindow();
+		void HandDetection::calibrateSkinToneRangeToDetect();
 			
 		//util
+		Point findOutlier(Mat contour);
 		double distanceBetweenTwoPoints(Point from, Point to);
 		Point averageTwoPoints(Point pt1, Point pt2);
 		int angleFromThreePoints(Point ptO, Point ptQ, Point ptM);
