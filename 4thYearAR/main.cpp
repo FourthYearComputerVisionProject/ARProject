@@ -17,6 +17,13 @@ void idleCallback() {
 	render->display();
 }
 
+void mouseCallback(int button, int state, int x, int y)
+{
+	ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(x, y);
+
+	EventManager::getGlobal()->fireEvent(evt);
+}
+
 void reshapeCallback(int w, int h) {
 	render->reshape(w, h);
 }
@@ -52,6 +59,8 @@ int main(int argc, char **argv) {
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
 
+	glutMouseFunc(mouseCallback);
+
 	glutDisplayFunc(displayCallback);
 	glutIdleFunc(idleCallback);
 	glutReshapeFunc(reshapeCallback);
@@ -62,10 +71,6 @@ int main(int argc, char **argv) {
 	StereoCapture* capture = new StereoCapture(0, 0);
 
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
-
-	ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(100, 100);
-
-	EventManager::getGlobal()->fireEvent(evt);
 
 	//glewInit();
 
