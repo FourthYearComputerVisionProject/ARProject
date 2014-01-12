@@ -188,6 +188,7 @@ void HandDetection::cleanUpContours(int index)
 
 Point findOutlier(Mat contour)
 {
+	contour
 	
 }
 /*=============== HandDetection:: drawClickIcon(int x, int y, Mat drawTo) ===============

@@ -87,6 +87,9 @@
   <ItemGroup>
     <ClInclude Include="BoxManip.h" />
     <ClInclude Include="HandDetection.h" />
+    <ClInclude Include="CriticalSection.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="EventManagerImpl.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Manipulator.h" />
     <ClInclude Include="Renderable.h" />
@@ -94,13 +97,17 @@
     <ClInclude Include="RenderableImage.h" />
     <ClInclude Include="StereoViewer.h" />
     <ClInclude Include="RenderableVideoCapture.h" />
+    <ClInclude Include="templates.h" />
     <ClInclude Include="textfile.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="types.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoxManip.cpp" />
     <ClCompile Include="HandDetection.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="EventManagerImpl.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RenderableCapture.cpp" />
     <ClCompile Include="RenderableImage.cpp" />
@@ -114,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="Shaders\alphablend.frag" />
     <None Include="Shaders\barrel.frag" />
     <None Include="Shaders\barrel_left.geom" />
