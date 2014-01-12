@@ -19,6 +19,12 @@ void idleCallback() {
 
 void mouseCallback(int button, int state, int x, int y)
 {
+	int height = glutGet(GLUT_WINDOW_HEIGHT) / 2;
+	int width = glutGet(GLUT_WINDOW_WIDTH) / 2;
+	if(x > width)
+	{
+		x -= width;
+	}
 	ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(x, y);
 
 	EventManager::getGlobal()->fireEvent(evt);
