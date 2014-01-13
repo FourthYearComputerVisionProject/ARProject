@@ -105,7 +105,10 @@ void HandDetection::makeContours()
 			double area = contourArea(contours[index], false);
 
 			if(area>MIN_OBJECT_AREA && area<MAX_OBJECT_AREA){  //first check: is size of area in range of hand
-				cleanUpContours(index);
+				//cleanUpContours(index); //for use with the hand detection code
+				Point objectFoundAt = centerOfMass(contours[index]);
+				//fire coordinates off using event manager
+
 			}
 		}
 	}
@@ -182,13 +185,26 @@ void HandDetection::cleanUpContours(int index)
 
 }
 
+
+
+/*=============== Point HandDetection::centerOfMass(vector< vector<Point> > objContour) ===============
+  Find the center of mass given the object contour
+*/
+Point HandDetection::centerOfMass( vector<Point> objContour)
+{
+	Moments m=moments(objContour,false);
+	double area = m.m00;
+	double x_bar=m.m10/area;
+	double y_bar=m.m01/area;
+	return Point(x_bar, y_bar);
+}
 /*=============== HandDetection:: findOutlier(Mat image) ===============
   Find the outliers in the image.  Used to find the fingertip.
 */
 
 Point findOutlier(Mat contour)
 {
-	contour
+	
 	
 }
 /*=============== HandDetection:: drawClickIcon(int x, int y, Mat drawTo) ===============
