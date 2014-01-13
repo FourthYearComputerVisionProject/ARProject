@@ -59,6 +59,7 @@ class HandDetection
 		void HandDetection::calibrateSkinToneRangeToDetect();
 			
 		//util
+		Point HandDetection::centerOfMass(vector<Point> objContour);
 		Point findOutlier(Mat contour);
 		double distanceBetweenTwoPoints(Point from, Point to);
 		Point averageTwoPoints(Point pt1, Point pt2);
