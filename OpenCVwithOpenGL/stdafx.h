@@ -4,7 +4,7 @@
 //
 
 #pragma once
-#define _DEBUG
+//#define _DEBUG
 #define _CRT_SECURE_NO_WARNINGS
 
 //Exclude rarely used stuff from Windows headers
@@ -19,8 +19,6 @@
 #include <malloc.h>
 #include <memory>
 #include <tchar.h>
-
-#include <mmsystem.h>
 
 #include <string>
 #include <list>

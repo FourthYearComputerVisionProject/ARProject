@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <windows.h>
- 
+#include <mmsystem.h>
 class CriticalSection : public GCC_noncopyable
 {
 public:

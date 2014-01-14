@@ -99,10 +99,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
-      <Filter>Header Files\event</Filter>
+      <Filter>Source Files\event</Filter>
     </ClCompile>
     <ClCompile Include="EventManagerImpl.cpp">
-      <Filter>Header Files\event</Filter>
+      <Filter>Source Files\event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
