@@ -189,6 +189,10 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 	rightYOffset = 0;
 	rightZOffset = 1;
 
+	QRDetector* qr = new QRDetector();
+
+	s->addDetector(qr);
+
 	DrawBoxManipulator* boxManip = new DrawBoxManipulator();
 
 	EventManager::getGlobal()->addListener(1, boxManip);
