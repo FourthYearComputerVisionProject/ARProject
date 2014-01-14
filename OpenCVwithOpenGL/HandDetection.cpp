@@ -150,7 +150,7 @@ void HandDetection::cleanUpContours(int index)
 	convexHull(contours[index], hullIndexes, true, false); //generate the hullIndexes of the contour
 
 	int hullcount = (int)hullPoints.size();
-	int distance =0;
+	double distance =0;
 
 	if(hullcount>0)
 	{
@@ -193,9 +193,9 @@ void HandDetection::cleanUpContours(int index)
 Point HandDetection::centerOfMass( vector<Point> objContour)
 {
 	Moments m=moments(objContour,false);
-	double area = m.m00;
-	double x_bar=m.m10/area;
-	double y_bar=m.m01/area;
+	float area = m.m00;
+	int x_bar= m.m10/area;
+	int y_bar=(int) m.m01/area;
 	return Point(x_bar, y_bar);
 }
 /*=============== HandDetection:: findOutlier(Mat image) ===============
@@ -205,7 +205,7 @@ Point HandDetection::centerOfMass( vector<Point> objContour)
 Point findOutlier(Mat contour)
 {
 	
-	
+	return Point(0,0);
 }
 /*=============== HandDetection:: drawClickIcon(int x, int y, Mat drawTo) ===============
   draws the icon at the x,y coordinates to indicate a click at that location
