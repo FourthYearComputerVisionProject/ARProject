@@ -21,6 +21,6 @@ void DrawBoxManipulator::handleEvent(BaseEvent* evt)
 
 void DrawBoxManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 {
-	cv::rectangle(leftImage, cv::Rect(x, y, 100, 100), cv::Scalar(1.0, 0.0, 1.0, 1.0), 5);
-	cv::rectangle(rightImage, cv::Rect(x, y, 100, 100), cv::Scalar(1.0, 0.0, 1.0, 1.0), 5);
+	cv::rectangle(leftImage, cv::Rect(x, y, 100, 100), cv::Scalar(1.0, 0.0, 1.0, 0.0), 5);
+	cv::rectangle(rightImage, cv::Rect(x, y, 100, 100), cv::Scalar(1.0, 0.0, 1.0, 0.0), 5);
 }

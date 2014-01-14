@@ -52,13 +52,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(OPENCV_DIR)\include;$(OPENGL_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ZBAR_DIR)\include;$(OPENCV_DIR)\include;$(OPENGL_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OPENCV_DIR)\lib;$(OPENGL_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_core248d.lib;opencv_imgproc248d.lib;opencv_highgui248d.lib;opencv_ml248d.lib;opencv_video248d.lib;opencv_features2d248d.lib;opencv_calib3d248d.lib;opencv_objdetect248d.lib;opencv_contrib248d.lib;opencv_legacy248d.lib;opencv_flann248d.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ZBAR_DIR)\lib;$(OPENCV_DIR)\lib;$(OPENGL_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_core248d.lib;opencv_imgproc248d.lib;opencv_highgui248d.lib;opencv_ml248d.lib;opencv_video248d.lib;opencv_features2d248d.lib;opencv_calib3d248d.lib;opencv_objdetect248d.lib;opencv_contrib248d.lib;opencv_legacy248d.lib;opencv_flann248d.lib;opengl32.lib;glew32.lib;libzbar-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,6 +94,7 @@
     <ClInclude Include="IManipulator.h" />
     <ClInclude Include="IStereoSource.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="QRDetector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StereoCapture.h" />
     <ClInclude Include="StereoRender.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="DrawBoxManipulator.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QRDetector.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -111,6 +113,9 @@
     <ClCompile Include="StereoCapture.cpp" />
     <ClCompile Include="StereoRender.cpp" />
     <ClCompile Include="textfile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TopLevel.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
