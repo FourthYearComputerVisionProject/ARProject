@@ -116,7 +116,7 @@ bool EventManager::VAbortEvent(const EventType& eventType, bool allOf)
 			auto thisIt = it;
 			++it;
 
-			if((*thisIt)->VGetEventType == eventType)
+			if((*thisIt)->VGetEventType() == eventType)
 			{
 				eventQueue.erase(thisIt);
 				success = true;
