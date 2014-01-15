@@ -48,7 +48,7 @@ void StereoRender::display(void) {
 				upperZDepth = (*it)->getZDepth();
 				depthSortedList.push_front((*it));
 				toSortList.erase(it);
-				zOffset = 1;
+				zOffset = 0;
 				sortedElement = true;
 				break;
 			}
@@ -191,10 +191,21 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 	rightZOffset = 1;
 
 	HUDManipulator* hudManip = new HUDManipulator();
+	QRDetector* qr = new QRDetector();
+
+	s->addDetector(qr);
+
+	std::string vidSource = "http://dl.dropboxusercontent.com/u/31680566/Dragon.mp4";
+	std::string localVidSource = "C:\\Users\\Damian\\Videos\\Janus Syndacite\\Back+to+School+with+Crackbone.mp4";
+
+	VideoDrawManipulator* vidManip = new VideoDrawManipulator(localVidSource, 0.25, 0);
+
+	DrawBoxManipulator* boxManip = new DrawBoxManipulator();
 
 	EventManager::getGlobal()->addListener(1, hudManip);
 
 	addManipulator(hudManip);
+	addManipulator(vidManip);
 
 	glGenTextures(1, &leftTexture); // Create The Texture
 

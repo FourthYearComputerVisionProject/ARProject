@@ -58,6 +58,8 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(windowPosX, windowPosY);
 	glutCreateWindow("Capture Window");
 
+	//cv::setOpenGlContext("Capture Window");
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glAlphaFunc(GL_GREATER, 0);
