@@ -64,7 +64,7 @@ void StereoRender::display(void) {
 	{
 		(*it)->manipulate(left, right);
 	}
-
+	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, leftTexture); //bind the texture
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -104,6 +104,7 @@ void StereoRender::display(void) {
 	glUseProgram(0);
 
 	glutSwapBuffers();
+	
 }
 
 bool StereoRender::addManipulator(IManipulator* manipulator)
@@ -189,11 +190,11 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 	rightYOffset = 0;
 	rightZOffset = 1;
 
-	DrawBoxManipulator* boxManip = new DrawBoxManipulator();
+	HUDManipulator* hudManip = new HUDManipulator();
 
-	EventManager::getGlobal()->addListener(1, boxManip);
+	EventManager::getGlobal()->addListener(1, hudManip);
 
-	addManipulator(boxManip);
+	addManipulator(hudManip);
 
 	glGenTextures(1, &leftTexture); // Create The Texture
 
@@ -230,4 +231,7 @@ StereoRender::~StereoRender() {
 	glDeleteProgram(alphaProgram);
 	glDeleteShader(alphaFragShader);
 	glDeleteShader(alphaVertShader);
+
+	glDeleteTextures(1, &leftTexture);
+	glDeleteTextures(1, &rightTexture);
 }

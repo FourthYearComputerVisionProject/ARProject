@@ -59,10 +59,10 @@
     <ClInclude Include="textfile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrawBoxManipulator.h">
+    <ClInclude Include="ChangeBoxLocationEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeBoxLocationEvent.h">
+    <ClInclude Include="HUDManipulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -85,7 +85,7 @@
     <ClCompile Include="textfile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawBoxManipulator.cpp">
+    <ClCompile Include="HUDManipulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

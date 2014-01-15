@@ -15,7 +15,7 @@
 
 #include "IStereoSource.h"
 #include "IManipulator.h"
-#include "DrawBoxManipulator.h"
+#include "HUDManipulator.h"
 
 /*
  * Definition of a stereo renderer.

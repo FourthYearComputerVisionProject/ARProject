@@ -77,8 +77,7 @@ int main(int argc, char **argv) {
 	StereoCapture* capture = new StereoCapture(0, 0);
 
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
-
-	//glewInit();
+	
 
 #ifdef _DEBUG
 	std::cout << "GLSL version: "<< glGetString(GL_SHADING_LANGUAGE_VERSION);
