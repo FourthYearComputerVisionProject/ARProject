@@ -98,8 +98,10 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StereoCapture.h" />
     <ClInclude Include="StereoRender.h" />
+    <ClInclude Include="StereoVideoSource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="textfile.h" />
+    <ClInclude Include="VideoDrawManipulator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawBoxManipulator.cpp" />
@@ -112,7 +114,9 @@
     </ClCompile>
     <ClCompile Include="StereoCapture.cpp" />
     <ClCompile Include="StereoRender.cpp" />
+    <ClCompile Include="StereoVideoSource.cpp" />
     <ClCompile Include="textfile.cpp" />
+    <ClCompile Include="VideoDrawManipulator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TopLevel.cd" />

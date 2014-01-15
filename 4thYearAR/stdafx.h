@@ -21,4 +21,6 @@
 
 #include "opencv\cv.h"
 #include "opencv\highgui.h"
+
+#define DEFAULT_FRAMERATE 60
 // TODO: reference additional headers your program requires here
