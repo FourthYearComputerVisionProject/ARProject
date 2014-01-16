@@ -69,7 +69,7 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
 			leftImg = ((VideoDrawManipulator*)lpParam)->source.getLeftImage();
 			cv::resize(leftImg, leftResize, cv::Size(((VideoDrawManipulator*)lpParam)->width,
 				((VideoDrawManipulator*)lpParam)->height), CV_INTER_LINEAR);
-			cv::cvtColor(leftResize, leftResize, CV_BGR2BGRA);
+			cv::cvtColor(leftResize, leftResize, CV_BGR2RGBA);
 			//rightImg = ((VideoDrawManipulator*)lpParam)->source.getRightImage();
 			((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(leftResize);
 			//((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(rightImg);
