@@ -88,6 +88,7 @@
     <ClInclude Include="BaseEvent.h" />
     <ClInclude Include="ChangeBoxLocationEvent.h" />
     <ClInclude Include="CloseVideoEvent.h" />
+    <ClInclude Include="EventTypes.h" />
     <ClInclude Include="HUDManipulator.h" />
     <ClInclude Include="ColouredBandDetector.h" />
     <ClInclude Include="EventManager.h" />

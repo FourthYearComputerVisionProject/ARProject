@@ -18,10 +18,12 @@ using namespace std;
 
 ColouredBandDetector::ColouredBandDetector(void)
 {
+	
 }
 
 ColouredBandDetector::~ColouredBandDetector(void)
 {
+	
 }
 
 /*=============== ColouredBandDetector:: detect ===============
@@ -29,10 +31,48 @@ ColouredBandDetector::~ColouredBandDetector(void)
 */
 void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage) 
 {
+	
 	camera=leftImage;
 	Point left = runDetection();
 	camera=rightImage;
 	Point right = runDetection();
+
+	if(left.x == -1 || left.y == -1)
+	{
+		return;
+	}
+
+	if(boundingBox.x == -1 || boundingBox.y == -1)
+	{
+		boundingBox = cv::Rect(cv::Point(left.x - 50, right.y - 50), cv::Size(100, 100));
+		enterTime = clock();
+	}
+	else
+	{
+		if(!boundingBox.contains(left))
+		{
+			boundingBox.x = -1;
+			boundingBox.y = -1;
+		}
+		else
+		{
+			clock_t time = clock();
+			clock_t diff = time - enterTime;
+			int timeSec = diff / CLOCKS_PER_SEC;
+			if(timeSec > 2)
+			{
+				cv::rectangle(leftImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
+				ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(left.x, left.y);
+				EventManager::getGlobal()->fireEvent(evt);
+				boundingBox.x = -1;
+				boundingBox.y = -1;
+			}
+			else
+			{
+				cv::rectangle(leftImage, boundingBox, cv::Scalar(255, 0, 0, 255), 4);
+			}
+		}
+	}
 
 	//fire coordinates off using event manager
 	SinglePointEvent* spEvent= new SinglePointEvent(left, right);
@@ -107,7 +147,7 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	Mat image_HSV;
 	
 	//convert from RGB to HSV
-	cvtColor(camera, image_HSV, COLOR_BGR2HSV);  
+	cvtColor(camera, image_HSV, COLOR_RGB2HSV);  
 	
 	//threshold via range
 	inRange(image_HSV,Scalar(hue_min, saturation_min, value_min),Scalar(hue_max, saturation_max, value_max),thresholdImage);
@@ -147,6 +187,7 @@ Point ColouredBandDetector::findCenterInContour()
 			}
 		}
 	}
+	return Point(-1.0f, -1.0f);
 }
 
 /*=============== Point ColouredBandDetector::centerOfMass(vector< vector<Point> > objContour) ===============

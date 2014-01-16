@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 
+#include "ChangeBoxLocationEvent.h"
 #include "idetector.h"
 #include <opencv\highgui.h>
 #include <opencv\cv.h>
@@ -24,30 +25,34 @@ public:
 	~ColouredBandDetector(void);
 	void detect(cv::Mat leftImage, cv::Mat rightImage);
 
-	private:
-		Mat camera;			//feed from the camera 
-		Mat thresholdImage;	//threshold image
-		vector< vector<Point> > contours;
-		vector<Point> hullPoints;
-		vector<int> hullIndexes;
-		vector <Vec4i> hierarchy;
-		vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
+private:
+	clock_t enterTime;
 
-		//minimum and maximum object area
-		static const int MIN_OBJECT_AREA = 15;
-		static const int MAX_OBJECT_AREA = 80000;
+	cv::Rect boundingBox;
+
+	Mat camera;			//feed from the camera 
+	Mat thresholdImage;	//threshold image
+	vector< vector<Point> > contours;
+	vector<Point> hullPoints;
+	vector<int> hullIndexes;
+	vector <Vec4i> hierarchy;
+	vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
+
+	//minimum and maximum object area
+	static const int MIN_OBJECT_AREA = 100;
+	static const int MAX_OBJECT_AREA = 80000;
 			
-		//function declarations
-		Point runDetection();
-		void removeNoise();
-		void makeThreshold();
-		Point findCenterInContour();
-		void cleanUpContours(int index);
-		void lookForHands(int index);
+	//function declarations
+	Point runDetection();
+	void removeNoise();
+	void makeThreshold();
+	Point findCenterInContour();
+	void cleanUpContours(int index);
+	void lookForHands(int index);
 					
-		//util
-		Point centerOfMass(vector<Point> objContour);
-		string intToString(int number);
+	//util
+	Point centerOfMass(vector<Point> objContour);
+	string intToString(int number);
 
 }; //ColouredBandDetector
 

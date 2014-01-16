@@ -29,7 +29,6 @@ void SinglePointManipulator::handleEvent(BaseEvent* evt)
 		xL = spEvt->getXL();
 		yL = spEvt->getYL();
 	}
-
 }
 
 void SinglePointManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)

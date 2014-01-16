@@ -84,7 +84,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CloseVideoEvent.h">
-	  <Filter>Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ColouredBandDetector.h">
       <Filter>Header Files</Filter>
@@ -93,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SinglePointManipulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,7 +137,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CloseVideoEvent.cpp">
-	  <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ColouredBandDetector.cpp">
       <Filter>Source Files</Filter>
