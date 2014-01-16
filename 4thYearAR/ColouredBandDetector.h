@@ -30,6 +30,8 @@ private:
 
 	cv::Rect boundingBox;
 
+	bool debounce;
+
 	Mat camera;			//feed from the camera 
 	Mat thresholdImage;	//threshold image
 	vector< vector<Point> > contours;

@@ -49,8 +49,8 @@ void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 
 	drawClock(leftImage, rightImage);
 
-	drawCrosshair(leftImage);
-	drawCrosshair(rightImage);
+	//drawCrosshair(leftImage);
+	//drawCrosshair(rightImage);
 }
 
 void HUDManipulator::drawCrosshair(cv::Mat img) {
