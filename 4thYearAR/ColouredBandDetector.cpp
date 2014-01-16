@@ -187,7 +187,7 @@ Point ColouredBandDetector::findCenterInContour()
 			}
 		}
 	}
-	return Point(-1.0f, -1.0f);
+	return Point(-1,-1);
 }
 
 /*=============== Point ColouredBandDetector::centerOfMass(vector< vector<Point> > objContour) ===============
