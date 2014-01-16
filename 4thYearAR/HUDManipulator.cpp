@@ -41,7 +41,7 @@ void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	//battery.copyTo(leftImage(cv::Rect(x, y, battery.cols, battery.rows)));
 	//drawImage(batteryTexture);
 	
-	cv::addWeighted(leftImage, 0.5, batteryTexture, 1, 0.0, leftImage);
+	//cv::addWeighted(leftImage, 0.5, batteryTexture, 1, 0.0, leftImage);
 
 	drawClock(leftImage, rightImage);
 }
