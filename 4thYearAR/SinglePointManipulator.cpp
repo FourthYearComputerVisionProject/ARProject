@@ -44,22 +44,19 @@ int SinglePointManipulator::getZDepth()
 
 void SinglePointManipulator::drawClickIcon(int x, int y, Mat &img)
 {
+	//cout << "in draw";
 	Size s = img.size();
 
-	circle(img,Point(x,y),3,Scalar(255,0,0),2);
+	circle(img,Point(x,y),5,Scalar(255,0,0),2);
     
-    line(img,Point(x,y),Point(x,max(y-25,0)),Scalar(0,255,0),2);
+    //line(img,Point(x,y),Point(x,max(y-25,0)),Scalar(0,255,0),2);
    
-    //if(y+25<FRAME_HEIGHT)
-    line(img,Point(x,y),Point(x,min(y+25, s.height)),Scalar(0,255,0),2);
-    //else line(img,Point(x,y),Point(x,FRAME_HEIGHT),Scalar(0,255,0),2);
-    //if(x-25>0)
-    line(img,Point(x,y),Point(max(x-25, 0),y),Scalar(0,255,0),2);
-    //else line(img,Point(x,y),Point(0,y),Scalar(0,255,0),2);
-    //if(x+25<FRAME_WIDTH)
-    line(img,Point(x,y),Point(min(x+25, s.width),y),Scalar(0,255,0),2);
-    //else line(img,Point(x,y),Point(FRAME_WIDTH,y),Scalar(0,255,0),2);
-
+    //line(img,Point(x,y),Point(x,min(y+25, s.height)),Scalar(0,255,0),2);
+    
+    //line(img,Point(x,y),Point(max(x-25, 0),y),Scalar(0,255,0),2);
+    
+    //line(img,Point(x,y),Point(min(x+25, s.width),y),Scalar(0,255,0),2);
+    
 }
 	
 

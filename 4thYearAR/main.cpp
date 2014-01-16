@@ -82,12 +82,13 @@ int main(int argc, char **argv) {
 	capture->addDetector(cbDetector);
 	
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
+	
 
 	VideoDrawManipulatorFactory* fact = new VideoDrawManipulatorFactory(render);
 
 	//add manipulators
-	//SinglePointManipulator* spManipulator = new SinglePointManipulator();
-	//render->addManipulator(spManipulator);
+	SinglePointManipulator* spManipulator = new SinglePointManipulator();
+	render->addManipulator(spManipulator);
 	
 	//glewInit();
 

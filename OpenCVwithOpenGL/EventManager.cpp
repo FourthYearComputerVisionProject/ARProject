@@ -10,13 +10,13 @@ IEventManager* IEventManager::Get(void)
 	return g_pEventManager;
 }
 
-IEventManager::IEventManager(const char* pName, bool setAsGlobal)
+IEventManager::IEventManager(const char* pName, bool setAsGlobal) 
 {
 	if(setAsGlobal)
 	{
 		if(g_pEventManager)
 		{
-			ERROR("Global event manager already exists");
+			ERROR("Global event manager already exists") ;
 			delete g_pEventManager;
 		}
 		g_pEventManager = this;
