@@ -54,12 +54,13 @@ private:
 	 * The Z offset of the right texture.
 	 */
 	GLdouble rightZOffset;
-	int x, y;
+	int x, y, height, width;
 	StereoVideoSource source;
 	HANDLE thread;
 	DWORD threadID;
+	std::string location;
 public:
-	VideoDrawManipulator(std::string file, int x, int y);
+	VideoDrawManipulator(std::string file, int x, int y, int width, int height);
 	~VideoDrawManipulator();
 	int getZDepth() { return 1; }
 	static DWORD WINAPI bufferFunction(LPVOID lpParam);
