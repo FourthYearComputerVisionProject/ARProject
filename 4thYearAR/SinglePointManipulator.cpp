@@ -23,8 +23,11 @@ void SinglePointManipulator::handleEvent(BaseEvent* evt)
 	if(evt->getType() == 3)
 	{
 		SinglePointEvent* spEvt = (SinglePointEvent*) evt;
-		x = spEvt->getX();
-		y = spEvt->getY();
+		xR = spEvt->getXR();
+		yR = spEvt->getYR();
+
+		xL = spEvt->getXL();
+		yL = spEvt->getYL();
 	}
 
 }
@@ -32,8 +35,8 @@ void SinglePointManipulator::handleEvent(BaseEvent* evt)
 void SinglePointManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 {
 	//cout<< "in manipulator";
-	drawClickIcon(x, y, leftImage);
-	drawClickIcon(x, y, rightImage);
+	drawClickIcon(xL, yL, leftImage);
+	drawClickIcon(xR, yR, rightImage);
 	
 }
 
