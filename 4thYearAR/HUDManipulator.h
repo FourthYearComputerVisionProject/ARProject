@@ -30,7 +30,7 @@ private:
 	 */
 	int y;
 
-	GLuint batteryTexture;
+	cv::Mat batteryTexture;
 public:
 	HUDManipulator();
 	~HUDManipulator();

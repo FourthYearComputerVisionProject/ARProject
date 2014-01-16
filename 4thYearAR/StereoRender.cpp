@@ -198,9 +198,9 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 	std::string vidSource = "http://dl.dropboxusercontent.com/u/31680566/Dragon.mp4";
 	std::string localVidSource = "C:\\Users\\Damian\\Videos\\Janus Syndacite\\Back+to+School+with+Crackbone.mp4";
 
-	VideoDrawManipulator* vidManip = new VideoDrawManipulator(localVidSource, 0.25, 0);
+	VideoDrawManipulator* vidManip = new VideoDrawManipulator(localVidSource, 0, 0);
 
-	DrawBoxManipulator* boxManip = new DrawBoxManipulator();
+	//HUDManipulator* boxManip = new DrawBoxManipulator();
 
 	EventManager::getGlobal()->addListener(1, hudManip);
 
