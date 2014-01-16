@@ -47,6 +47,10 @@ int SinglePointManipulator::getZDepth()
 
 void SinglePointManipulator::drawClickIcon(int x, int y, Mat &img)
 {
+	if(x == -1 || y == -1)
+	{
+		return;
+	}
 	//cout << "in draw";
 	Size s = img.size();
 

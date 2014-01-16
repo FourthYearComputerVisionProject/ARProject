@@ -18,7 +18,7 @@ using namespace std;
 
 ColouredBandDetector::ColouredBandDetector(void)
 {
-	
+	debounce = false;
 }
 
 ColouredBandDetector::~ColouredBandDetector(void)
@@ -37,8 +37,24 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 	camera=rightImage;
 	Point right = runDetection();
 
+	//fire coordinates off using event manager
+	SinglePointEvent* spEvent= new SinglePointEvent(left, right);
+	EventManager::getGlobal()->fireEvent(spEvent);
+
 	if(left.x == -1 || left.y == -1)
 	{
+		return;
+	}
+
+	if(debounce)
+	{
+		clock_t time = clock();
+		clock_t diff = time - enterTime;
+		float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
+		if(timeSec > 0.25f)
+		{
+			debounce = false;
+		}
 		return;
 	}
 
@@ -51,6 +67,8 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 	{
 		if(!boundingBox.contains(left))
 		{
+			cv::rectangle(leftImage, boundingBox, cv::Scalar(255, 0, 0, 255), 4);
+			cv::rectangle(rightImage, boundingBox, cv::Scalar(255, 0, 0, 255), 4);
 			boundingBox.x = -1;
 			boundingBox.y = -1;
 		}
@@ -58,25 +76,25 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 		{
 			clock_t time = clock();
 			clock_t diff = time - enterTime;
-			int timeSec = diff / CLOCKS_PER_SEC;
-			if(timeSec > 2)
+			float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
+			if(timeSec > 0.75f)
 			{
 				cv::rectangle(leftImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
+				cv::rectangle(rightImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
 				ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(left.x, left.y);
 				EventManager::getGlobal()->fireEvent(evt);
 				boundingBox.x = -1;
 				boundingBox.y = -1;
+				enterTime = clock();
+				debounce = true;
 			}
 			else
 			{
+				cv::rectangle(rightImage, boundingBox, cv::Scalar(255, 0, 0, 255), 4);
 				cv::rectangle(leftImage, boundingBox, cv::Scalar(255, 0, 0, 255), 4);
 			}
 		}
 	}
-
-	//fire coordinates off using event manager
-	SinglePointEvent* spEvent= new SinglePointEvent(left, right);
-	EventManager::getGlobal()->fireEvent(spEvent);
 }
 
 /*=============== ColouredBandDetector:: runDetection ===============
