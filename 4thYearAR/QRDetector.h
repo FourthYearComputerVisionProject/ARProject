@@ -10,6 +10,8 @@
 #include "zbar.h"
 
 #include "IDetector.h"
+#include "EventManager.h"
+#include "QRCodeEvent.h"
 
 class QRDetector : public IDetector{
 public:

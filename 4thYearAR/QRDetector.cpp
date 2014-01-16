@@ -51,8 +51,13 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 		{
 			continue;
 		}
+
 		std::cout    << "decoded " << sym->get_type_name()
                     << " symbol \"" << sym->get_data() << '"' << std::endl;
+
+		QRCodeEvent* evt = new QRCodeEvent(sym->get_data());
+		EventManager::getGlobal()->fireEvent(evt);
+
 		history.push_back(sym->get_data());
 		if(history.size() > HISTORY_SIZE)
 		{
