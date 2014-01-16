@@ -107,11 +107,11 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 
 	cv::cvtColor(resizeRight, resizeRight, CV_BGR2BGRA);
 
-	double alpha = 0.5;
+	double alpha = 0.7;
 
 	double beta = 1.0 - alpha;
 
-	cv::Rect rect = cv::Rect(x, y, 200, 200);
+	cv::Rect rect = cv::Rect(x, y, 400, 400);
 
 	//leftImage.adjustROI(0 - y, 0 - (leftImage.rows - (y + resizeLeft.rows)), 0 - x, 0 - (leftImage.cols - (x + resizeLeft.cols)));
 	//rightImage.adjustROI(0 - y, 0 - (rightImage.rows - (y + right.rows)), 0 - x, 0 - (rightImage.cols - (x + right.cols)));
