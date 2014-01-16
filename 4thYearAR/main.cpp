@@ -36,7 +36,6 @@ void reshapeCallback(int w, int h) {
 
 void closeCallback(){
 	glutLeaveMainLoop();
-	
 }
 
 int main(int argc, char **argv) {
@@ -58,12 +57,14 @@ int main(int argc, char **argv) {
 	glutInitWindowPosition(windowPosX, windowPosY);
 	glutCreateWindow("Capture Window");
 
+	//cv::setOpenGlContext("Capture Window");
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glAlphaFunc(GL_GREATER, 0);
 	glEnable(GL_ALPHA_TEST);
 
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	glutMouseFunc(mouseCallback);
 
@@ -78,6 +79,8 @@ int main(int argc, char **argv) {
 
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
 
+	VideoDrawManipulatorFactory* fact = new VideoDrawManipulatorFactory(render);
+
 	//glewInit();
 
 #ifdef _DEBUG
@@ -86,7 +89,7 @@ int main(int argc, char **argv) {
 
 	glutMainLoop();
 
-	delete(render);
+	//delete(render);
 
 	return 0;
 }
