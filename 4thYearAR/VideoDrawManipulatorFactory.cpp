@@ -20,7 +20,7 @@ void VideoDrawManipulatorFactory::handleEvent(BaseEvent* evt)
 		float aspect = 640.0f / 480.0f;
 		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 200, 200, (int)(200.0f * aspect), 200);
 		globalvid = manip;
-		//Add some kind of text that says click to play
+		//Add some kind of text that says click to play?
 	}
 	else if(evt->getType() == 1)
 	{
