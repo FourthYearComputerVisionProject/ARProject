@@ -2,6 +2,8 @@
 
 #include "VideoDrawManipulatorFactory.h"
 
+static VideoDrawManipulator* globalvid;	//temp so we can remove video, will be changed to location finding
+
 VideoDrawManipulatorFactory::VideoDrawManipulatorFactory(StereoRender* renderer)
 {
 	render = renderer;
@@ -14,14 +16,18 @@ void VideoDrawManipulatorFactory::handleEvent(BaseEvent* evt)
 	if(evt->getType() == 2){
 		QRCodeEvent* qEvt = (QRCodeEvent*)evt;
 		std::string localVidSource = qEvt->getLocalVid();
-		//std::cout << localVidSource << std::endl;
 		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 100, 100);
+		globalvid = manip;
 		render->addManipulator(manip);
 	}
 	else if(evt->getType() == 1)
 	{
-		std::string localVidSource = "Images\\killzone.mp4";
-		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 100, 100);
-		render->addManipulator(manip);
+		//std::string localVidSource = "Images\\killzone.mp4";
+		//VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 100, 100);
+		//render->addManipulator(manip);
+		if(globalvid!=NULL){
+			render->removeManipulator(globalvid);
+			globalvid = NULL;
+		}
 	}
 }
