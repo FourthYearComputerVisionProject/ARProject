@@ -5,14 +5,40 @@
 
 #include "stdafx.h"
 
-#include <list>
-#include <string>
-
 #include "QRDetector.h"
 
 #define HISTORY_SIZE 10
 
-static std::list<std::string> history;
+QRDetector::QRDetector()
+{
+	EventManager::getGlobal()->addListener(1, this);
+}
+
+void QRDetector::handleEvent(BaseEvent* evt)
+{
+	if(evt->getType() == 1)
+	{
+		ChangeBoxLocationEvent* chEvt = (ChangeBoxLocationEvent*)evt;
+		if(history.size() != 0)
+		{
+			std::string str = historyOrder.front();
+			auto findIt = history.find(str);
+			if(findIt->second)
+			{
+				CloseVideoEvent evt = CloseVideoEvent(findIt->first);
+				EventManager::getGlobal()->fireEvent(&evt);
+				history.erase(findIt);
+				historyOrder.pop_front();
+			}
+			else
+			{
+				OpenVideoEvent evt = OpenVideoEvent(findIt->first);
+				EventManager::getGlobal()->fireEvent(&evt);
+				history[findIt->first] = true;
+			}
+		}
+	}
+}
 
 void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 {
@@ -38,16 +64,8 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 	for(zbar::Image::SymbolIterator sym = image.symbol_begin();
 		sym != image.symbol_end(); ++sym)
 	{
-		bool foundIt = false;
-		for(auto it = history.begin(); it != history.end(); ++it)
-		{
-			if(it->compare(sym->get_data()) == 0)
-			{
-				foundIt = true;
-				break;
-			}
-		}
-		if(foundIt)
+		auto findIt = history.find(sym->get_data());
+		if(findIt != history.end())
 		{
 			continue;
 		}
@@ -55,14 +73,11 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 		std::cout    << "decoded " << sym->get_type_name()
                     << " symbol \"" << sym->get_data() << '"' << std::endl;
 
-		QRCodeEvent* evt = new QRCodeEvent(sym->get_data());
-		EventManager::getGlobal()->fireEvent(evt);
+		//QRCodeEvent* evt = new QRCodeEvent(sym->get_data());
+		//EventManager::getGlobal()->fireEvent(evt);
 
-		history.push_back(sym->get_data());
-		if(history.size() > HISTORY_SIZE)
-		{
-			history.pop_front();
-		}
+		history[sym->get_data()] = false;
+		historyOrder.push_back(sym->get_data());
 		if (sym->get_location_size() == 4) {
             //rectangle(frame, Rect(symbol->get_location_x(i), symbol->get_location_y(i), 10, 10), Scalar(0, 255, 0));
             cv::line(leftImage, cv::Point(sym->get_location_x(0), sym->get_location_y(0)), cv::Point(sym->get_location_x(1), sym->get_location_y(1)), cv::Scalar(0, 255, 0), 2, 8, 0);

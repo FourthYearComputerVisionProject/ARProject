@@ -55,6 +55,7 @@ int main(int argc, char **argv) {
 
 	viewer = new StereoViewer(0, 0);//0,0 for one cam//0,2 for rift
 
+
 #ifdef _DEBUG
 	std::cout << "GLSL version: "<< glGetString(GL_SHADING_LANGUAGE_VERSION);
 #endif

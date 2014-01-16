@@ -20,7 +20,7 @@ private:
 public:
 	//NOTE: The constructor hard-codes the event type so that we don't need to provide it
 	//each time we make a new event
-	ChangeBoxLocationEvent(int newX, int newY) : BaseEvent(1) { x = newX; y = newY; }
+	ChangeBoxLocationEvent(int newX, int newY) : BaseEvent(CLICK_EVENT) { x = newX; y = newY; }
 	int getX() { return x; }
 	int getY() { return y; }
 };
