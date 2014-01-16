@@ -16,6 +16,10 @@ static std::list<std::string> history;
 
 void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 {
+	if(!leftImage.data)
+	{
+		return;
+	}
 	cv::Mat grayScale;
 	zbar::ImageScanner scanner;
 	scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 1);

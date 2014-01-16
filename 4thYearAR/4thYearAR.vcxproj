@@ -102,6 +102,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="textfile.h" />
     <ClInclude Include="VideoDrawManipulator.h" />
+    <ClInclude Include="VideoDrawManipulatorFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawBoxManipulator.cpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="StereoVideoSource.cpp" />
     <ClCompile Include="textfile.cpp" />
     <ClCompile Include="VideoDrawManipulator.cpp" />
+    <ClCompile Include="VideoDrawManipulatorFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TopLevel.cd" />

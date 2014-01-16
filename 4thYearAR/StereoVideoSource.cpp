@@ -5,7 +5,7 @@
 StereoVideoSource::StereoVideoSource(std::string file)
 {
 	capture.open(file);
-	capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
+	//capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
 }
 
 bool StereoVideoSource::addDetector(IDetector* detector)
@@ -32,6 +32,16 @@ bool StereoVideoSource::removeDetector(IDetector* detector)
 		}
 	}
 	return false;
+}
+
+cv::Mat StereoVideoSource::getLeftImage()
+{
+	return image;
+}
+
+cv::Mat StereoVideoSource::getRightImage()
+{
+	return image;
 }
 
 void StereoVideoSource::update()

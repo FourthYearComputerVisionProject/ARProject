@@ -7,8 +7,11 @@
 
 #include "stdafx.h"
 
-#include "GL\glew.h";
-#include "GL\glut.h";
+#include <windows.h>
+#include <list>
+
+#include "GL\glew.h"
+#include "GL\glut.h"
 
 #include "IManipulator.h"
 #include "StereoVideoSource.h"
@@ -16,6 +19,7 @@
 class VideoDrawManipulator : public IManipulator
 {
 private:
+	std::list<cv::Mat> frameBuffer;
 	/*
 	 * The texture used to render the left side of the
 	 * stereo image.
@@ -52,8 +56,12 @@ private:
 	GLdouble rightZOffset;
 	int x, y;
 	StereoVideoSource source;
+	HANDLE thread;
+	DWORD threadID;
 public:
 	VideoDrawManipulator(std::string file, int x, int y);
-	int getZDepth() { return 0; }
+	~VideoDrawManipulator();
+	int getZDepth() { return 1; }
+	static DWORD WINAPI bufferFunction(LPVOID lpParam);
 	void manipulate(cv::Mat leftImage, cv::Mat rightImage);
 };

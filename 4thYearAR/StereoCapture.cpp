@@ -13,6 +13,8 @@ StereoCapture::StereoCapture(int leftDevice, int rightDevice)
 	{
 		throw ERROR;
 	}
+	leftCapture.set(CV_CAP_PROP_FPS, 60.0);
+	rightCapture.set(CV_CAP_PROP_FPS, 60.0);
 }
 
 bool StereoCapture::addDetector(IDetector* detector)

@@ -14,3 +14,4 @@
 #include "StereoCapture.h"
 #include "EventManager.h"
 #include "ChangeBoxLocationEvent.h"
+#include "VideoDrawManipulatorFactory.h"

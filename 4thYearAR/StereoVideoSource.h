@@ -22,6 +22,6 @@ public:
 	bool addDetector(IDetector* detector);
 	bool removeDetector(IDetector* detector);
 	void update();
-	cv::Mat getLeftImage() { return image; }
-	cv::Mat getRightImage() { return image; }
+	cv::Mat getLeftImage();
+	cv::Mat getRightImage();
 };
