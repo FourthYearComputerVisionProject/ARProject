@@ -18,5 +18,5 @@ public:
 	//NOTE: The constructor hard-codes the event type so that we don't need to provide it
 	//each time we make a new event
 	QRCodeEvent(std::string loc) : BaseEvent(2) { location = loc;}
-	std::string getLocation() { return location; }
+	std::string getLocalVid() { return location; }
 };
