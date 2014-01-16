@@ -23,7 +23,7 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 	cv::Mat grayScale;
 	zbar::ImageScanner scanner;
 	scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 1);
-	cv::cvtColor(leftImage, grayScale, CV_BGR2GRAY);
+	cv::cvtColor(leftImage, grayScale, CV_RGBA2GRAY);
 	int width, height;
 	width =  grayScale.cols;
 	height = grayScale.rows;
