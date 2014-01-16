@@ -16,15 +16,13 @@ void VideoDrawManipulatorFactory::handleEvent(BaseEvent* evt)
 	if(evt->getType() == 2){
 		QRCodeEvent* qEvt = (QRCodeEvent*)evt;
 		std::string localVidSource = qEvt->getLocalVid();
-		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 100, 100);
+		float aspect = 640.0f / 480.0f;
+		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 200, 200, (int)(200.0f * aspect), 200);
 		globalvid = manip;
 		render->addManipulator(manip);
 	}
 	else if(evt->getType() == 1)
 	{
-		//std::string localVidSource = "Images\\killzone.mp4";
-		//VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 100, 100);
-		//render->addManipulator(manip);
 		if(globalvid!=NULL){
 			render->removeManipulator(globalvid);
 			globalvid = NULL;

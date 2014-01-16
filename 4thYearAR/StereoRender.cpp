@@ -30,6 +30,11 @@ void StereoRender::display(void) {
 	cv::Mat left = source->getLeftImage();
 	cv::Mat right = source->getRightImage();
 
+	if(!left.data || !right.data)
+	{
+		return;
+	}
+
 	std::list<IManipulator*> toSortList;
 	std::list<IManipulator*> depthSortedList;
 	for(auto it = manipulatorList.begin(); it != manipulatorList.end(); ++it)

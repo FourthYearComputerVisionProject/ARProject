@@ -47,6 +47,10 @@ cv::Mat StereoVideoSource::getRightImage()
 void StereoVideoSource::update()
 {
 	capture >> image;
+	if(!image.data)
+	{
+		return;
+	}
 	for(auto it = detectors.begin(); it != detectors.end(); ++it)
 	{
 		(*it)->detect(image, image);

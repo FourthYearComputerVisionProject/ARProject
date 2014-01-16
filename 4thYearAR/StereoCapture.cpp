@@ -47,6 +47,10 @@ void StereoCapture::update()
 {
 	 leftCapture >> leftImage;
 	 rightCapture >> rightImage;
+	 if(!leftImage.data || !rightImage.data)
+	 {
+		 return;
+	 }
 	 cv::cvtColor(leftImage, leftImage, CV_BGR2RGBA);
 	 cv::cvtColor(rightImage, rightImage, CV_BGR2RGBA);
 	 for(auto it = detectorList.begin(); it != detectorList.end(); ++it)
