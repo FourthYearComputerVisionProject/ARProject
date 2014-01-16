@@ -42,7 +42,7 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 void ColouredBandDetector::runDetection()
 {
 	makeThreshold();
-	removeNoise(thresholdImage);
+	removeNoise();
 	findCenterInContour();
 }
 
@@ -50,13 +50,22 @@ void ColouredBandDetector::runDetection()
   Remove noise from the image by using morphological operations
   Details: current settings uses a rectangular element area 3x3, open operation (erode, dialate), with two interations
 */
-void ColouredBandDetector::removeNoise(Mat srcDstImage)
+void ColouredBandDetector::removeNoise()
 {
-	Mat element = getStructuringElement(MORPH_RECT, Size(3, 3));
-	Point anchor = Point(-1, -1); //default
-	int iterations = 2;
+	//Mat element = getStructuringElement(MORPH_RECT, Size(3, 3));
+	//Point anchor = Point(-1, -1); //default
+	//int iterations = 4;
     
-	morphologyEx(srcDstImage, srcDstImage, CV_MOP_OPEN, element,anchor,iterations);
+	//morphologyEx(srcDstImage, srcDstImage, CV_MOP_OPEN, element,anchor,iterations);
+
+	Mat erodeElement = getStructuringElement( MORPH_RECT,Size(3,3));
+   	Mat dilateElement = getStructuringElement( MORPH_RECT,Size(5,5));
+
+	erode(thresholdImage,thresholdImage,erodeElement);
+	erode(thresholdImage,thresholdImage,erodeElement);
+	
+	dilate(thresholdImage,thresholdImage,dilateElement);
+	dilate(thresholdImage,thresholdImage,dilateElement);
 }
 
 
@@ -75,9 +84,17 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	int value_max = 214;
 	*/
 
+	/*
 	//neon green in my room daylight
 	int hue_min=47;
-	int hue_max=61;
+	int hue_max=105;
+	int saturation_min=61;
+	int saturation_max = 181;
+	int value_min = 88;
+	int value_max = 214;
+	*/
+	int hue_min=42;//47
+	int hue_max=100;//105
 	int saturation_min=61;
 	int saturation_max = 181;
 	int value_min = 88;
@@ -92,7 +109,8 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	inRange(image_HSV,Scalar(hue_min, saturation_min, value_min),Scalar(hue_max, saturation_max, value_max),thresholdImage);
 	
 	//remove noise from threshold
-	removeNoise(thresholdImage);
+	removeNoise();
+	//imshow("Threshold", thresholdImage);
 }
 
 /*=============== ColouredBandDetector:: makeContours() ===============

@@ -34,12 +34,12 @@ public:
 		vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
 
 		//minimum and maximum object area
-		static const int MIN_OBJECT_AREA = 10;
+		static const int MIN_OBJECT_AREA = 15;
 		static const int MAX_OBJECT_AREA = 80000;
 			
 		//function declarations
 		void runDetection();
-		void removeNoise(Mat srcDstImage);
+		void removeNoise();
 		void makeThreshold();
 		void findCenterInContour();
 		void cleanUpContours(int index);

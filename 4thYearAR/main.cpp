@@ -89,6 +89,7 @@ int main(int argc, char **argv) {
 	//add manipulators
 	SinglePointManipulator* spManipulator = new SinglePointManipulator();
 	render->addManipulator(spManipulator);
+	EventManager::getGlobal()->addListener(3, spManipulator);
 	
 	//glewInit();
 

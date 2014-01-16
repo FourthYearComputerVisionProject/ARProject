@@ -20,7 +20,7 @@ SinglePointManipulator::~SinglePointManipulator(void)
 void SinglePointManipulator::handleEvent(BaseEvent* evt)
 {
 	//cout<< "in manipulator handlEvent";
-	if(evt->getType() == 2)
+	if(evt->getType() == 3)
 	{
 		SinglePointEvent* spEvt = (SinglePointEvent*) evt;
 		x = spEvt->getX();
@@ -33,6 +33,7 @@ void SinglePointManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 {
 	//cout<< "in manipulator";
 	drawClickIcon(x, y, leftImage);
+	drawClickIcon(x, y, rightImage);
 	
 }
 
@@ -47,15 +48,15 @@ void SinglePointManipulator::drawClickIcon(int x, int y, Mat &img)
 	//cout << "in draw";
 	Size s = img.size();
 
-	circle(img,Point(x,y),5,Scalar(255,0,0),2);
+	circle(img,Point(x,y),5,Scalar(255,0,0),1);
     
-    //line(img,Point(x,y),Point(x,max(y-25,0)),Scalar(0,255,0),2);
+    line(img,Point(x,y),Point(x,max(y-15,0)),Scalar(0,255,0),1);
    
-    //line(img,Point(x,y),Point(x,min(y+25, s.height)),Scalar(0,255,0),2);
+    line(img,Point(x,y),Point(x,min(y+15, s.height)),Scalar(0,255,0),1);
     
-    //line(img,Point(x,y),Point(max(x-25, 0),y),Scalar(0,255,0),2);
+    line(img,Point(x,y),Point(max(x-15, 0),y),Scalar(0,255,0),1);
     
-    //line(img,Point(x,y),Point(min(x+25, s.width),y),Scalar(0,255,0),2);
+    line(img,Point(x,y),Point(min(x+15, s.width),y),Scalar(0,255,0),1);
     
 }
 	

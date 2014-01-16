@@ -5,7 +5,7 @@
 using namespace std;
 using namespace cv;
 
-SinglePointEvent::SinglePointEvent(Point newPoint):BaseEvent(2)
+SinglePointEvent::SinglePointEvent(Point newPoint):BaseEvent(3)
 {	
 	p = newPoint;
 }
