@@ -13,6 +13,8 @@
 #include "StereoRender.h"
 #include "StereoCapture.h"
 #include "EventManager.h"
+
 #include "ChangeBoxLocationEvent.h"
+#include "VideoDrawManipulatorFactory.h"
 #include "ColouredBandDetector.h"
 #include "SinglePointManipulator.h"

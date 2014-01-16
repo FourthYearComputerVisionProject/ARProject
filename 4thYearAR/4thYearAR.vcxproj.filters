@@ -65,6 +65,21 @@
     <ClInclude Include="ChangeBoxLocationEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="QRDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StereoVideoSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoDrawManipulator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoDrawManipulatorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRCodeEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ColouredBandDetector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -97,6 +112,18 @@
     <ClCompile Include="DrawBoxManipulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QRDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StereoVideoSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoDrawManipulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoDrawManipulatorFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="ColouredBandDetector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -106,5 +133,8 @@
     <ClCompile Include="SinglePointManipulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TopLevel.cd" />
   </ItemGroup>
 </Project>
