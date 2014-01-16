@@ -2,7 +2,7 @@
 
 #include "CloseVideoEvent.h"
 
-CloseVideoEvent::CloseVideoEvent(std::string vid) : BaseEvent(5L), video(vid)
+CloseVideoEvent::CloseVideoEvent(std::string vid) : BaseEvent(CLOSE_VIDEO_EVENT), video(vid)
 {
 
 }

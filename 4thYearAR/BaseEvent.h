@@ -8,6 +8,8 @@
 
 #include "stdafx.h"
 
+#include "EventTypes.h"
+
 /*
  * Static definition of no source for an event.
  */
