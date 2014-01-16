@@ -51,8 +51,8 @@ void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 }
 
 void HUDManipulator::drawClock(cv::Mat leftImage, cv::Mat rightImage) {
-	cv::putText(leftImage, getTime().str(), cv::Point(350, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0,0,0), 3, 4);
-	cv::putText(rightImage, getTime().str(), cv::Point(325, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0, 0, 0), 3, 4);
+	cv::putText(leftImage, getTime().str(), cv::Point(350, 100), cv::FONT_HERSHEY_PLAIN, 4, cv::Scalar(0, 0, 255, 255), 2,CV_AA);
+	cv::putText(rightImage, getTime().str(), cv::Point(325, 100), cv::FONT_HERSHEY_PLAIN, 4, cv::Scalar(0, 0, 255, 255), 2);
 }
 
 std::stringstream HUDManipulator::getTime() {
