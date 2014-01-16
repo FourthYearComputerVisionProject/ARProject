@@ -4,15 +4,11 @@
 
 #define BUF_SIZE 255
 
+static HANDLE mutex;
+
 VideoDrawManipulator::VideoDrawManipulator(std::string file, int x, int y) : x(x), y(y), source(file)
 {
-	thread = CreateThread( 
-            NULL,                   // default security attributes
-            0,                      // use default stack size  
-			bufferFunction,       // thread function name
-            this,          // argument to thread function 
-            0,                      // use default creation flags 
-			&threadID);
+	mutex = CreateMutex(NULL, false, NULL);
 	glBindTexture(GL_TEXTURE_2D, leftTexture);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -34,6 +30,13 @@ VideoDrawManipulator::VideoDrawManipulator(std::string file, int x, int y) : x(x
 	rightXOffset = 0.5;
 	rightYOffset = 0;
 	rightZOffset = 2;
+	thread = CreateThread( 
+            NULL,                   // default security attributes
+            0,                      // use default stack size  
+			bufferFunction,       // thread function name
+            this,          // argument to thread function 
+            0,                      // use default creation flags 
+			&threadID);
 }
 
 VideoDrawManipulator::~VideoDrawManipulator()
@@ -56,18 +59,20 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
         return 1;
 	while(true)
 	{
-		if(((VideoDrawManipulator*)lpParam)->frameBuffer.size() < 240)
+		if(((VideoDrawManipulator*)lpParam)->frameBuffer.size() < 20)
 		{
+			WaitForSingleObject(mutex, INFINITE);
 			((VideoDrawManipulator*)lpParam)->source.update();
 			cv::Mat leftImg, rightImg;
 			leftImg = ((VideoDrawManipulator*)lpParam)->source.getLeftImage();
 			rightImg = ((VideoDrawManipulator*)lpParam)->source.getRightImage();
 			((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(leftImg);
 			((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(rightImg);
+			ReleaseMutex(mutex);
 		}
 		else
 		{
-			Sleep(500);
+			continue;
 		}
 	}
 }
@@ -78,8 +83,10 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	{
 		return;
 	}
+	WaitForSingleObject(mutex, INFINITE);
 	if(frameBuffer.size() < 2)
 	{
+		ReleaseMutex(mutex);
 		return;
 	}
 	//source.update();
@@ -88,16 +95,33 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	frameBuffer.pop_front();
 	cv::Mat right = frameBuffer.front();
 	frameBuffer.pop_front();
+	ReleaseMutex(mutex);
+
+	cv::Mat resizeLeft;
+	cv::Mat resizeRight;
+
+	cv::resize(left, resizeLeft, cv::Size(200, 200), CV_INTER_LINEAR);
+	cv::resize(right, resizeRight, cv::Size(200, 200), CV_INTER_LINEAR);
 
 	double alpha = 0.5;
 
 	double beta = 1.0 - alpha;
 
-	leftImage.adjustROI(0 - y, 0 - (leftImage.rows - (y + left.rows)), 0 - x, 0 - (leftImage.cols - (x + left.cols)));
-	rightImage.adjustROI(0 - y, 0 - (rightImage.rows - (y + right.rows)), 0 - x, 0 - (rightImage.cols - (x + right.cols)));
+	cv::Rect rect = cv::Rect(x, y, 200, 200);
 
-	cv::addWeighted(left, alpha, leftImage, beta, 0.0, leftImage);
-	cv::addWeighted(right, alpha, rightImage, beta, 0.0, rightImage);
+	//leftImage.adjustROI(0 - y, 0 - (leftImage.rows - (y + resizeLeft.rows)), 0 - x, 0 - (leftImage.cols - (x + resizeLeft.cols)));
+	//rightImage.adjustROI(0 - y, 0 - (rightImage.rows - (y + right.rows)), 0 - x, 0 - (rightImage.cols - (x + right.cols)));
+
+	cv::Mat leftROI = leftImage(rect);
+	cv::Mat rightROI = rightImage(rect);
+
+	cv::addWeighted(resizeLeft, alpha, leftROI, beta, 0.0, leftROI);
+	cv::addWeighted(resizeRight, alpha, rightROI, beta, 0.0, rightROI);
+
+	
+
+	//leftImage.adjustROI(y, leftImage.rows - (y + resizeLeft.rows), x, leftImage.cols - (x + resizeLeft.cols));
+	//rightImage.adjustROI(y, rightImage.rows - (y + right.rows), x, rightImage.cols - (x + right.cols));
 
 	/*glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, leftTexture); //bind the texture
