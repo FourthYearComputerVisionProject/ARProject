@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ChangeBoxLocationEvent" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABgAGAAAAA=</HashCode>
+      <FileName>ChangeBoxLocationEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawBoxManipulator" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABABAAAAACAAAAAAAAAAAIBgAAAAAAA=</HashCode>
+      <FileName>DrawBoxManipulator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ISteroSource" Collapsed="true">
+    <Position X="3.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAEAAAAAAAAABIAAAAAAAAAAEAAA=</HashCode>
+      <FileName>IStereoSource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StereoCapture" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEBCAAAAAAFAAAAAEAAAFIAAAACAAAAAEAAA=</HashCode>
+      <FileName>StereoCapture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StereoRender" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAIgACAABAEAYAUAQBQAAAAwEDBgQAAAAAAASAMAA=</HashCode>
+      <FileName>StereoRender.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDetector" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDetector.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IManipulator" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>IManipulator.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseEvent" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAQQAIAAAAAAAAAARABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BaseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventManager" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAGAAAIAgAQAAAAAAAAQAAAgAgAAAAAAADAAA=</HashCode>
+      <FileName>EventManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IEventListener" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IEventListener.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="IEventListenerList" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="BaseEventList" Collapsed="true">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="EventType" Collapsed="true">
+    <Position X="7.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventManager.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,7 +1,7 @@
 Debug
 ipch
-/*.suo
-/*.sdf
-/*.opensdf
-/*.exe
-/*.user
+*.suo
+*.sdf
+*.opensdf
+*.exe
+*.user
