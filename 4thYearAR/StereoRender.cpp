@@ -70,7 +70,7 @@ void StereoRender::display(void) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	//glUniform1i(program, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, left.cols, left.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, left.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, left.cols, left.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, left.data);
 
 	glBindTexture(GL_TEXTURE_2D, leftTexture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);
@@ -88,7 +88,7 @@ void StereoRender::display(void) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	//glUniform1i(program, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, right.cols, right.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, right.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, right.cols, right.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, right.data);
 
 	glBindTexture(GL_TEXTURE_2D, rightTexture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);

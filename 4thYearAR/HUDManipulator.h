@@ -29,7 +29,13 @@ private:
 	 * The Y position of the box.
 	 */
 	int y;
-
+	/*
+	 * The alpha transparancy of the HUD
+	 */
+	double alpha;
+	/*
+	 * The texture used for the battery
+	 */
 	cv::Mat batteryTexture;
 public:
 	HUDManipulator();

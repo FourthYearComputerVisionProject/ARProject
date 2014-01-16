@@ -6,9 +6,12 @@
 
 HUDManipulator::HUDManipulator()
 {
+	batteryTexture = cv::imread("Images\\battery.png", -1);
+	//cv::cvtColor(batteryTexture, batteryTexture, CV_RGBA2BGRA);
 
-	cv::Mat battery = cv::imread("Images\\battery.png", -1);
-	//cv::imshow("t", battery);
+	alpha = 0.5;
+
+	//cv::imshow("t", batteryTexture);
 	/*
 	glGenTextures(1, &batteryTexture); // Create The Texture
 
@@ -36,12 +39,10 @@ void HUDManipulator::handleEvent(BaseEvent* evt)
 
 void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 {
-	//cv::imshow("temp", battery);
+	cv::Rect roi = cv::Rect(150, 150, batteryTexture.cols, batteryTexture.rows);
+	cv::Mat leftROI = leftImage(roi);
+	cv::addWeighted(batteryTexture, alpha, leftROI, 1 - alpha, 0.0, leftROI);
 	
-	//battery.copyTo(leftImage(cv::Rect(x, y, battery.cols, battery.rows)));
-	//drawImage(batteryTexture);
-	
-	//cv::addWeighted(leftImage, 0.5, batteryTexture, 1, 0.0, leftImage);
 
 	drawClock(leftImage, rightImage);
 }
