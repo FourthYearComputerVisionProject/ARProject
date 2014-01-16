@@ -1,0 +1,7 @@
+#pragma once
+
+#define CLICK_EVENT 1
+#define QR_DETECT_EVENT 2
+#define SINGLE_POINT_EVENT 3
+#define OPEN_VIDEO_EVENT 4
+#define CLOSE_VIDEO_EVENT 5

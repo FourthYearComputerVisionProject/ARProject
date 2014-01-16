@@ -87,6 +87,7 @@
   <ItemGroup>
     <ClInclude Include="BaseEvent.h" />
     <ClInclude Include="ChangeBoxLocationEvent.h" />
+    <ClInclude Include="CloseVideoEvent.h" />
     <ClInclude Include="HUDManipulator.h" />
     <ClInclude Include="ColouredBandDetector.h" />
     <ClInclude Include="EventManager.h" />
@@ -95,6 +96,7 @@
     <ClInclude Include="IManipulator.h" />
     <ClInclude Include="IStereoSource.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="OpenVideoEvent.h" />
     <ClInclude Include="QRCodeEvent.h" />
     <ClInclude Include="QRDetector.h" />
     <ClInclude Include="SinglePointEvent.h" />
@@ -109,10 +111,12 @@
     <ClInclude Include="VideoDrawManipulatorFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CloseVideoEvent.cpp" />
     <ClCompile Include="HUDManipulator.cpp" />
     <ClCompile Include="ColouredBandDetector.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenVideoEvent.cpp" />
     <ClCompile Include="QRDetector.cpp" />
     <ClCompile Include="SinglePointEvent.cpp" />
     <ClCompile Include="SinglePointManipulator.cpp" />

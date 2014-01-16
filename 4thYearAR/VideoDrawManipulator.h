@@ -62,6 +62,7 @@ private:
 public:
 	VideoDrawManipulator(std::string file, int x, int y, int width, int height);
 	~VideoDrawManipulator();
+	std::string getLocation() { return location; }
 	int getZDepth() { return 1; }
 	static DWORD WINAPI bufferFunction(LPVOID lpParam);
 	void manipulate(cv::Mat leftImage, cv::Mat rightImage);
