@@ -16,6 +16,10 @@ static std::list<std::string> history;
 
 void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 {
+	if(!leftImage.data)
+	{
+		return;
+	}
 	cv::Mat grayScale;
 	zbar::ImageScanner scanner;
 	scanner.set_config(zbar::ZBAR_NONE, zbar::ZBAR_CFG_ENABLE, 1);
@@ -47,8 +51,13 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 		{
 			continue;
 		}
+
 		std::cout    << "decoded " << sym->get_type_name()
                     << " symbol \"" << sym->get_data() << '"' << std::endl;
+
+		QRCodeEvent* evt = new QRCodeEvent(sym->get_data());
+		EventManager::getGlobal()->fireEvent(evt);
+
 		history.push_back(sym->get_data());
 		if(history.size() > HISTORY_SIZE)
 		{

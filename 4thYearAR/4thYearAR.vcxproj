@@ -94,6 +94,7 @@
     <ClInclude Include="IManipulator.h" />
     <ClInclude Include="IStereoSource.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="QRCodeEvent.h" />
     <ClInclude Include="QRDetector.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StereoCapture.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="textfile.h" />
     <ClInclude Include="VideoDrawManipulator.h" />
+    <ClInclude Include="VideoDrawManipulatorFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HUDManipulator.cpp" />
@@ -117,6 +119,7 @@
     <ClCompile Include="StereoVideoSource.cpp" />
     <ClCompile Include="textfile.cpp" />
     <ClCompile Include="VideoDrawManipulator.cpp" />
+    <ClCompile Include="VideoDrawManipulatorFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TopLevel.cd" />

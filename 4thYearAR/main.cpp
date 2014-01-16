@@ -36,7 +36,6 @@ void reshapeCallback(int w, int h) {
 
 void closeCallback(){
 	glutLeaveMainLoop();
-	
 }
 
 int main(int argc, char **argv) {
@@ -65,7 +64,7 @@ int main(int argc, char **argv) {
 	glAlphaFunc(GL_GREATER, 0);
 	glEnable(GL_ALPHA_TEST);
 
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	glutMouseFunc(mouseCallback);
 
@@ -81,13 +80,14 @@ int main(int argc, char **argv) {
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
 	
 
+	VideoDrawManipulatorFactory* fact = new VideoDrawManipulatorFactory(render);
 #ifdef _DEBUG
 	std::cout << "GLSL version: "<< glGetString(GL_SHADING_LANGUAGE_VERSION);
 #endif
 
 	glutMainLoop();
 
-	delete(render);
+	//delete(render);
 
 	return 0;
 }

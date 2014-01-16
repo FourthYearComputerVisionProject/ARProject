@@ -74,6 +74,12 @@
     <ClInclude Include="VideoDrawManipulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VideoDrawManipulatorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QRCodeEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EventManager.cpp">
@@ -104,6 +110,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VideoDrawManipulator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoDrawManipulatorFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

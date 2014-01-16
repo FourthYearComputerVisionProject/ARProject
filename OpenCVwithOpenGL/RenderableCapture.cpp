@@ -58,6 +58,7 @@ void RenderableCapture::draw(void) {
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, capture.cols, capture.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, capture.data);
 
+	//MOVED TO RenderableAbst//
 	glBindTexture(GL_TEXTURE_2D, texture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -66,6 +67,6 @@ void RenderableCapture::draw(void) {
 	glTexCoord2d(1.0, 1.0); glVertex3d(0.5 + xOffset, 0.0 + yOffset, 0.0 + zOffset);
 	glTexCoord2d(0.0, 0.0); glVertex3d(0.0 + xOffset, 1.0 + yOffset, 0.0 + zOffset);
 	glTexCoord2d(1.0, 0.0); glVertex3d(0.5 + xOffset, 1.0 + yOffset, 0.0 + zOffset);
-
 	glEnd();
+	//END MOVED//
 }
