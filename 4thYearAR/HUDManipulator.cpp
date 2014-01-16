@@ -6,34 +6,27 @@
 
 HUDManipulator::HUDManipulator()
 {
+	EventManager::getGlobal()->addListener(VIDEO_READY_EVENT, this); //subscribe to video ready events
+
 	batteryTexture = cv::imread("Images\\battery.png", -1);
 	cv::cvtColor(batteryTexture, batteryTexture, CV_RGBA2BGRA);
+	videoAvailable = false;
 
 	alpha = 0.5;
-
-	//cv::imshow("t", batteryTexture);
-	/*
-	glGenTextures(1, &batteryTexture); // Create The Texture
-
-	glBindTexture(GL_TEXTURE_2D, batteryTexture);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, battery.cols, battery.rows, 0, GL_BGRA, GL_UNSIGNED_BYTE, battery.data);
-	*/
 	x = y = 0;
 }
 
 void HUDManipulator::handleEvent(BaseEvent* evt)
 {
-	if(evt->getType() == 1)
+	if(evt->getType() == CLICK_EVENT)
 	{
 		ChangeBoxLocationEvent* cEvt = (ChangeBoxLocationEvent*)evt;
 		x = cEvt->getX();
 		y = cEvt->getY();
+	}
+	else if (evt->getType() == VIDEO_READY_EVENT) {
+		VideoReadyEvent vrevt = (VideoReadyEvent*) evt;
+		videoAvailable = vrevt.videoReady();
 	}
 }
 
@@ -47,27 +40,29 @@ void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	cv::Mat rightROI = rightImage(roi);
 	cv::addWeighted(batteryTexture, alpha, rightROI, 1 - alpha, 0.0, rightROI);
 
+	if (videoAvailable) {
+		drawMessage("Video Available",leftImage,rightImage);
+	}
+
 	drawClock(leftImage, rightImage);
 
-	drawCrosshair(leftImage);
-	drawCrosshair(rightImage);
+	//drawCrosshair(leftImage);
+	//drawCrosshair(rightImage);
 }
 
 void HUDManipulator::drawCrosshair(cv::Mat img) {
 	cv::Size s = img.size();
-
 	cv::Point p = cv::Point(s.width / 2, s.height / 2);
-
 	cv::circle(img, p, 5, cv::Scalar(0, 0, 255, 255), 1);
-
 	cv::line(img, p, cv::Point(p.x, cv::max(p.y - 15, 0)), cv::Scalar(255, 0, 0, 255), 1);
-
 	line(img, p, cv::Point(p.x, cv::min(p.y + 15, s.height)), cv::Scalar(255, 0, 0, 255), 1);
-
 	line(img, p, cv::Point(cv::max(p.x - 15, 0), p.y), cv::Scalar(255, 0, 0, 255), 1);
-
 	line(img, p, cv::Point(cv::min(p.x + 15, s.width), p.y), cv::Scalar(255, 0, 0, 255), 1);
+}
 
+void HUDManipulator::drawMessage(std::string message,cv::Mat leftImage, cv::Mat rightImage) {
+	cv::putText(leftImage, message, cv::Point(250, 350), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0, 0, 255, 255), 2, CV_AA);
+	cv::putText(rightImage, message, cv::Point(225, 350), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(0, 0, 255, 255), 2, CV_AA);
 }
 
 void HUDManipulator::drawClock(cv::Mat leftImage, cv::Mat rightImage) {

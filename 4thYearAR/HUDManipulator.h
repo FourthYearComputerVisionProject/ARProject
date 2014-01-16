@@ -14,6 +14,7 @@
 #include "IManipulator.h"
 #include "IEventListener.h"
 #include "EventManager.h"
+#include "VideoReadyEvent.h"
 
 /*
  * A manipulator that draws a box.
@@ -37,6 +38,10 @@ private:
 	 * The texture used for the battery
 	 */
 	cv::Mat batteryTexture;
+	/*
+	 * If true a message will be displayed to the user
+	 */
+	bool videoAvailable;
 public:
 	HUDManipulator();
 	~HUDManipulator();
@@ -47,4 +52,5 @@ public:
 	std::stringstream getTime();
 	void drawImage(GLuint texture);
 	void drawCrosshair(cv::Mat img);
+	void drawMessage(std::string message, cv::Mat leftImage, cv::Mat rightImage);
 };

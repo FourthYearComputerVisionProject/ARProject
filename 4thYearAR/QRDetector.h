@@ -20,11 +20,13 @@
 #include "ChangeBoxLocationEvent.h"
 #include "OpenVideoEvent.h"
 #include "CloseVideoEvent.h"
+#include "VideoReadyEvent.h"
 
 class QRDetector : public IDetector, public IEventListener {
 private:
 	std::map<std::string, bool> history;
 	std::list<std::string> historyOrder;
+	bool videoReady;
 public:
 	QRDetector();
 	void detect(cv::Mat leftImage, cv::Mat rightImage);

@@ -110,6 +110,7 @@
     <ClInclude Include="textfile.h" />
     <ClInclude Include="VideoDrawManipulator.h" />
     <ClInclude Include="VideoDrawManipulatorFactory.h" />
+    <ClInclude Include="VideoReadyEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CloseVideoEvent.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="textfile.cpp" />
     <ClCompile Include="VideoDrawManipulator.cpp" />
     <ClCompile Include="VideoDrawManipulatorFactory.cpp" />
+    <ClCompile Include="VideoReadyEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TopLevel.cd" />
