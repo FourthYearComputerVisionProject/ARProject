@@ -7,7 +7,7 @@
 HUDManipulator::HUDManipulator()
 {
 	batteryTexture = cv::imread("Images\\battery.png", -1);
-	//cv::cvtColor(batteryTexture, batteryTexture, CV_RGBA2BGRA);
+	cv::cvtColor(batteryTexture, batteryTexture, CV_RGBA2BGRA);
 
 	alpha = 0.5;
 
@@ -39,17 +39,20 @@ void HUDManipulator::handleEvent(BaseEvent* evt)
 
 void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 {
-	cv::Rect roi = cv::Rect(150, 150, batteryTexture.cols, batteryTexture.rows);
+	cv::Rect roi = cv::Rect(300, 50, batteryTexture.cols, batteryTexture.rows);
 	cv::Mat leftROI = leftImage(roi);
 	cv::addWeighted(batteryTexture, alpha, leftROI, 1 - alpha, 0.0, leftROI);
-	
+
+	roi = cv::Rect(275, 50, batteryTexture.cols, batteryTexture.rows);
+	cv::Mat rightROI = rightImage(roi);
+	cv::addWeighted(batteryTexture, alpha, rightROI, 1 - alpha, 0.0, rightROI);
 
 	drawClock(leftImage, rightImage);
 }
 
 void HUDManipulator::drawClock(cv::Mat leftImage, cv::Mat rightImage) {
-	cv::putText(leftImage, getTime().str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0,0,255), 3, 4);
-	cv::putText(rightImage, getTime().str(), cv::Point(x, y), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0, 0, 255), 3, 4);
+	cv::putText(leftImage, getTime().str(), cv::Point(350, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0,0,0), 3, 4);
+	cv::putText(rightImage, getTime().str(), cv::Point(325, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0, 0, 0), 3, 4);
 }
 
 std::stringstream HUDManipulator::getTime() {
