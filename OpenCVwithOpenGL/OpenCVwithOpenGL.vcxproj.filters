@@ -51,6 +51,9 @@
     <ClInclude Include="BoxManip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HandDetection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -77,6 +80,9 @@
     <ClCompile Include="BoxManip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HandDetection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\barrel_right.geom">
@@ -100,5 +106,6 @@
     <None Include="Shaders\alphablend.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
