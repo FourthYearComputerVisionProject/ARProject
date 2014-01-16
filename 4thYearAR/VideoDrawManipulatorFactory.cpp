@@ -2,8 +2,8 @@
 
 #include "VideoDrawManipulatorFactory.h"
 
-static VideoDrawManipulator* globalvid;	//temp so we can remove video, will be changed to location finding
-static bool videoPlaying = false;
+//static VideoDrawManipulator* globalvid;	//temp so we can remove video, will be changed to location finding
+//static bool videoPlaying = false;
 
 VideoDrawManipulatorFactory::VideoDrawManipulatorFactory(StereoRender* renderer)
 {
