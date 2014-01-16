@@ -2,10 +2,21 @@
 
 #include "StereoVideoSource.h"
 
+StereoVideoSource::StereoVideoSource()
+{
+
+}
+
 StereoVideoSource::StereoVideoSource(std::string file)
 {
 	capture.open(file);
-	//capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
+	capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
+}
+
+void StereoVideoSource::open(std::string file)
+{
+	capture.open(file);
+	capture.set(CV_CAP_PROP_FPS, DEFAULT_FRAMERATE);
 }
 
 bool StereoVideoSource::addDetector(IDetector* detector)

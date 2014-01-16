@@ -58,6 +58,7 @@ private:
 	StereoVideoSource source;
 	HANDLE thread;
 	DWORD threadID;
+	std::string location;
 public:
 	VideoDrawManipulator(std::string file, int x, int y, int width, int height);
 	~VideoDrawManipulator();
