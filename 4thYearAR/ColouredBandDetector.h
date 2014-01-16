@@ -34,7 +34,7 @@ public:
 		vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
 
 		//minimum and maximum object area
-		static const int MIN_OBJECT_AREA = 15;
+		static const int MIN_OBJECT_AREA = 200;
 		static const int MAX_OBJECT_AREA = 80000;
 			
 		//function declarations

@@ -48,11 +48,31 @@ void HUDManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	cv::addWeighted(batteryTexture, alpha, rightROI, 1 - alpha, 0.0, rightROI);
 
 	drawClock(leftImage, rightImage);
+
+	drawCrosshair(leftImage);
+	drawCrosshair(rightImage);
+}
+
+void HUDManipulator::drawCrosshair(cv::Mat img) {
+	cv::Size s = img.size();
+
+	cv::Point p = cv::Point(s.width / 2, s.height / 2);
+
+	cv::circle(img, p, 5, cv::Scalar(0, 0, 255, 255), 1);
+
+	cv::line(img, p, cv::Point(p.x, cv::max(p.y - 15, 0)), cv::Scalar(255, 0, 0, 255), 1);
+
+	line(img, p, cv::Point(p.x, cv::min(p.y + 15, s.height)), cv::Scalar(255, 0, 0, 255), 1);
+
+	line(img, p, cv::Point(cv::max(p.x - 15, 0), p.y), cv::Scalar(255, 0, 0, 255), 1);
+
+	line(img, p, cv::Point(cv::min(p.x + 15, s.width), p.y), cv::Scalar(255, 0, 0, 255), 1);
+
 }
 
 void HUDManipulator::drawClock(cv::Mat leftImage, cv::Mat rightImage) {
-	cv::putText(leftImage, getTime().str(), cv::Point(350, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0,0,0), 3, 4);
-	cv::putText(rightImage, getTime().str(), cv::Point(325, 100), cv::FONT_HERSHEY_SIMPLEX, 2, CV_RGB(0, 0, 0), 3, 4);
+	cv::putText(leftImage, getTime().str(), cv::Point(350, 100), cv::FONT_HERSHEY_PLAIN, 4, cv::Scalar(0, 0, 255, 255), 2, CV_AA);
+	cv::putText(rightImage, getTime().str(), cv::Point(325, 100), cv::FONT_HERSHEY_PLAIN, 4, cv::Scalar(0, 0, 255, 255), 2, CV_AA);
 }
 
 std::stringstream HUDManipulator::getTime() {
