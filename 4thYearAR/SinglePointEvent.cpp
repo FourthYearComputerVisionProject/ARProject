@@ -5,21 +5,33 @@
 using namespace std;
 using namespace cv;
 
-SinglePointEvent::SinglePointEvent(Point newPoint):BaseEvent(3)
+SinglePointEvent::SinglePointEvent(Point newLeftPoint, Point newRightPoint):BaseEvent(3)
 {	
-	p = newPoint;
+	pRight = newRightPoint;
+	pLeft = newLeftPoint;
+
 }
 
 SinglePointEvent::~SinglePointEvent(void)
 {
 }
 
-int SinglePointEvent::getX() 
+int SinglePointEvent::getXR() 
 { 
-	return p.x; 
+	return pRight.x; 
 }
 
-int SinglePointEvent::getY() 
+int SinglePointEvent::getYR() 
 { 
-	return p.y; 
+	return pRight.y; 
+}
+
+int SinglePointEvent::getXL() 
+{ 
+	return pLeft.x; 
+}
+
+int SinglePointEvent::getYL() 
+{ 
+	return pLeft.y; 
 }

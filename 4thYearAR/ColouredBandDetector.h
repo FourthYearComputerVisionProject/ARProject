@@ -38,10 +38,10 @@ public:
 		static const int MAX_OBJECT_AREA = 80000;
 			
 		//function declarations
-		void runDetection();
+		Point runDetection();
 		void removeNoise();
 		void makeThreshold();
-		void findCenterInContour();
+		Point findCenterInContour();
 		void cleanUpContours(int index);
 		void lookForHands(int index);
 					

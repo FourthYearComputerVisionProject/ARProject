@@ -12,7 +12,7 @@ public:
 	int getZDepth();
 	void handleEvent(BaseEvent* evt);
 private:
-	int x, y;
+	int xR, yR, xL, yL;
 	void drawClickIcon(int x, int y, cv::Mat &img);
 };
 

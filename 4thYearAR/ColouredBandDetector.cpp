@@ -30,20 +30,24 @@ ColouredBandDetector::~ColouredBandDetector(void)
 void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage) 
 {
 	camera=leftImage;
-	runDetection();
+	Point left = runDetection();
 	camera=rightImage;
-	runDetection();
+	Point right = runDetection();
+
+	//fire coordinates off using event manager
+	SinglePointEvent* spEvent= new SinglePointEvent(left, right);
+	EventManager::getGlobal()->fireEvent(spEvent);
 }
 
 /*=============== ColouredBandDetector:: runDetection ===============
 	Run the detection on the camera image
 */
 
-void ColouredBandDetector::runDetection()
+Point ColouredBandDetector::runDetection()
 {
 	makeThreshold();
 	removeNoise();
-	findCenterInContour();
+	return findCenterInContour();
 }
 
 /*=============== ColouredBandDetector:: removeNoise ===============
@@ -124,7 +128,7 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
   Note: hierarchy[i] negative means none exists for that corresponding element
 
 */
-void ColouredBandDetector::findCenterInContour()
+Point ColouredBandDetector::findCenterInContour()
 {
 	Mat srcImage;
 	Point objectFoundAt=0;
@@ -138,11 +142,8 @@ void ColouredBandDetector::findCenterInContour()
 			if(area>MIN_OBJECT_AREA && area<MAX_OBJECT_AREA){  //first check: is size of area in range of hand
 				//cleanUpContours(index); //for use with the hand detection code
 				objectFoundAt = centerOfMass(contours[index]);
-				
-				//fire coordinates off using event manager
-				SinglePointEvent* spEvent= new SinglePointEvent(objectFoundAt);
-				EventManager::getGlobal()->fireEvent(spEvent);
-				
+				return objectFoundAt;
+								
 			}
 		}
 	}

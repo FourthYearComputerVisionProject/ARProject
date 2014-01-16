@@ -10,11 +10,14 @@ class SinglePointEvent :
 	public BaseEvent
 {
 protected:
-	Point p;
+	Point pRight, pLeft;
+
 public:
-	SinglePointEvent(Point newPoint);
+	SinglePointEvent(Point newLeftPoint, Point newRightPoint);
 	~SinglePointEvent(void);
-	int getX();
-	int getY();
+	int getXR();
+	int getYR();
+	int getXL();
+	int getYL();
 };
 
