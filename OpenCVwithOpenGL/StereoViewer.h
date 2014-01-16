@@ -15,8 +15,8 @@
 #include "Renderable.h"
 #include "RenderableCapture.h"
 
-class StereoViewer{
-private:
+class StereoViewer {
+private: 
 	GLuint monochromeVertShader;
 	GLuint monochromeFragShader;
 	GLuint monochromeProgram;

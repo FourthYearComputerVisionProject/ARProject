@@ -4,7 +4,7 @@
 //
 
 #pragma once
-#define _DEBUG
+//#define _DEBUG
 #define _CRT_SECURE_NO_WARNINGS
 
 //Exclude rarely used stuff from Windows headers

@@ -9,7 +9,7 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 
-class RenderableVideoCapture{
+class RenderableVideoCapture {
 
 private:
 	GLuint texture; //the array for our texture

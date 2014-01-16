@@ -64,13 +64,13 @@ void StereoRender::display(void) {
 	{
 		(*it)->manipulate(left, right);
 	}
-
+	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, leftTexture); //bind the texture
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	//glUniform1i(program, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, left.cols, left.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, left.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, left.cols, left.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, left.data);
 
 	glBindTexture(GL_TEXTURE_2D, leftTexture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);
@@ -88,7 +88,7 @@ void StereoRender::display(void) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	//glUniform1i(program, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, right.cols, right.rows, 0, GL_BGR, GL_UNSIGNED_BYTE, right.data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, right.cols, right.rows, 0, GL_RGBA, GL_UNSIGNED_BYTE, right.data);
 
 	glBindTexture(GL_TEXTURE_2D, rightTexture); //bind the texture
 	glBegin(GL_TRIANGLE_STRIP);
@@ -104,6 +104,7 @@ void StereoRender::display(void) {
 	glUseProgram(0);
 
 	glutSwapBuffers();
+	
 }
 
 bool StereoRender::addManipulator(IManipulator* manipulator)
@@ -189,6 +190,7 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 	rightYOffset = 0;
 	rightZOffset = 1;
 
+	HUDManipulator* hudManip = new HUDManipulator();
 	QRDetector* qr = new QRDetector();
 
 	s->addDetector(qr);
@@ -198,11 +200,11 @@ StereoRender::StereoRender(ISteroSource* s) : source(s) {
 
 	//VideoDrawManipulator* vidManip = new VideoDrawManipulator(localVidSource, 100, 100);
 
-	DrawBoxManipulator* boxManip = new DrawBoxManipulator();
+	//HUDManipulator* boxManip = new DrawBoxManipulator();
 
-	EventManager::getGlobal()->addListener(1, boxManip);
+	EventManager::getGlobal()->addListener(1, hudManip);
 
-	addManipulator(boxManip);
+	addManipulator(hudManip);
 	//addManipulator(vidManip);
 
 	glGenTextures(1, &leftTexture); // Create The Texture
@@ -240,4 +242,7 @@ StereoRender::~StereoRender() {
 	glDeleteProgram(alphaProgram);
 	glDeleteShader(alphaFragShader);
 	glDeleteShader(alphaVertShader);
+
+	glDeleteTextures(1, &leftTexture);
+	glDeleteTextures(1, &rightTexture);
 }
