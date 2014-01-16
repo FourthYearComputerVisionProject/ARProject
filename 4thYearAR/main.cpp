@@ -79,6 +79,7 @@ int main(int argc, char **argv) {
 
 	GLenum err = glewInit();
 
+	StereoCapture* capture = new StereoCapture(1, 2);
 	
 	//add detectors
 	ColouredBandDetector* cbDetector = new ColouredBandDetector();

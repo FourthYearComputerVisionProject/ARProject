@@ -46,4 +46,5 @@ public:
 	void drawClock(cv::Mat leftImage, cv::Mat rightImage);
 	std::stringstream getTime();
 	void drawImage(GLuint texture);
+	void drawCrosshair(cv::Mat img);
 };

@@ -48,15 +48,15 @@ void SinglePointManipulator::drawClickIcon(int x, int y, Mat &img)
 	//cout << "in draw";
 	Size s = img.size();
 
-	circle(img,Point(x,y),5,Scalar(255,0,0),1);
+	circle(img,Point(x,y),5,Scalar(0,0,255, 255),1);
     
-    line(img,Point(x,y),Point(x,max(y-15,0)),Scalar(0,255,0),1);
+	line(img, Point(x, y), Point(x, max(y - 15, 0)), Scalar(255, 0, 0, 255), 2);
    
-    line(img,Point(x,y),Point(x,min(y+15, s.height)),Scalar(0,255,0),1);
+	line(img, Point(x, y), Point(x, min(y + 15, s.height)), Scalar(255, 0, 0, 255), 2);
     
-    line(img,Point(x,y),Point(max(x-15, 0),y),Scalar(0,255,0),1);
+	line(img, Point(x, y), Point(max(x - 15, 0), y), Scalar(255, 0, 0, 255), 2);
     
-    line(img,Point(x,y),Point(min(x+15, s.width),y),Scalar(0,255,0),1);
+	line(img, Point(x, y), Point(min(x + 15, s.width), y), Scalar(255, 0, 0, 255), 2);
     
 }
 	
