@@ -89,6 +89,7 @@
     <ClInclude Include="ChangeBoxLocationEvent.h" />
     <ClInclude Include="CloseVideoEvent.h" />
     <ClInclude Include="HUDManipulator.h" />
+    <ClInclude Include="ColouredBandDetector.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="IDetector.h" />
     <ClInclude Include="IEventListener.h" />
@@ -98,6 +99,8 @@
     <ClInclude Include="OpenVideoEvent.h" />
     <ClInclude Include="QRCodeEvent.h" />
     <ClInclude Include="QRDetector.h" />
+    <ClInclude Include="SinglePointEvent.h" />
+    <ClInclude Include="SinglePointManipulator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StereoCapture.h" />
     <ClInclude Include="StereoRender.h" />
@@ -110,10 +113,13 @@
   <ItemGroup>
     <ClCompile Include="CloseVideoEvent.cpp" />
     <ClCompile Include="HUDManipulator.cpp" />
+    <ClCompile Include="ColouredBandDetector.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenVideoEvent.cpp" />
     <ClCompile Include="QRDetector.cpp" />
+    <ClCompile Include="SinglePointEvent.cpp" />
+    <ClCompile Include="SinglePointManipulator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

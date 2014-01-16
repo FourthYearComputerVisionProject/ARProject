@@ -84,6 +84,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CloseVideoEvent.h">
+    <ClInclude Include="ColouredBandDetector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePointEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SinglePointManipulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,10 +128,20 @@
     <ClCompile Include="VideoDrawManipulatorFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="OpenVideoEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CloseVideoEvent.cpp">
+=======
+    <ClCompile Include="ColouredBandDetector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SinglePointEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SinglePointManipulator.cpp">
+>>>>>>> 70d5cfbf3bdab82e0f564a7b16a2ada3d414f5c9
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
