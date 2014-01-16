@@ -6,7 +6,8 @@
 
 static HANDLE mutex;
 
-VideoDrawManipulator::VideoDrawManipulator(std::string file, int x, int y) : x(x), y(y), source(file)
+VideoDrawManipulator::VideoDrawManipulator(std::string file, int x, int y, int width, int height) :
+	x(x), y(y), width(width), height(height), source(file)
 {
 	mutex = CreateMutex(NULL, false, NULL);
 	/*glBindTexture(GL_TEXTURE_2D, leftTexture);
@@ -66,7 +67,8 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
 			cv::Mat leftImg, rightImg;
 			cv::Mat leftResize;
 			leftImg = ((VideoDrawManipulator*)lpParam)->source.getLeftImage();
-			cv::resize(leftImg, leftResize, cv::Size(200, 200), CV_INTER_LINEAR);
+			cv::resize(leftImg, leftResize, cv::Size(((VideoDrawManipulator*)lpParam)->width,
+				((VideoDrawManipulator*)lpParam)->height), CV_INTER_LINEAR);
 			cv::cvtColor(leftResize, leftResize, CV_BGR2BGRA);
 			//rightImg = ((VideoDrawManipulator*)lpParam)->source.getRightImage();
 			((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(leftResize);
@@ -104,11 +106,11 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 
 	//cv::cvtColor(resizeRight, resizeRight, CV_BGR2BGRA);
 
-	double alpha = 0.5;
+	double alpha = 0.7;
 
 	double beta = 1.0 - alpha;
 
-	cv::Rect rect = cv::Rect(x, y, 200, 200);
+	cv::Rect rect = cv::Rect(x, y, width, height);
 
 	//leftImage.adjustROI(0 - y, 0 - (leftImage.rows - (y + resizeLeft.rows)), 0 - x, 0 - (leftImage.cols - (x + resizeLeft.cols)));
 	//rightImage.adjustROI(0 - y, 0 - (rightImage.rows - (y + right.rows)), 0 - x, 0 - (rightImage.cols - (x + right.cols)));
