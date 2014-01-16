@@ -77,6 +77,12 @@
     <ClCompile Include="BoxManip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManagerImpl.cpp">
+      <Filter>Source Files\event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\barrel_right.geom">
