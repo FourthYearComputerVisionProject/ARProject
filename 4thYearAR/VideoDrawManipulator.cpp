@@ -103,6 +103,10 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 	cv::resize(left, resizeLeft, cv::Size(200, 200), CV_INTER_LINEAR);
 	cv::resize(right, resizeRight, cv::Size(200, 200), CV_INTER_LINEAR);
 
+	cv::cvtColor(resizeLeft, resizeLeft, CV_BGR2BGRA);
+
+	cv::cvtColor(resizeRight, resizeRight, CV_BGR2BGRA);
+
 	double alpha = 0.5;
 
 	double beta = 1.0 - alpha;
