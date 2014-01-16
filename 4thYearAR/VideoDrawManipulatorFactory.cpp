@@ -3,6 +3,7 @@
 #include "VideoDrawManipulatorFactory.h"
 
 static VideoDrawManipulator* globalvid;	//temp so we can remove video, will be changed to location finding
+static bool videoPlaying = false;
 
 VideoDrawManipulatorFactory::VideoDrawManipulatorFactory(StereoRender* renderer)
 {
@@ -19,13 +20,19 @@ void VideoDrawManipulatorFactory::handleEvent(BaseEvent* evt)
 		float aspect = 640.0f / 480.0f;
 		VideoDrawManipulator* manip = new VideoDrawManipulator(localVidSource, 200, 200, (int)(200.0f * aspect), 200);
 		globalvid = manip;
-		render->addManipulator(manip);
+		//render->addManipulator(manip);
 	}
 	else if(evt->getType() == 1)
 	{
 		if(globalvid!=NULL){
-			render->removeManipulator(globalvid);
-			globalvid = NULL;
+			if(videoPlaying==true){
+				render->removeManipulator(globalvid);
+				globalvid = NULL;
+				videoPlaying = false;
+			}else{
+				render->addManipulator(globalvid);
+				videoPlaying = true;
+			}
 		}
 	}
 }
