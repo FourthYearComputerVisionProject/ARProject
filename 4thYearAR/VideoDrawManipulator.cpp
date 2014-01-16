@@ -7,7 +7,7 @@
 static HANDLE mutex;
 
 VideoDrawManipulator::VideoDrawManipulator(std::string file, int x, int y, int width, int height) :
-	x(x), y(y), width(width), height(height), source(file)
+	x(x), y(y), width(width), height(height), location(file)
 {
 	mutex = CreateMutex(NULL, false, NULL);
 	/*glBindTexture(GL_TEXTURE_2D, leftTexture);
@@ -53,6 +53,8 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
     size_t cchStringSize;
     DWORD dwChars;
 
+	((VideoDrawManipulator*)lpParam)->source.open(((VideoDrawManipulator*)lpParam)->location);
+
     // Make sure there is a console to receive output results. 
 
     hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -75,6 +77,7 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
 			//((VideoDrawManipulator*)lpParam)->frameBuffer.push_back(rightImg);
 		}
 		ReleaseMutex(mutex);
+		Yield();
 	}
 }
 

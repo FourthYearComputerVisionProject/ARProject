@@ -18,7 +18,9 @@ private:
 	cv::Mat image;
 	cv::VideoCapture capture;
 public:
+	StereoVideoSource();
 	StereoVideoSource(std::string file);
+	void open(std::string file);
 	bool addDetector(IDetector* detector);
 	bool removeDetector(IDetector* detector);
 	void update();

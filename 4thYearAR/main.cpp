@@ -25,6 +25,10 @@ void mouseCallback(int button, int state, int x, int y)
 	{
 		x -= width;
 	}
+	if(state == GLUT_UP)
+	{
+		return;
+	}
 	ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(x, y);
 
 	EventManager::getGlobal()->fireEvent(evt);
