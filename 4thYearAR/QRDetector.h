@@ -26,7 +26,7 @@ class QRDetector : public IDetector, public IEventListener {
 private:
 	std::map<std::string, bool> history;
 	std::list<std::string> historyOrder;
-	bool videoReady;
+	bool videoPlaying;
 public:
 	QRDetector();
 	void detect(cv::Mat leftImage, cv::Mat rightImage);

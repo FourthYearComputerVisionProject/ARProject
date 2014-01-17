@@ -25,8 +25,8 @@ void HUDManipulator::handleEvent(BaseEvent* evt)
 		y = cEvt->getY();
 	}
 	else if (evt->getType() == VIDEO_READY_EVENT) {
-		VideoReadyEvent vrevt = (VideoReadyEvent*) evt;
-		videoAvailable = vrevt.videoReady();
+		VideoReadyEvent* vrevt = (VideoReadyEvent*) evt;
+		videoAvailable = vrevt->videoReady();
 	}
 }
 

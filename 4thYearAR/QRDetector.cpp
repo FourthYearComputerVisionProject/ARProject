@@ -12,7 +12,7 @@
 QRDetector::QRDetector()
 {
 	EventManager::getGlobal()->addListener(1, this);
-	videoReady = false;
+	videoPlaying = false;
 }
 
 void QRDetector::handleEvent(BaseEvent* evt)
@@ -33,6 +33,7 @@ void QRDetector::handleEvent(BaseEvent* evt)
 				if (history.size() != 0) { // if another video is ready to load
 					VideoReadyEvent vrevt = VideoReadyEvent(true);
 					EventManager::getGlobal()->fireEvent(&vrevt);
+					videoPlaying = false;
 				}
 			}
 			else
@@ -43,6 +44,7 @@ void QRDetector::handleEvent(BaseEvent* evt)
 
 				VideoReadyEvent vrevt = VideoReadyEvent(false);
 				EventManager::getGlobal()->fireEvent(&vrevt);
+				videoPlaying = true;
 			}
 		}
 	}
@@ -94,7 +96,9 @@ void QRDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
             cv::line(leftImage, cv::Point(sym->get_location_x(3), sym->get_location_y(3)), cv::Point(sym->get_location_x(0), sym->get_location_y(0)), cv::Scalar(0, 255, 0), 2, 8, 0);
         }
 
-		VideoReadyEvent vrevt = VideoReadyEvent(true);
-		EventManager::getGlobal()->fireEvent(&vrevt); //a video was added, inform the user
+		if (!videoPlaying) {
+			VideoReadyEvent vrevt = VideoReadyEvent(true);
+			EventManager::getGlobal()->fireEvent(&vrevt); //a video was added, inform the user
+		}
 	}
 }
