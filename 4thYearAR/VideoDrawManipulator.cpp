@@ -69,6 +69,11 @@ DWORD WINAPI VideoDrawManipulator::bufferFunction(LPVOID lpParam)
 			cv::Mat leftImg, rightImg;
 			cv::Mat leftResize;
 			leftImg = ((VideoDrawManipulator*)lpParam)->source.getLeftImage();
+			if(!leftImg.data)
+			{
+				ReleaseMutex(mutex);
+				return 0;
+			}
 			cv::resize(leftImg, leftResize, cv::Size(((VideoDrawManipulator*)lpParam)->width,
 				((VideoDrawManipulator*)lpParam)->height), CV_INTER_LINEAR);
 			cv::cvtColor(leftResize, leftResize, CV_BGR2RGBA);
@@ -88,9 +93,20 @@ void VideoDrawManipulator::manipulate(cv::Mat leftImage, cv::Mat rightImage)
 		return;
 	}
 	WaitForSingleObject(mutex, INFINITE);
-	if(frameBuffer.size() < 120)
+	if(frameBuffer.size() == 0)
 	{
 		ReleaseMutex(mutex);
+		DWORD result = WaitForSingleObject(thread, 10);
+		if(result == WAIT_OBJECT_0)
+		{
+			DWORD exitCode;
+			GetExitCodeThread(thread, &exitCode);
+			if(exitCode == 0)
+			{
+				CloseVideoEvent* evt = new CloseVideoEvent(location);
+				EventManager::getGlobal()->fireEvent(evt);
+			}
+		}
 		return;
 	}
 	//source.update();
