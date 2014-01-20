@@ -60,7 +60,7 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 
 	if(boundingBox.x == -1 || boundingBox.y == -1)
 	{
-		boundingBox = cv::Rect(cv::Point(left.x - 50, right.y - 50), cv::Size(100, 100));
+		boundingBox = cv::Rect(cv::Point(left.x - 25, right.y - 25), cv::Size(50, 50));
 		enterTime = clock();
 	}
 	else
@@ -77,7 +77,7 @@ void ColouredBandDetector::detect(cv::Mat leftImage, cv::Mat rightImage)
 			clock_t time = clock();
 			clock_t diff = time - enterTime;
 			float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
-			if(timeSec > 0.75f)
+			if(timeSec > 0.8f)
 			{
 				cv::rectangle(leftImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
 				cv::rectangle(rightImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
@@ -155,12 +155,12 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	int value_min = 88;
 	int value_max = 214;
 	*/
-	int hue_min=42;//47
-	int hue_max=100;//105
+	int hue_min=50;//42
+	int hue_max=100;//100
 	int saturation_min=61;
 	int saturation_max = 181;
 	int value_min = 88;
-	int value_max = 214;
+	int value_max = 200; //214
 	
 	Mat image_HSV;
 	

@@ -12,6 +12,7 @@
 QRDetector::QRDetector()
 {
 	EventManager::getGlobal()->addListener(1, this);
+	EventManager::getGlobal()->addListener(CLOSE_VIDEO_EVENT, this);
 	videoPlaying = false;
 }
 
@@ -47,6 +48,21 @@ void QRDetector::handleEvent(BaseEvent* evt)
 				videoPlaying = true;
 			}
 		}
+	}
+	else if(evt->getType() == CLOSE_VIDEO_EVENT)
+	{
+		std::string str = historyOrder.front();
+		auto findIt = history.find(str);
+		if(findIt->second)
+		{
+			history.erase(findIt);
+			historyOrder.pop_front();
+			if (history.size() != 0) { // if another video is ready to load
+				VideoReadyEvent vrevt = VideoReadyEvent(true);
+				EventManager::getGlobal()->fireEvent(&vrevt);
+			}
+		}
+		videoPlaying = false;
 	}
 }
 

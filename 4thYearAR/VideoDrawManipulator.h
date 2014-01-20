@@ -15,6 +15,8 @@
 
 #include "IManipulator.h"
 #include "StereoVideoSource.h"
+#include "CloseVideoEvent.h"
+#include "EventManager.h"
 
 class VideoDrawManipulator : public IManipulator
 {
