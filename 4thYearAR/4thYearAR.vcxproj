@@ -135,7 +135,7 @@
     <ClCompile Include="VideoReadyEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TopLevel.cd" />
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

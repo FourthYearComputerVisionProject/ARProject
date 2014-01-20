@@ -25,19 +25,19 @@ void QRDetector::handleEvent(BaseEvent* evt)
 		{
 			std::string str = historyOrder.front();
 			auto findIt = history.find(str);
-			if(findIt->second)
+			if(findIt != history.end() && findIt->second)
 			{
 				CloseVideoEvent evt = CloseVideoEvent(findIt->first);
 				EventManager::getGlobal()->fireEvent(&evt);
-				history.erase(findIt);
-				historyOrder.pop_front();
+				/*history.erase(findIt);
+				historyOrder.pop_front();*/
 				if (history.size() != 0) { // if another video is ready to load
 					VideoReadyEvent vrevt = VideoReadyEvent(true);
 					EventManager::getGlobal()->fireEvent(&vrevt);
 					videoPlaying = false;
 				}
 			}
-			else
+			else if(findIt != history.end())
 			{
 				OpenVideoEvent ovevt = OpenVideoEvent(findIt->first);
 				EventManager::getGlobal()->fireEvent(&ovevt);
@@ -53,7 +53,7 @@ void QRDetector::handleEvent(BaseEvent* evt)
 	{
 		std::string str = historyOrder.front();
 		auto findIt = history.find(str);
-		if(findIt->second)
+		if(findIt != history.end() && findIt->second)
 		{
 			history.erase(findIt);
 			historyOrder.pop_front();
