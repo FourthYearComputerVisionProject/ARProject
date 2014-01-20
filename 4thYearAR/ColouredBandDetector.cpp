@@ -155,12 +155,12 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	int value_min = 88;
 	int value_max = 214;
 	*/
-	int hue_min=42;//47
-	int hue_max=100;//105
+	int hue_min=50;//42
+	int hue_max=100;//100
 	int saturation_min=61;
 	int saturation_max = 181;
 	int value_min = 88;
-	int value_max = 214;
+	int value_max = 200;//214
 	
 	Mat image_HSV;
 	
