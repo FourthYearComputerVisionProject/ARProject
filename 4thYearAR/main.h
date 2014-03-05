@@ -18,3 +18,6 @@
 #include "VideoDrawManipulatorFactory.h"
 #include "ColouredBandDetector.h"
 #include "SinglePointManipulator.h"
+#include "CalibrateSkinTones.h"
+#include "CalibrationManipulator.h"
+#include "HandDetector.h"
