@@ -64,20 +64,11 @@ private:
 
 	void removeNoise(); //--
 	void makeThreshold(); //--
-	void makeContours();
-	void makeHistogram(Mat &img_hsv);
-	//void makeHulls(int index);
-	//void makeDefects(int index);
-	//void removeDuplicateEndPoints(vector<Vec4i> newDefects);
-	//void removeDefects();
-	void isolateTipPoints(int index);
-
+	//void makeContours();
+	void drawHistogram(Mat &img_hsv);
 	Point findCenterInContour(); //--
-
 	Point findFingerTip(); //--
-	//void cleanUpContours(int index);
-	//void lookForHands(int index);
-					
+	
 	//util
 	float lengthPP(Point m, Point n);
 	float angle(Point p, Point q, Point r);

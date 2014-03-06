@@ -103,6 +103,12 @@ Point HandDetector::runDetection()
 }
 
 /*=============== HandDetector:: findFingerTips() ===============
+	info on contours:
+	hierarchy[i][0] next contour of the same hierarchical level
+	hierarchy[i][1] previous contour " "
+	hierarchy[i][2] parent contours
+	hierarchy[i][3] nested contours
+  Note: hierarchy[i] negative means none exists for that corresponding element
 */
 Point HandDetector::findFingerTip(){
 	Point fingerTipAt = Point(-1,-1); //init to default
@@ -146,28 +152,6 @@ Point HandDetector::findFingerTip(){
 		}
 	}
 	return fingerTipAt;
-}
-
-/*=============== HandDetector:: isolateTipPoints() ===============
-	Get the points at the end of the finger tips into one vector
-*/
-
-/*=============== HandDetector:: makeContours() ===============
-  Create the contours from the threshold image and if area of contour is within 
-  area of hand then check for a hand
-
-  hierarchy[i][0] next contour of the same hierarchical level
-  hierarchy[i][1] previous contour " "
-  hierarchy[i][2] parent contours
-  hierarchy[i][3] nested contours
-  Note: hierarchy[i] negative means none exists for that corresponding element
-*/
-void HandDetector::makeContours()
-{
-	Mat srcImage;
-
-	thresholdImage.copyTo(srcImage); //preserve thresholdImage
-	findContours(srcImage,contours,hierarchy,CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE );  //generate contours, hierarchy 
 }
 
 /*=============== HandDetector:: findCenterInContour() ===============
@@ -288,7 +272,7 @@ void HandDetector::makeThreshold() //KMTODO: change this so it can handle other 
 
 	if(SHOW_WORK){
 		//imshow("HSV", image_HSV);
-		makeHistogram(image_HSV);
+		drawHistogram(image_HSV);
 		imshow("Threshold", thresholdImage);
 	}
 }
@@ -320,15 +304,12 @@ int HandDetector::getZDepth()
 	return 3;  //layer 3
 }
 
-void HandDetector::makeHistogram(Mat &img_hsv)
+void HandDetector::drawHistogram(Mat &img_hsv)
 {
 	bool do_manual_calibration = true;
 	Mat histogram;
-	//Mat img_HSV;
 	Mat hsv_min_max;
-
-	//cvtColor(cameraFeed, image_HSV, COLOR_RGB2HSV);  //convert to HSV
-  
+		  
 	int h_bins = 255; //number of bins to use in histogram for hue, saturation, value
 	int s_bins = 255; 
 	int v_bins = 255;
