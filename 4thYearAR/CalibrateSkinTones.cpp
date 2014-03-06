@@ -147,25 +147,24 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	
 	cv::meanStdDev ( h_hist, h_mean, h_stddev );
 	uchar       h_mean_pxl = h_mean.val[0];
-	uchar       h_stddev_pxl = h_stddev.val[0]*2.2;
+	uchar       h_stddev_pxl = h_stddev.val[0]*1.2;
 
 	cv::meanStdDev ( s_hist, s_mean, s_stddev );
 	uchar       s_mean_pxl = s_mean.val[0];
-	uchar       s_stddev_pxl = s_stddev.val[0] * 2.5;
+	uchar       s_stddev_pxl = s_stddev.val[0] * 1.5;
 
 	cv::meanStdDev ( v_hist, v_mean, v_stddev );
 	uchar       v_mean_pxl = v_mean.val[0];
-	uchar       v_stddev_pxl = v_stddev.val[0]*4;
+	uchar       v_stddev_pxl = v_stddev.val[0]*100;
 
-	
+		
 	range.hue_min= max(0,h_mean_pxl-h_stddev_pxl);
 	range.hue_max=min(255,h_mean_pxl+h_stddev_pxl);
 	range.sat_min=max(0,s_mean_pxl-s_stddev_pxl);
 	range.sat_max=min(255,s_mean_pxl+s_stddev_pxl);
 	range.val_min=max(0,v_mean_pxl-v_stddev_pxl);
 	range.val_max=min(255,v_mean_pxl+v_stddev_pxl);
-	
-	
+
 	cout << endl;
 	cout <<"H_mean: " << (int) h_mean_pxl<< " s.d.: " << (int) h_stddev_pxl << "(" << (int) max(0,h_mean_pxl-h_stddev_pxl) << "," << (int)  min(255,h_mean_pxl+h_stddev_pxl) <<")"<<endl;
 	cout <<"S_mean: " << (int) s_mean_pxl<< " s.d.: " << (int) s_stddev_pxl << "(" << (int) max(0,s_mean_pxl-s_stddev_pxl) << "," << (int)  min(255,s_mean_pxl+s_stddev_pxl) <<")"<<endl;

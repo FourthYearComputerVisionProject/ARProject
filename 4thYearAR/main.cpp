@@ -99,6 +99,7 @@ int main(int argc, char **argv) {
 	CalibrationManipulator* calibrationManipulator = new CalibrationManipulator();
 	render->addManipulator(spManipulator);
 	render->addManipulator(calibrationManipulator);
+	render->addManipulator(handDetector);
 	EventManager::getGlobal()->addListener(3, spManipulator);
 	EventManager::getGlobal()->addListener(8, handDetector);
 	EventManager::getGlobal()->addListener(7, calibration);
