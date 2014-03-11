@@ -7,8 +7,10 @@
 #include "EventManager.h"
 #include <opencv\cv.h>
 
+#define MAX_HUE 100
+#define VALUE_MIN 25
 
-using namespace cv;
+using namespace cv; 
 
 class CalibrateSkinTones:
 	public IDetector, public IEventListener

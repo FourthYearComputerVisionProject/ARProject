@@ -1,168 +1,168 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="ChangeBoxLocationEvent">
-    <Position X="0.5" Y="3.75" Width="1.5" />
+    <Position X="3.75" Y="3.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAABgAGAAAAA=</HashCode>
       <FileName>ChangeBoxLocationEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CloseVideoEvent">
-    <Position X="7.25" Y="3.75" Width="1.5" />
+    <Position X="12.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAAAAAAAACAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>CloseVideoEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HUDManipulator">
-    <Position X="3.5" Y="8.25" Width="1.5" />
+    <Position X="5" Y="9.25" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AgAAAAAQAAAAABABAAAAAAAAAEAUEBAAAIBwAAEAAEA=</HashCode>
       <FileName>HUDManipulator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ColouredBandDetector">
-    <Position X="17.5" Y="8.25" Width="1.5" />
+    <Position X="0.5" Y="9.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>EAIBgQAwBgCEAAAAAAAAAACAAAAADCAgEAMAgAgAJAA=</HashCode>
       <FileName>ColouredBandDetector.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ISteroSource">
-    <Position X="8.25" Y="11.5" Width="1.5" />
+    <Position X="13" Y="13.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAEAAAAAAAAABIAAAAAAAAAAEAAA=</HashCode>
       <FileName>IStereoSource.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OpenVideoEvent">
-    <Position X="2.75" Y="3.75" Width="1.5" />
+    <Position X="7.25" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>OpenVideoEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="QRCodeEvent">
-    <Position X="9.5" Y="3.75" Width="1.5" />
+    <Position X="15" Y="3.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAACAAAAAA=</HashCode>
       <FileName>QRCodeEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="QRDetector">
-    <Position X="6.5" Y="8.25" Width="1.5" />
+    <Position X="15.75" Y="9.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAgAAABAAAAAAAAAAAAAAgAAAAAAIAAAAAgA=</HashCode>
       <FileName>QRDetector.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SinglePointEvent">
-    <Position X="11.75" Y="3.75" Width="1.5" />
+    <Position X="17.25" Y="3.75" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAACAAAAAAwBAAAAAAAAAAAAAAMCA=</HashCode>
       <FileName>SinglePointEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SinglePointManipulator">
-    <Position X="0.5" Y="8.25" Width="1.5" />
+    <Position X="10.5" Y="9.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAwAAAABABAAACgAAAAAAAAAMAAIAAAAAAAAA=</HashCode>
       <FileName>SinglePointManipulator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StereoCapture">
-    <Position X="7" Y="14" Width="1.5" />
+    <Position X="11" Y="16" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEBCAAAAAAFAAAAAEAAAFIAAAACAAAAAEAAA=</HashCode>
       <FileName>StereoCapture.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="StereoRender">
-    <Position X="21.75" Y="0.5" Width="1.5" />
+  <Class Name="StereoRender" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAQAIgACAABAEAYAUAQBQAAAAwEDBgQAAAAAAASAMAA=</HashCode>
       <FileName>StereoRender.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="StereoVideoSource">
-    <Position X="9.25" Y="14" Width="1.5" />
+    <Position X="15" Y="16" Width="3" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAABAAAAAAAGAAAAAAEAAhMAAAAAAAAAAEAAA=</HashCode>
       <FileName>StereoVideoSource.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VideoDrawManipulator">
-    <Position X="14.5" Y="8.25" Width="1.5" />
+    <Position X="23.75" Y="9.25" Width="4.25" />
     <TypeIdentifier>
       <HashCode>AAYAIAACAABgAAcBUAABAAACCQAAQAAAAIBgAAAAIAA=</HashCode>
       <FileName>VideoDrawManipulator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VideoDrawManipulatorFactory">
-    <Position X="10.25" Y="8.25" Width="1.5" />
+    <Position X="19.5" Y="9.25" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAQQAgA=</HashCode>
       <FileName>VideoDrawManipulatorFactory.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VideoReadyEvent">
-    <Position X="5" Y="3.75" Width="1.5" />
+    <Position X="9.75" Y="3.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAQEAAAAAA=</HashCode>
       <FileName>VideoReadyEvent.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IDetector">
-    <Position X="6.5" Y="6.5" Width="1.5" />
+    <Position X="15.75" Y="7.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IDetector.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IManipulator">
-    <Position X="14.5" Y="6.25" Width="1.5" />
+    <Position X="5.5" Y="7.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
       <FileName>IManipulator.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="BaseEvent">
-    <Position X="6" Y="0.5" Width="1.5" />
+    <Position X="10.5" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAQQAIAAAAAAAAAARABAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BaseEvent.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="EventManager">
-    <Position X="20" Y="0.5" Width="1.5" />
+  <Class Name="EventManager" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABAAGAAAIAgAQAAAAAAAAQAAAgAgAAAAAAADAAA=</HashCode>
       <FileName>EventManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IEventListener">
-    <Position X="3.5" Y="6.5" Width="1.5" />
+    <Position X="11" Y="7.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>IEventListener.h</FileName>
     </TypeIdentifier>
   </Class>
   <Typedef Name="IEventListenerList" Collapsed="true">
-    <Position X="16.25" Y="1.25" Width="1.5" />
+    <Position X="18.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>EventManager.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="BaseEventList" Collapsed="true">
-    <Position X="16.25" Y="0.5" Width="1.5" />
+    <Position X="18.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>EventManager.h</FileName>
     </TypeIdentifier>
   </Typedef>
   <Typedef Name="EventType" Collapsed="true">
-    <Position X="18" Y="0.5" Width="1.5" />
+    <Position X="20" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>EventManager.h</FileName>

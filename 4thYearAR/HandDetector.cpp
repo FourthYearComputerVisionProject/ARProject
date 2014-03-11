@@ -238,12 +238,6 @@ void HandDetector::makeDefects(int index)
 */
 void HandDetector::removeNoise()
 {
-	//Mat element = getStructuringElement(MORPH_RECT, Size(3, 3));
-	//Point anchor = Point(-1, -1); //default
-	//int iterations = 4;
-    
-	//morphologyEx(srcDstImage, srcDstImage, CV_MOP_OPEN, element,anchor,iterations);
-
 	Mat erodeElement = getStructuringElement( MORPH_RECT,Size(3,3));
    	Mat dilateElement = getStructuringElement( MORPH_RECT,Size(5,5));
 

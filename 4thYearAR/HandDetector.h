@@ -64,7 +64,6 @@ private:
 
 	void removeNoise(); //--
 	void makeThreshold(); //--
-	//void makeContours();
 	void drawHistogram(Mat &img_hsv);
 	Point findCenterInContour(); //--
 	Point findFingerTip(); //--
@@ -73,7 +72,6 @@ private:
 	float lengthPP(Point m, Point n);
 	float angle(Point p, Point q, Point r);
 	Point centerOfMass(vector<Point> objContour); //--
-	//string intToString(int number);
-
+	
 };
 #endif

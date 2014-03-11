@@ -32,8 +32,10 @@ void CalibrateSkinTones::detect(cv::Mat leftImage, cv::Mat rightImage){
 		if(timeSec>5.0f && timeSec<6.0){
 			Mat hsv;
 			cvtColor(leftImage, hsv, CV_RGB2HSV);
-
-			r=makeHistogram(hsv);
+			Mat roi(hsv, Rect(Point(leftImage.size().width*.4, leftImage.size().height*.3),Point(leftImage.size().width*.6, leftImage.size().height*.7)));
+		
+			r=makeHistogram(roi);
+			
 			//fire coordinates off using event manager
 			CalibrationResultsEvent* calibrationEvent= new CalibrationResultsEvent(r.hue_min,r.hue_max, r.sat_min, r.sat_max, r.val_min, r.val_max );
 			EventManager::getGlobal()->fireEvent(calibrationEvent);
@@ -145,29 +147,39 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	
 	cv::meanStdDev ( h_hist, h_mean, h_stddev );
 	uchar       h_mean_pxl = h_mean.val[0];
-	uchar       h_stddev_pxl = h_stddev.val[0]*1.2;
+	uchar       h_stddev_pxl = h_stddev.val[0]*1.1; //1.2
 
 	cv::meanStdDev ( s_hist, s_mean, s_stddev );
 	uchar       s_mean_pxl = s_mean.val[0];
-	uchar       s_stddev_pxl = s_stddev.val[0]*1.5;
+	uchar       s_stddev_pxl = s_stddev.val[0]*1.5;//1.5
 
 	cv::meanStdDev ( v_hist, v_mean, v_stddev );
 	uchar       v_mean_pxl = v_mean.val[0];
-	uchar       v_stddev_pxl = v_stddev.val[0]*4;
+	uchar       v_stddev_pxl = v_stddev.val[0]*3.5;//3.5
 
-		
-	range.hue_min= max(0,h_mean_pxl-h_stddev_pxl);
-	range.hue_max=min(255,h_mean_pxl+h_stddev_pxl);
-	range.sat_min=max(0,s_mean_pxl-s_stddev_pxl);
-	range.sat_max=min(255,s_mean_pxl+s_stddev_pxl);
-	range.val_min=max(0,v_mean_pxl-v_stddev_pxl);
-	range.val_max=min(255,v_mean_pxl+v_stddev_pxl);
+	range.hue_min= max(0, h_mean_pxl-h_stddev_pxl);
+	range.hue_max=min(MAX_HUE, h_mean_pxl+h_stddev_pxl);  //putting limits on max hue to 100
+	range.sat_min=max(0, s_mean_pxl-s_stddev_pxl);
+	range.sat_max=min(255, s_mean_pxl+s_stddev_pxl);
+	range.val_min=max(VALUE_MIN, v_mean_pxl-v_stddev_pxl); //putting limits on min value to be at least 25
+	range.val_max=min(255, v_mean_pxl+v_stddev_pxl);
 	//range.val_max=225;
+	//fine tune the range
 
+	
+	Mat thresholdImage;
+	Mat ones = Mat::ones(img_hsv.size().height, img_hsv.size().width, CV_8U);
+	double prevDotProduct=0;
+	
+	//inRange(img_hsv,Scalar(hmin, smin, vmin),Scalar(hmax, smax, vmax),thresholdImage);
+	inRange(img_hsv,Scalar(range.hue_min, range.sat_min, range.val_min),Scalar(range.hue_max, range.sat_max, range.val_max),thresholdImage);
+	double dotProduct = thresholdImage.dot(ones);
+	
 	cout << endl;
-	cout <<"H_mean: " << (int) h_mean_pxl<< " s.d.: " << (int) h_stddev_pxl << "H range: (" << (int) max(0,h_mean_pxl-h_stddev_pxl) << "," << (int)  min(255,h_mean_pxl+h_stddev_pxl) <<")"<<endl;
-	cout <<"S_mean: " << (int) s_mean_pxl<< " s.d.: " << (int) s_stddev_pxl << "V range: (" << (int) max(0,s_mean_pxl-s_stddev_pxl) << "," << (int)  min(255,s_mean_pxl+s_stddev_pxl) <<")"<<endl;
-	cout <<"V_mean: " << (int) v_mean_pxl<< " s.d.: " << (int) v_stddev_pxl << "S range: (" << (int) max(0,v_mean_pxl-v_stddev_pxl) << "," << (int)  min(255,v_mean_pxl+v_stddev_pxl) <<")"<<endl;
+	cout << "dot product: " << dotProduct <<endl;
+	cout <<"H_mean: " << (int) h_mean_pxl<< " s.d.: " << (int) h_stddev_pxl << " H range: (" << range.hue_min << "," << range.hue_max <<")"<<endl;
+	cout <<"S_mean: " << (int) s_mean_pxl<< " s.d.: " << (int) s_stddev_pxl << " S range: (" << range.sat_min << "," << range.sat_max <<")"<<endl;
+	cout <<"V_mean: " << (int) v_mean_pxl<< " s.d.: " << (int) v_stddev_pxl << " V range: (" << range.val_min << "," << range.val_max <<")"<<endl;
 	
 	return range;
 }
