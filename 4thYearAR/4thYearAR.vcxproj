@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -86,9 +86,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseEvent.h" />
+    <ClInclude Include="CalibrateSkinTones.h" />
+    <ClInclude Include="CalibrationEvent.h" />
+    <ClInclude Include="CalibrationManipulator.h" />
+    <ClInclude Include="CalibrationResultsEvent.h" />
     <ClInclude Include="ChangeBoxLocationEvent.h" />
     <ClInclude Include="CloseVideoEvent.h" />
     <ClInclude Include="EventTypes.h" />
+    <ClInclude Include="HandDetector.h" />
     <ClInclude Include="HUDManipulator.h" />
     <ClInclude Include="ColouredBandDetector.h" />
     <ClInclude Include="EventManager.h" />
@@ -113,7 +118,12 @@
     <ClInclude Include="VideoReadyEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalibrateSkinTones.cpp" />
+    <ClCompile Include="CalibrationEvent.cpp" />
+    <ClCompile Include="CalibrationManipulator.cpp" />
+    <ClCompile Include="CalibrationResultsEvent.cpp" />
     <ClCompile Include="CloseVideoEvent.cpp" />
+    <ClCompile Include="HandDetector.cpp" />
     <ClCompile Include="HUDManipulator.cpp" />
     <ClCompile Include="ColouredBandDetector.cpp" />
     <ClCompile Include="EventManager.cpp" />
@@ -122,6 +132,7 @@
     <ClCompile Include="QRDetector.cpp" />
     <ClCompile Include="SinglePointEvent.cpp" />
     <ClCompile Include="SinglePointManipulator.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

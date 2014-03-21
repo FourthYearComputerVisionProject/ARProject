@@ -133,20 +133,15 @@ void ColouredBandDetector::removeNoise()
 
 /*=============== ColouredBandDetector:: makeThreshold() ===============
   Create the threshold image  
-*/
-void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
-{
-	//samples in my room in dim light at night
-	/*
+
+  //samples in my room in dim light at night
 	int hue_min=46;
 	int hue_max=105;
 	int saturation_min=61;
 	int saturation_max = 181;
 	int value_min = 88;
 	int value_max = 214;
-	*/
-
-	/*
+	
 	//neon green in my room daylight
 	int hue_min=47;
 	int hue_max=105;
@@ -154,7 +149,10 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
 	int saturation_max = 181;
 	int value_min = 88;
 	int value_max = 214;
-	*/
+*/
+
+void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
+{	
 	int hue_min=50;//42
 	int hue_max=100;//100
 	int saturation_min=61;
@@ -186,6 +184,11 @@ void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handl
   Note: hierarchy[i] negative means none exists for that corresponding element
 
 */
+
+/*=============== ColouredBandDetector:: findCenterInContour() ===============
+ Finds the center in teh contour of the thresholded image and returns the center
+ as a Point.
+*/
 Point ColouredBandDetector::findCenterInContour()
 {
 	Mat srcImage;
@@ -198,7 +201,6 @@ Point ColouredBandDetector::findCenterInContour()
 			double area = contourArea(contours[index], false);
 
 			if(area>MIN_OBJECT_AREA && area<MAX_OBJECT_AREA){  //first check: is size of area in range of hand
-				//cleanUpContours(index); //for use with the hand detection code
 				objectFoundAt = centerOfMass(contours[index]);
 				return objectFoundAt;
 								

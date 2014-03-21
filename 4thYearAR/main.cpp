@@ -83,16 +83,27 @@ int main(int argc, char **argv) {
 	
 	//add detectors
 	ColouredBandDetector* cbDetector = new ColouredBandDetector();
+	CalibrateSkinTones* calibration = new CalibrateSkinTones();
+	HandDetector* handDetector = new HandDetector();
 	capture->addDetector(cbDetector);
-	
+	capture->addDetector(handDetector);
+	capture->addDetector(calibration);
+		
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
 
 	VideoDrawManipulatorFactory* fact = new VideoDrawManipulatorFactory(render);
 
 	//add manipulators
 	SinglePointManipulator* spManipulator = new SinglePointManipulator();
+	CalibrationManipulator* calibrationManipulator = new CalibrationManipulator();
 	render->addManipulator(spManipulator);
+	render->addManipulator(calibrationManipulator);
+	render->addManipulator(handDetector);
 	EventManager::getGlobal()->addListener(3, spManipulator);
+	EventManager::getGlobal()->addListener(8, handDetector);
+	EventManager::getGlobal()->addListener(7, calibration);
+	EventManager::getGlobal()->addListener(7, calibrationManipulator);
+	
 	
 	//glewInit();
 
