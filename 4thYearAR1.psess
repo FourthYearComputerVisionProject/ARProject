@@ -67,6 +67,11 @@
       <ProjName>4thYearAR</ProjName>
     </ProjBinary>
   </Binaries>
+  <Reports>
+    <Report>
+      <Path>4thYearAR140322.vspx</Path>
+    </Report>
+  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{1A98A4FF-8CB5-4F74-8D6C-C0B2FC0CD952}|4thYearAR\4thYearAR.vcxproj</Path>
