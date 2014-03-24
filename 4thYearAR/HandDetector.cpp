@@ -52,12 +52,15 @@ void HandDetector::handleEvent(BaseEvent* evt)
 			value_max = 255;
 
 		}else{
+			ranges=cre->getHistRanges();
+			/*
 			hue_min = cre->getHueMin();
 			hue_max = cre->getHueMax();
 			saturation_min = cre->getSaturationMin();
 			saturation_max = cre->getSaturationMax();
 			value_min = cre->getValueMin();
 			value_max = cre->getValueMax();
+			*/
 		}
 	}
 }
@@ -254,15 +257,24 @@ void HandDetector::removeNoise()
 void HandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
 {
 	Mat image_HSV;
+	Mat cumThreshold;//= Mat::zeros(camera.size().width, camera.size().height, CV_8U); //cummulative threshold
+	Mat prevThreshold= Mat::zeros(Size(camera.size().width, camera.size().height), CV_8UC1); //cummulative threshold
 	
 	//convert from RGB to HSV
 	cvtColor(camera, image_HSV, COLOR_RGB2HSV);  
-	
-	//threshold via range
-	inRange(image_HSV,Scalar(hue_min, saturation_min, value_min),Scalar(hue_max, saturation_max, value_max),thresholdImage);
-	
+	for(int i=0; i<5; i++)
+	{
+		Mat tempThreshold;
+		//threshold via range
+		inRange(image_HSV,Scalar(ranges[i].getHueMin(),ranges[i].getSaturationMin(), ranges[i].getValueMin()),Scalar(ranges[i].getHueMax(), ranges[i].getSaturationMax(), ranges[i].getValueMax()),tempThreshold);
+		bitwise_or(prevThreshold, tempThreshold, cumThreshold);
+		prevThreshold=cumThreshold.clone();
+	}
+	thresholdImage = cumThreshold;
 	//remove noise from threshold
 	removeNoise();
+
+	thresholdImage = cumThreshold;
 
 	if(SHOW_WORK){
 		//imshow("HSV", image_HSV);

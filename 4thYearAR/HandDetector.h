@@ -8,6 +8,7 @@
 #include "idetector.h"
 #include "IEventListener.h"
 #include "IManipulator.h"
+#include "HistRange.h"
 #include <opencv\highgui.h>
 #include <opencv\cv.h>
 #include <sstream>
@@ -34,6 +35,10 @@ private:
 
 	bool doCalibration;
 	bool doneCalibration;
+	
+	//---new ---
+	vector<HistRange> ranges;
+	//---old ---
 	int hue_min, hue_max;
 	int saturation_min, saturation_max;
 	int value_min, value_max;
