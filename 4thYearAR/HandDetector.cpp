@@ -17,8 +17,9 @@ HandDetector::HandDetector(void)
 {
 	doneCalibration = false;
 	doCalibration = true;
+	debounce = false;
 }
-
+//get the calibration results and store the values.
 void HandDetector::handleEvent(BaseEvent* evt)
 {
 	if(evt->getType() == CALIBRATION_RESULTS_EVENT) 
@@ -26,7 +27,7 @@ void HandDetector::handleEvent(BaseEvent* evt)
 		doneCalibration=true;
 
 		CalibrationResultsEvent* cre = (CalibrationResultsEvent*) evt;
-		if(MANUAL_CALIBRATION){
+		if(MANUAL_CALIBRATION){ //**** NEED TO CHANGE THIS TO THE 5 HISTRANGES ****
 			/* from automatic calibration with face in medium daylight in my room
 			hue_min = 0;
 			hue_max = 57;
@@ -78,6 +79,61 @@ void HandDetector::detect(cv::Mat leftImage, cv::Mat rightImage){
 		//---- show a cursor or click icon if hand is detected ----
 		SinglePointEvent* spEvent = new SinglePointEvent(leftPoint, rightPoint);
 		EventManager::getGlobal()->fireEvent(spEvent);
+
+		if(leftPoint.x == -1 || leftPoint.y == -1)
+		{
+			return;
+		}
+
+		if(debounce)
+		{
+			clock_t time = clock();
+			clock_t diff = time - enterTime;
+			float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
+			if(timeSec > 0.25f)
+			{
+				debounce = false;
+			}
+			return;
+		}
+
+		if(boundingBox.x == -1 || boundingBox.y == -1)
+		{
+			boundingBox = cv::Rect(cv::Point(leftPoint.x - 25, rightPoint.y - 25), cv::Size(40, 40));
+			enterTime = clock();
+		}
+		else
+		{
+			if(!boundingBox.contains(leftPoint))
+			{
+				cv::rectangle(leftImage, boundingBox, cv::Scalar(255, 255, 0, 255), 4);
+				cv::rectangle(rightImage, boundingBox, cv::Scalar(255, 255, 0, 255), 4);
+				boundingBox.x = -1;
+				boundingBox.y = -1;
+			}
+			else
+			{
+				clock_t time = clock();
+				clock_t diff = time - enterTime;
+				float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
+				if(timeSec > 0.8f)
+				{
+					cv::rectangle(leftImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
+					cv::rectangle(rightImage, boundingBox, cv::Scalar(0, 255, 0, 255), 4);
+					ChangeBoxLocationEvent* evt = new ChangeBoxLocationEvent(leftPoint.x, leftPoint.y);
+					EventManager::getGlobal()->fireEvent(evt);
+					boundingBox.x = -1;
+					boundingBox.y = -1;
+					enterTime = clock();
+					debounce = true;
+				}
+				else
+				{
+					cv::rectangle(rightImage, boundingBox, cv::Scalar(255, 255, 0, 255), 4);
+					cv::rectangle(leftImage, boundingBox, cv::Scalar(255, 255, 0, 255), 4);
+				}
+			}
+		}
 
 	}else{
 		// launch the calibration routine by firing a CalibrationEvent to 
@@ -256,12 +312,13 @@ void HandDetector::removeNoise()
 */
 void HandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
 {
-	Mat image_HSV;
+	Mat image_HSV, image_Temp;
 	Mat cumThreshold;//= Mat::zeros(camera.size().width, camera.size().height, CV_8U); //cummulative threshold
 	Mat prevThreshold= Mat::zeros(Size(camera.size().width, camera.size().height), CV_8UC1); //cummulative threshold
 	
 	//convert from RGB to HSV
 	cvtColor(camera, image_HSV, COLOR_RGB2HSV);  
+	
 	for(int i=0; i<5; i++)
 	{
 		Mat tempThreshold;
@@ -273,9 +330,7 @@ void HandDetector::makeThreshold() //KMTODO: change this so it can handle other 
 	thresholdImage = cumThreshold;
 	//remove noise from threshold
 	removeNoise();
-
-	thresholdImage = cumThreshold;
-
+		
 	if(SHOW_WORK){
 		//imshow("HSV", image_HSV);
 		drawHistogram(image_HSV);
@@ -389,7 +444,7 @@ void HandDetector::drawHistogram(Mat &img_hsv)
 					Scalar( 0, 0, 255), 2, 8, 0  );
 	}
 
-    imshow("Histogram", histImage );
+    //imshow("Histogram", histImage );
 
 }
 

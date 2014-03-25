@@ -33,6 +33,8 @@ public:
 private:
 	cv::Rect boundingBox;
 
+	bool debounce;
+	clock_t enterTime;
 	bool doCalibration;
 	bool doneCalibration;
 	
