@@ -25,19 +25,44 @@ CalibrateSkinTones::~CalibrateSkinTones(void)
 */
 void CalibrateSkinTones::detect(cv::Mat leftImage, cv::Mat rightImage){
 	if(doCalibration){	
-		histRange r;
+		histRange r, r1, r2, r3, r4;
 		clock_t time = clock();
 		clock_t diff = time - enterTime;
+		
 		float timeSec = (float)diff / (float)CLOCKS_PER_SEC;
 		if(timeSec>5.0f && timeSec<6.0){
 			Mat hsv;
-			cvtColor(leftImage, hsv, CV_RGB2HSV);
-			Mat roi(hsv, Rect(Point(leftImage.size().width*.4, leftImage.size().height*.3),Point(leftImage.size().width*.6, leftImage.size().height*.7)));
-		
-			r=makeHistogram(roi);
 			
+			cvtColor(leftImage, hsv, CV_RGB2HSV);
+			//large area
+			//cout<<"Image width and height: " <<leftImage.size().width << leftImage.size().height<<endl;
+			Mat roi(hsv, Rect(Point(leftImage.size().width*.4, leftImage.size().height*.3),Point(leftImage.size().width*.6, leftImage.size().height*.7)));
+			r=makeHistogram(roi);
+			ranges.push_back(HistRange(r.hue_min,r.hue_max, r.sat_min, r.sat_max, r.val_min, r.val_max));
+			
+			//region1
+			Mat roi1(hsv, Rect(Point(leftImage.size().width*.5, leftImage.size().height*.4),Point(leftImage.size().width*.5+SIDE, leftImage.size().height*.4+SIDE)));
+			r1=makeHistogram(roi1);
+			ranges.push_back(HistRange(r1.hue_min,r1.hue_max, r1.sat_min, r1.sat_max, r1.val_min, r1.val_max));
+
+			//region2
+			Mat roi2(hsv, Rect(Point(leftImage.size().width*.6, leftImage.size().height*.5),Point(leftImage.size().width*.6+SIDE, leftImage.size().height*.5+SIDE)));
+			r2=makeHistogram(roi2);
+			ranges.push_back(HistRange(r2.hue_min,r2.hue_max, r2.sat_min, r2.sat_max, r2.val_min, r2.val_max));
+
+			//region3
+			Mat roi3(hsv, Rect(Point(leftImage.size().width*.5, leftImage.size().height*.4),Point(leftImage.size().width*.5+SIDE, leftImage.size().height*.4+SIDE)));
+			r3=makeHistogram(roi3);
+			ranges.push_back(HistRange(r3.hue_min,r3.hue_max, r3.sat_min, r3.sat_max, r3.val_min, r3.val_max));
+
+			//region4
+			Mat roi4(hsv, Rect(Point(leftImage.size().width*.7, leftImage.size().height*.6),Point(leftImage.size().width*.7+SIDE, leftImage.size().height*.6+SIDE)));
+			r4=makeHistogram(roi4);
+			ranges.push_back(HistRange(r4.hue_min,r4.hue_max, r4.sat_min, r4.sat_max, r4.val_min, r4.val_max));
+
 			//fire coordinates off using event manager
-			CalibrationResultsEvent* calibrationEvent= new CalibrationResultsEvent(r.hue_min,r.hue_max, r.sat_min, r.sat_max, r.val_min, r.val_max );
+			//CalibrationResultsEvent* calibrationEvent= new CalibrationResultsEvent(r.hue_min,r.hue_max, r.sat_min, r.sat_max, r.val_min, r.val_max );
+			CalibrationResultsEvent* calibrationEvent= new CalibrationResultsEvent(ranges);
 			EventManager::getGlobal()->fireEvent(calibrationEvent);
 			
 			doCalibration = false;
@@ -99,10 +124,12 @@ void CalibrateSkinTones::drawCalibrationBox(int x, int y, cv::Mat img)
 	Make a histogram of the image, calculate the mean and std dev, 
 	return the range 
 */
+
 CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 {
 	Mat histogram;
 	Mat hsv_min_max;
+	//histRange range;
 	histRange range;
 		  
 	int h_bins = 255; //number of bins to use in histogram for hue, saturation, value
@@ -147,7 +174,7 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	
 	cv::meanStdDev ( h_hist, h_mean, h_stddev );
 	uchar       h_mean_pxl = h_mean.val[0];
-	uchar       h_stddev_pxl = h_stddev.val[0]*1.1; //1.2
+	uchar       h_stddev_pxl = h_stddev.val[0]*1.2; //1.2
 
 	cv::meanStdDev ( s_hist, s_mean, s_stddev );
 	uchar       s_mean_pxl = s_mean.val[0];
@@ -155,7 +182,7 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 
 	cv::meanStdDev ( v_hist, v_mean, v_stddev );
 	uchar       v_mean_pxl = v_mean.val[0];
-	uchar       v_stddev_pxl = v_stddev.val[0]*3.5;//3.5
+	uchar       v_stddev_pxl = v_stddev.val[0];//3.5
 
 	range.hue_min= max(0, h_mean_pxl-h_stddev_pxl);
 	range.hue_max=min(MAX_HUE, h_mean_pxl+h_stddev_pxl);  //putting limits on max hue to 100
@@ -164,19 +191,18 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	range.val_min=max(VALUE_MIN, v_mean_pxl-v_stddev_pxl); //putting limits on min value to be at least 25
 	range.val_max=min(255, v_mean_pxl+v_stddev_pxl);
 	//range.val_max=225;
-	//fine tune the range
+	
+	range.hue_min=findMin(img_hsv, 0, h_mean_pxl, 255, range);
+	range.hue_max=findMax(img_hsv, 0, range.hue_max, range.hue_min, range);  //start from right and go to left
+	
+	range.sat_min=findMin(img_hsv, 1, s_mean_pxl, 255, range);
+	range.sat_max=findMax(img_hsv, 1, 255, range.sat_min, range);
 
+	range.val_min=findMin(img_hsv, 2, v_mean_pxl, 255, range);
+	range.val_max=findMax(img_hsv, 2, 255, range.val_min, range);
+
+	//cout << endl;
 	
-	Mat thresholdImage;
-	Mat ones = Mat::ones(img_hsv.size().height, img_hsv.size().width, CV_8U);
-	double prevDotProduct=0;
-	
-	//inRange(img_hsv,Scalar(hmin, smin, vmin),Scalar(hmax, smax, vmax),thresholdImage);
-	inRange(img_hsv,Scalar(range.hue_min, range.sat_min, range.val_min),Scalar(range.hue_max, range.sat_max, range.val_max),thresholdImage);
-	double dotProduct = thresholdImage.dot(ones);
-	
-	cout << endl;
-	cout << "dot product: " << dotProduct <<endl;
 	cout <<"H_mean: " << (int) h_mean_pxl<< " s.d.: " << (int) h_stddev_pxl << " H range: (" << range.hue_min << "," << range.hue_max <<")"<<endl;
 	cout <<"S_mean: " << (int) s_mean_pxl<< " s.d.: " << (int) s_stddev_pxl << " S range: (" << range.sat_min << "," << range.sat_max <<")"<<endl;
 	cout <<"V_mean: " << (int) v_mean_pxl<< " s.d.: " << (int) v_stddev_pxl << " V range: (" << range.val_min << "," << range.val_max <<")"<<endl;
@@ -184,3 +210,74 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	return range;
 }
 
+
+//Find the min value for the given channel
+int CalibrateSkinTones::findMin(Mat hsv, int channel, int startAt, int endAt, histRange r)
+{
+	double prevAreaDetected=0;
+	double areaDetected;
+	Mat thresholdImage;
+	int returnVal = startAt;
+		
+	for(int i=startAt; i<endAt; i++)
+	{
+		switch(channel)
+		{
+		case 0:
+			inRange(hsv,Scalar(i, r.sat_min, r.val_min ),Scalar(r.hue_max, r.sat_max, r.val_max),thresholdImage);
+
+			break;
+		case 1:
+			inRange(hsv,Scalar(r.hue_min, i , r.val_min ),Scalar(r.hue_max, r.sat_max, r.val_max),thresholdImage);
+
+			break;
+		case 3:
+			inRange(hsv,Scalar(r.hue_min, r.sat_min, i ),Scalar(r.hue_max, r.sat_max, r.val_max),thresholdImage);
+			break;
+		}	
+		areaDetected = countNonZero(thresholdImage); //area
+		//cout<<"Area Detected: " << areaDetected << " Channel: "<< channel<<  " Value_min: " << i<<endl;
+		if(areaDetected<prevAreaDetected || areaDetected==0)
+		{
+			returnVal = i;
+			break;
+		}
+		prevAreaDetected=areaDetected;
+	}
+	return returnVal;
+}
+
+int CalibrateSkinTones::findMax(Mat hsv, int channel, int startAt, int endAt, histRange r)
+{
+	double prevAreaDetected=0;
+	double areaDetected;
+	Mat thresholdImage;
+	int returnVal = startAt;
+	
+	for(int i=startAt; i>(endAt+1); i--){
+		switch(channel)
+		{
+		case 0: //hue max
+			inRange(hsv,Scalar(r.hue_min, r.sat_min, r.val_min ),Scalar(i, r.sat_max, r.val_max),thresholdImage);
+
+			break;
+		case 1:	//saturation max
+			inRange(hsv,Scalar(r.hue_min, r.sat_min , r.val_min ),Scalar(r.hue_max, i, r.val_max),thresholdImage);
+
+			break;
+		case 2: //value max
+			inRange(hsv,Scalar(r.hue_min, r.sat_min, r.val_min ),Scalar(r.hue_max, r.sat_max, i),thresholdImage);
+			break;
+		}	
+		
+		areaDetected = countNonZero(thresholdImage); //area
+		//cout<<"Area detected: " << areaDetected << " Channel: "<< channel<< " Value_max: " << i<<endl;
+		if(prevAreaDetected>areaDetected){
+			returnVal = i;
+			break;
+		}
+		prevAreaDetected=areaDetected;
+	}
+
+	return returnVal;
+}

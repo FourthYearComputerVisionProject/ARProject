@@ -53,6 +53,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ZBAR_DIR)\include;$(OPENCV_DIR)\include;$(OPENGL_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -60,6 +61,9 @@
       <AdditionalLibraryDirectories>$(ZBAR_DIR)\lib;$(OPENCV_DIR)\lib;$(OPENGL_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_core248d.lib;opencv_imgproc248d.lib;opencv_highgui248d.lib;opencv_ml248d.lib;opencv_video248d.lib;opencv_features2d248d.lib;opencv_calib3d248d.lib;opencv_objdetect248d.lib;opencv_contrib248d.lib;opencv_legacy248d.lib;opencv_flann248d.lib;opengl32.lib;glew32.lib;libzbar-0.lib</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -94,6 +98,7 @@
     <ClInclude Include="CloseVideoEvent.h" />
     <ClInclude Include="EventTypes.h" />
     <ClInclude Include="HandDetector.h" />
+    <ClInclude Include="HistRange.h" />
     <ClInclude Include="HUDManipulator.h" />
     <ClInclude Include="ColouredBandDetector.h" />
     <ClInclude Include="EventManager.h" />
@@ -124,6 +129,7 @@
     <ClCompile Include="CalibrationResultsEvent.cpp" />
     <ClCompile Include="CloseVideoEvent.cpp" />
     <ClCompile Include="HandDetector.cpp" />
+    <ClCompile Include="HistRange.cpp" />
     <ClCompile Include="HUDManipulator.cpp" />
     <ClCompile Include="ColouredBandDetector.cpp" />
     <ClCompile Include="EventManager.cpp" />
@@ -144,9 +150,6 @@
     <ClCompile Include="VideoDrawManipulator.cpp" />
     <ClCompile Include="VideoDrawManipulatorFactory.cpp" />
     <ClCompile Include="VideoReadyEvent.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

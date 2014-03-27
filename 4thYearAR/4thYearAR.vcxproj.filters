@@ -116,6 +116,9 @@
     <ClInclude Include="CalibrationResultsEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HistRange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EventManager.cpp">
@@ -187,8 +190,8 @@
     <ClCompile Include="CalibrationResultsEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClCompile Include="HistRange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

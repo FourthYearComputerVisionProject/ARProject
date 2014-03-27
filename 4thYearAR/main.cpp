@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
 
 	GLenum err = glewInit();
 
-	StereoCapture* capture = new StereoCapture(2, 0);
+	StereoCapture* capture = new StereoCapture(2, 1);
 	
 	//add detectors
 	ColouredBandDetector* cbDetector = new ColouredBandDetector();
@@ -90,6 +90,7 @@ int main(int argc, char **argv) {
 	capture->addDetector(calibration);
 		
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
+	
 
 	VideoDrawManipulatorFactory* fact = new VideoDrawManipulatorFactory(render);
 

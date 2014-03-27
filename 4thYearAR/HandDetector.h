@@ -8,6 +8,7 @@
 #include "idetector.h"
 #include "IEventListener.h"
 #include "IManipulator.h"
+#include "HistRange.h"
 #include <opencv\highgui.h>
 #include <opencv\cv.h>
 #include <sstream>
@@ -32,8 +33,14 @@ public:
 private:
 	cv::Rect boundingBox;
 
+	bool debounce;
+	clock_t enterTime;
 	bool doCalibration;
 	bool doneCalibration;
+	
+	//---new ---
+	vector<HistRange> ranges;
+	//---old ---
 	int hue_min, hue_max;
 	int saturation_min, saturation_max;
 	int value_min, value_max;
@@ -53,7 +60,7 @@ private:
 	vector<int> hullIndexes;
 	vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
 	//vector<vector<Vec4i>> convexDefects;
-	//vector <Point> fingers;
+	vector <Point> fingers;
 		
 	//minimum and maximum object area
 	static const int MIN_OBJECT_AREA = 11047;
