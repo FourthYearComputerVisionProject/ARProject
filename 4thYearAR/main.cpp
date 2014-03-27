@@ -79,15 +79,20 @@ int main(int argc, char **argv) {
 
 	GLenum err = glewInit();
 
-	StereoCapture* capture = new StereoCapture(2, 1);
+	StereoCapture* capture = new StereoCapture(0, 0);
 	
 	//add detectors
 	ColouredBandDetector* cbDetector = new ColouredBandDetector();
 	CalibrateSkinTones* calibration = new CalibrateSkinTones();
 	HandDetector* handDetector = new HandDetector();
-	capture->addDetector(cbDetector);
-	capture->addDetector(handDetector);
-	capture->addDetector(calibration);
+	if (argc > 1 && strcmp(argv[1], "-cb") == 0) {
+		capture->addDetector(cbDetector);
+	}
+	else
+	{
+		capture->addDetector(handDetector);
+		capture->addDetector(calibration);
+	}
 		
 	render = new StereoRender(capture);//0,0 for one cam//0,2 for rift
 	

@@ -18,6 +18,7 @@ HandDetector::HandDetector(void)
 	doneCalibration = false;
 	doCalibration = true;
 	debounce = false;
+	count = 0;
 }
 //get the calibration results and store the values.
 void HandDetector::handleEvent(BaseEvent* evt)
@@ -67,23 +68,29 @@ void HandDetector::handleEvent(BaseEvent* evt)
 }
 
 void HandDetector::detect(cv::Mat leftImage, cv::Mat rightImage){
-	if(doneCalibration)
+	count++;
+	if (doneCalibration)
 	{
-		//Run the detection routine only after calibration is done
-		camera = leftImage;
-		Point leftPoint = runDetection();
-		//cout << "left point " << leftPoint <<endl;
-		camera = rightImage;
-		Point rightPoint = runDetection();
-
-		//---- show a cursor or click icon if hand is detected ----
-		SinglePointEvent* spEvent = new SinglePointEvent(leftPoint, rightPoint);
-		EventManager::getGlobal()->fireEvent(spEvent);
+		Point leftPoint = Point(-1, -1);
+		//Point rightPoint = Point(-1, -1);
+		if (count > 3) {
+			count = 0;
+			//Run the detection routine only after calibration is done
+			camera = leftImage;
+			Point leftPoint = runDetection();
+			//cout << "left point " << leftPoint <<endl;
+			//camera = rightImage;
+			//Point rightPoint = runDetection();
+		}
 
 		if(leftPoint.x == -1 || leftPoint.y == -1)
 		{
 			return;
 		}
+
+		//---- show a cursor or click icon if hand is detected ----
+		SinglePointEvent* spEvent = new SinglePointEvent(leftPoint, Point(leftPoint.x+3,leftPoint.y));
+		EventManager::getGlobal()->fireEvent(spEvent);
 
 		if(debounce)
 		{
@@ -99,10 +106,9 @@ void HandDetector::detect(cv::Mat leftImage, cv::Mat rightImage){
 
 		if(boundingBox.x == -1 || boundingBox.y == -1)
 		{
-			boundingBox = cv::Rect(cv::Point(leftPoint.x - 25, rightPoint.y - 25), cv::Size(40, 40));
+			boundingBox = cv::Rect(cv::Point(leftPoint.x - 20, leftPoint.y - 20), cv::Size(40, 40));
 			enterTime = clock();
 		}
-		else
 		{
 			if(!boundingBox.contains(leftPoint))
 			{

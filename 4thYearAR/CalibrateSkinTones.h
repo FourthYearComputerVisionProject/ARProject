@@ -8,9 +8,9 @@
 #include "HistRange.h"
 #include <opencv\cv.h>
 
-#define MAX_HUE 100
-#define VALUE_MIN 25
-#define SIDE 25
+#define MAX_HUE 100//100
+#define VALUE_MIN 25//25
+#define SIDE 25//25
 
 using namespace cv; 
 

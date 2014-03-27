@@ -37,6 +37,7 @@ private:
 	clock_t enterTime;
 	bool doCalibration;
 	bool doneCalibration;
+	int count;
 	
 	//---new ---
 	vector<HistRange> ranges;
