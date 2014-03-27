@@ -35,7 +35,7 @@ void CalibrateSkinTones::detect(cv::Mat leftImage, cv::Mat rightImage){
 			
 			cvtColor(leftImage, hsv, CV_RGB2HSV);
 			//large area
-			cout<<"Image width and height: " <<leftImage.size().width << leftImage.size().height<<endl;
+			//cout<<"Image width and height: " <<leftImage.size().width << leftImage.size().height<<endl;
 			Mat roi(hsv, Rect(Point(leftImage.size().width*.4, leftImage.size().height*.3),Point(leftImage.size().width*.6, leftImage.size().height*.7)));
 			r=makeHistogram(roi);
 			ranges.push_back(HistRange(r.hue_min,r.hue_max, r.sat_min, r.sat_max, r.val_min, r.val_max));
@@ -201,7 +201,7 @@ CalibrateSkinTones::histRange CalibrateSkinTones::makeHistogram(Mat &img_hsv)
 	range.val_min=findMin(img_hsv, 2, v_mean_pxl, 255, range);
 	range.val_max=findMax(img_hsv, 2, 255, range.val_min, range);
 
-	cout << endl;
+	//cout << endl;
 	
 	cout <<"H_mean: " << (int) h_mean_pxl<< " s.d.: " << (int) h_stddev_pxl << " H range: (" << range.hue_min << "," << range.hue_max <<")"<<endl;
 	cout <<"S_mean: " << (int) s_mean_pxl<< " s.d.: " << (int) s_stddev_pxl << " S range: (" << range.sat_min << "," << range.sat_max <<")"<<endl;

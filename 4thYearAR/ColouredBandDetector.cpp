@@ -151,14 +151,23 @@ void ColouredBandDetector::removeNoise()
 	int value_max = 214;
 */
 
-void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
-{	
+/*	Used for oral presentation
 	int hue_min=50;//42
 	int hue_max=100;//100
 	int saturation_min=61;
 	int saturation_max = 181;
 	int value_min = 88;
 	int value_max = 200;//214
+*/
+
+void ColouredBandDetector::makeThreshold() //KMTODO: change this so it can handle other colours
+{	
+	int hue_min=48;//42
+	int hue_max=102;//100
+	int saturation_min=51;
+	int saturation_max = 153;
+	int value_min = 40;
+	int value_max = 204;//214
 	
 	Mat image_HSV;
 	

@@ -60,7 +60,7 @@ private:
 	vector<int> hullIndexes;
 	vector<Point> cleanHullPoints; //cleaned up hull Points w/o duplicate points at the fingertips
 	//vector<vector<Vec4i>> convexDefects;
-	//vector <Point> fingers;
+	vector <Point> fingers;
 		
 	//minimum and maximum object area
 	static const int MIN_OBJECT_AREA = 11047;
